@@ -165,7 +165,7 @@ function Stack:checkMatches()
       self:queueAttackSoundEffect(isChainLink, self.chain_counter, comboSize, metalCount)
     end
 
-    if comboSize == 3 and (not isChainLink) and metalCount == 0 and (garbagePanels and #garbagePanels == 0) then
+    if comboSize == 3 and (not isChainLink) and metalCount == 0 and (not garbagePanels) then
       self.analytic:register_wasted_panels(comboSize)
     end
 
