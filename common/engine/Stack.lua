@@ -1205,7 +1205,7 @@ function Stack.simulate(self)
 
   prof.push("reset stuff")
   if not self.panels_in_top_row and not self:has_falling_garbage() then
-    self.health = self.levelData.maxHealth
+    self.health = self.health
   end
 
   if self.displacement % 16 ~= 0 then
