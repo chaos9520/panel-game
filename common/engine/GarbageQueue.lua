@@ -34,6 +34,10 @@ local function orderComboGarbage(a, b)
   end
 end
 
+local function orderFrameEarned(a, b)
+  return a.frameEarned < b.frameEarned
+end
+
 --  width
 --  height
 --  isMetal
@@ -42,32 +46,23 @@ end
 --  finalized (optional)
 -- orders garbage so that priority increases with index
 -- higher priority garbage is at the end so we can pop it without having to shift indexes
+
 local function orderGarbage(garbageQueue, treatMetalAsCombo)
   table.sort(garbageQueue, function(a, b)
-    if a.isChain == b.isChain then
-      if a.isChain then
-        return orderChainGarbage(a, b)
-      else
-        -- we handle exclusively non-chain garbage!
-        if a.isMetal == b.isMetal then
-          -- both pieces are of the same type
-          return orderComboGarbage(a, b)
+    if treatMetalAsCombo then
+      if a.isChain == b.isChain then
+        if a.isChain then
+          return orderChainGarbage(a, b)
         else
-          -- it's a combo and a shock!
-          -- some special case to enable armageddon shenanigans here
-          if treatMetalAsCombo then
-            -- under this setting, shock and combos are treated as if they were the same!
-            return orderComboGarbage(a, b)
-          else
-            -- otherwise, combo always queues before shock
-            return a.isMetal
-          end
+          return orderComboGarbage(a, b)
         end
+      else
+        -- one is a chain, the other not
+        -- chain should get sorted in after the combo
+        return not a.isChain
       end
     else
-      -- one is a chain, the other not
-      -- chain should get sorted in after the combo
-      return not a.isChain
+      return orderFrameEarned(a, b)
     end
   end)
 

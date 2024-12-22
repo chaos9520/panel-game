@@ -24,9 +24,6 @@ function Health:run()
     self.currentRiseSpeed = math.min(self.currentRiseSpeed + 1, 99)
   end
 
-  local risenLines = 1.0 / (consts.SPEED_TO_RISE_TIME[self.currentRiseSpeed] * 16)
-  self.currentLines = self.currentLines + risenLines
-
   -- Harder to survive over time, simulating "stamina"
   local staminaPercent = math.max(0.5, 1 - ((self.clock / 60) * (0.01 / 10)))
   local decrementLines = (self.lineClearRate * (1/60.0)) * staminaPercent
@@ -38,39 +35,21 @@ function Health:run()
   return self.framesToppedOutToLose
 end
 
-function Health:damageForHeight(height)
-  if height >= 6 then
-    local damage = 5
-    for i = 1, height-5 do
-      if i > 4 then
-        break
-      end
-      damage = damage + (1 - i * .2)
-    end
-    return damage
-  end
-  return height
-end
-
 function Health:receiveGarbage(frameToReceive, garbage)
   if garbage.width and garbage.height then
     local countGarbage = true
-    if not garbage.isMetal and not garbage.isChain and garbage.width == 3 then
-      if self.lastWasFourCombo then
-        -- Two four combos in a row, don't count an extra line
-        self.lastWasFourCombo = false
-        countGarbage = false
-      else
-        -- First four combo
-        self.lastWasFourCombo = true
-      end
-    else
-      -- non four combo
-      self.lastWasFourCombo = false
-    end
 
     if countGarbage then
-      self.currentLines = self.currentLines + self:damageForHeight(garbage.height)
+      local damage_height = (garbage.height * (garbage.height + 1)) / 2
+      local damage = (damage_height * garbage.width) / 6
+      if garbage.isChain then
+        damage = damage
+      elseif garbage.isMetal then
+        damage = 1.5
+      else
+        damage = damage
+      end
+      self.currentLines = math.min(self.height * 1.2, self.currentLines + damage)
     end
   end
 end

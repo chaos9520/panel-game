@@ -36,7 +36,7 @@ local function characterForStageNumber(stageNumber)
     end
   end
 
-  local character = otherCharacters[((stageNumber - 1) % #otherCharacters) + 1]
+  local character = otherCharacters[math.random(#otherCharacters)]
   return character
 end
 

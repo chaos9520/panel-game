@@ -708,6 +708,7 @@ function Panel.canSwap(self)
     if self.state == "normal"
     or self.state == "swapping"
     or self.state == "falling"
+    or self.state == "hovering"
     or self.state == "landing" then
       return true
     else

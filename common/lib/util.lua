@@ -291,4 +291,13 @@ function util.addToCPath(path)
   end
 end
 
+function factorial(n)
+  fact = 1
+  for i = 1, n, 1
+  do
+    fact = fact * i
+  end
+  return fact
+end
+
 return util

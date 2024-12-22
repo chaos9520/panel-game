@@ -6,7 +6,7 @@ local LevelData = require("common.engine.LevelData")
 local prof = require("common.lib.jprof.jprof")
 require("table.clear")
 
--- score lookup tables
+-- score lookup tables (not used)
 local SCORE_COMBO_PdP64 = {} --size 40
 local SCORE_COMBO_TA = {  0,    0,    0,   20,   30,
                          50,   60,   70,   80,  100,
@@ -19,19 +19,39 @@ local SCORE_CHAIN_TA = {  0,   50,   80,  150,  300,
                         400,  500,  700,  900, 1100,
                        1300, 1500, 1800, [0]=0}
 
-local COMBO_GARBAGE = {{}, {}, {},
-                  --  +4      +5     +6
-                      {3},     {4},   {5},
-                  --  +7      +8     +9
-                      {6},   {3,4}, {4,4},
-                  --  +10     +11    +12
-                      {5,5}, {5,6}, {6,6},
-                  --  +13         +14
-                      {6,6,6},  {6,6,6,6},
-                 [20]={6,6,6,6,6,6},
-                 [27]={6,6,6,6,6,6,6,6}}
+local COMBO_GARBAGE = {{}, {}, {}, {3}, {4},
+                       {5}, {6}, {3}, {4}, {5},
+                       {6}, {3}, {4}, {5}, {6},
+                       {3}, {4}, {5}, {6}, {3},
+                       {4}, {5}, {6}, {3}, {4},
+                       {5}, {6}, {3}, {4}, {5},
+                       {6}, {3}, {4}, {5}, {6},
+                       {3}, {4}, {5}, {6}, {3},
+                       {4}, {5}, {6}, {3}, {4},
+                       {5}, {6}, {3}, {4}, {5},
+                       {6}, {3}, {4}, {5}, {6},
+                       {3}, {4}, {5}, {6}, {3},
+                       {4}, {5}, {6}}
 for i=1,72 do
   COMBO_GARBAGE[i] = COMBO_GARBAGE[i] or COMBO_GARBAGE[i-1]
+end
+
+local COMBO_GARBAGE_CLASSIC = {{}, {}, {}, {3}, {4},
+{5}, {6}, {3,3}, {4,4}, {5,5},
+{6,6}, {3,3,3}, {4,4,4}, {5,5,5}, {6,6,6},
+{3,3,3,3}, {4,4,4,4}, {5,5,5,5}, {6,6,6,6}, {3,3,3,3,3},
+{4,4,4,4,4}, {5,5,5,5,5}, {6,6,6,6,6}, {3,3,3,3,3,3}, {4,4,4,4,4,4},
+{5,5,5,5,5,5}, {6,6,6,6,6,6}, {3,3,3,3,3,3,3}, {4,4,4,4,4,4,4}, {5,5,5,5,5,5,5},
+{6,6,6,6,6,6,6}, {3,3,3,3,3,3,3,3}, {4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6},
+{3,3,3,3,3,3,3,3,3}, {4,4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6,6}, {3,3,3,3,3,3,3,3,3,3},
+{4,4,4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6,6,6}, {3,3,3,3,3,3,3,3,3,3,3}, {4,4,4,4,4,4,4,4,4,4,4},
+{5,5,5,5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6,6,6,6}, {3,3,3,3,3,3,3,3,3,3,3,3}, {4,4,4,4,4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5,5,5,5,5},
+{6,6,6,6,6,6,6,6,6,6,6,6}, {3,3,3,3,3,3,3,3,3,3,3,3,3}, {4,4,4,4,4,4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6,6,6,6,6,6},
+{3,3,3,3,3,3,3,3,3,3,3,3,3,3}, {4,4,4,4,4,4,4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6,6,6,6,6,6,6}, {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3},
+{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}, {5,5,5,5,5,5,5,5,5,5,5,5,5,5,5}, {6,6,6,6,6,6,6,6,6,6,6,6,6,6,6}}
+
+for i=1,72 do
+  COMBO_GARBAGE_CLASSIC[i] = COMBO_GARBAGE_CLASSIC[i] or COMBO_GARBAGE_CLASSIC[i-1]
 end
 
 local function sortByPopOrder(panelList, isGarbage)
@@ -143,6 +163,10 @@ function Stack:checkMatches()
     if isChainLink or comboSize > 3 or metalCount > 0 then
       self:pushGarbage(attackGfxOrigin, isChainLink, comboSize, metalCount)
       self:queueAttackSoundEffect(isChainLink, self.chain_counter, comboSize, metalCount)
+    end
+
+    if comboSize == 3 and (not isChainLink) and metalCount == 0 and (garbagePanels and #garbagePanels == 0) then
+      self.analytic:register_wasted_panels(comboSize)
     end
 
     self.analytic:register_destroyed_panels(comboSize)
@@ -745,6 +769,7 @@ function Stack:convertGarbagePanels(isChain)
           garbagePanelRow = self:getGarbagePanelRow()
         end
         panel.color = string.sub(garbagePanelRow, column, column) + 0
+        self.analytic:register_garbage_cleared()
         if isChain then
           panel.chaining = true
         end
@@ -784,9 +809,19 @@ function Stack:getGarbagePanelRow()
   return garbagePanelRow
 end
 
+function GarbageMultiplier(clock)
+  local initial_period = 3600
+  if clock < initial_period then
+    return 1
+  else
+    return math.min(12, math.ceil((clock - initial_period) / 3600))
+  end
+end
+
 function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   logger.debug("P" .. self.which .. "@" .. self.clock .. ": Pushing garbage for " .. (isChain and "chain" or "combo") .. " with " .. comboSize .. " panels")
   for i = 3, metalCount do
+    local metal_pieces = 1
     self.outgoingGarbage:push({
       width = 6,
       height = 1,
@@ -797,20 +832,43 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
       colEarned = coordinate.column
     })
     self.analytic:registerShock()
+    self.analytic:register_pieces_sent(metal_pieces)
   end
 
   local combo_pieces = COMBO_GARBAGE[comboSize]
-  for i = 1, #combo_pieces do
-    -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
-    self.outgoingGarbage:push({
-      width = combo_pieces[i],
-      height = 1,
-      isMetal = false,
-      isChain = false,
-      frameEarned = self.clock,
-      rowEarned = coordinate.row,
-      colEarned = coordinate.column
-    })
+  local combo_pieces_classic = COMBO_GARBAGE_CLASSIC[comboSize]
+  local pieces_sent = 1
+
+  if (self.chain_counter and self.chain_counter < 3) then
+    -- Chaos Combo Garbage
+    for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch) do
+      -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
+      self.outgoingGarbage:push({
+        width = comboSize % 4 + 3,
+        height = math.ceil((comboSize - 3) / 4),
+        isMetal = false,
+        isChain = false,
+        frameEarned = self.clock,
+        rowEarned = coordinate.row,
+        colEarned = coordinate.column
+      })
+      self.analytic:register_pieces_sent(pieces_sent)
+    end
+  else
+    -- Classic Combo Garbage
+    for i = 1, #combo_pieces_classic * GarbageMultiplier(self.game_stopwatch) do
+      -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
+      self.outgoingGarbage:push({
+        width = comboSize % 4 + 3,
+        height = 1,
+        isMetal = false,
+        isChain = false,
+        frameEarned = self.clock,
+        rowEarned = coordinate.row,
+        colEarned = coordinate.column
+      })
+      self.analytic:register_pieces_sent(pieces_sent)
+    end
   end
 
   if isChain then
@@ -827,33 +885,42 @@ end
 function Stack:calculateStopTime(comboSize, toppedOut, isChain, chainCounter)
   local stopTime = 0
   local stop = self.levelData.stop
+  local garbageMargin
+  local stackState
+  local chainSize
+  local coefficient
+
+  if not chainCounter then
+    chainSize = 0
+  else
+    chainSize = chainCounter - 1
+  end
+
+  if toppedOut and isChain then
+    stackState = 3
+    coefficient = stop.dangerCoefficient
+  elseif toppedOut then
+    stackState = 2
+    coefficient = stop.dangerCoefficient
+  elseif isChain then
+    stackState = 1
+    coefficient = stop.coefficient
+  else
+    stackState = 0
+    coefficient = stop.coefficient
+  end
+
   if comboSize > 3 or isChain then
-    if toppedOut and isChain then
-      if stop.formula == LevelData.STOP_FORMULAS.MODERN then
-        local length = (chainCounter > 4) and 6 or chainCounter
-        stopTime = stop.dangerConstant + (length - 1) * stop.dangerCoefficient
-      elseif stop.formula == LevelData.STOP_FORMULAS.CLASSIC then
-        stopTime = stop.dangerConstant
-      end
-    elseif toppedOut then
-      if stop.formula == LevelData.STOP_FORMULAS.MODERN then
-        local length = (comboSize < 9) and 2 or 3
-        stopTime = stop.coefficient * length + stop.chainConstant
-      elseif stop.formula == LevelData.STOP_FORMULAS.CLASSIC then
-        stopTime = stop.dangerConstant
-      end
-    elseif isChain then
-      if stop.formula == LevelData.STOP_FORMULAS.MODERN then
-        local length = math.min(chainCounter, 13)
-        stopTime = stop.coefficient * length + stop.chainConstant
-      elseif stop.formula == LevelData.STOP_FORMULAS.CLASSIC then
-        stopTime = stop.chainConstant
-      end
-    else
-      if stop.formula == LevelData.STOP_FORMULAS.MODERN then
-        stopTime = stop.coefficient * comboSize + stop.comboConstant
-      elseif stop.formula == LevelData.STOP_FORMULAS.CLASSIC then
-        stopTime = stop.comboConstant
+    if stop.formula == LevelData.STOP_FORMULAS.MODERN then
+      garbageMargin = (self.levelData.garbage_margin - self.incomingGarbage:len()) / self.levelData.garbage_margin
+      stopTime = math.max(0, math.ceil(((coefficient * (comboSize - 4)) + (coefficient * chainSize) + (stop.comboConstant * 1.1 ^ stackState) * garbageMargin)))
+    elseif stop.formula == LevelData.STOP_FORMULAS.CLASSIC then
+      if stackState >= 2 then
+        stopTime = math.max(0, math.ceil(stop.dangerConstant * (1 - self.speed / 100)))
+      elseif stackState == 1 then
+        stopTime = math.max(0, math.ceil(stop.chainConstant * (1 - self.speed / 100)))
+      else
+        stopTime = math.max(0, math.ceil(stop.comboConstant * (1 - self.speed / 100)))
       end
     end
   end
@@ -913,13 +980,10 @@ end
 function Stack:updateScoreWithCombo(comboSize)
   if comboSize > 3 then
     if (score_mode == consts.SCOREMODE_TA) then
-      self.score = self.score + SCORE_COMBO_TA[math.min(30, comboSize)]
+      self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 5) * 10) * 10 * math.max(1, self.chain_counter)
     elseif (score_mode == consts.SCOREMODE_PDP64) then
-      if (comboSize < 41) then
-        self.score = self.score + SCORE_COMBO_PdP64[comboSize]
-      else
-        self.score = self.score + 20400 + ((comboSize - 40) * 800)
-      end
+      -- self.score = self.score + math.floor((((comboSize - 3) * 62.5) * math.max(1, self.chain_counter)))
+      self.score = self.score + math.ceil(( 200 * 1.1 ^ (comboSize - 4)) * 1.2 ^ (math.max(1, self.chain_counter) - 1))
     end
   end
 end
@@ -927,10 +991,14 @@ end
 function Stack:updateScoreWithChain()
   local chain_bonus = self.chain_counter
   if (score_mode == consts.SCOREMODE_TA) then
-    if (self.chain_counter > 13) then
-      chain_bonus = 0
+    self.score = self.score + math.ceil(math.log(factorial(chain_bonus), 3) * 10) * 10
+  elseif (score_mode == consts.SCOREMODE_PDP64) then
+    if chain_bonus == 0 then
+      self.score = self.score
+    else
+      -- self.score = self.score + math.floor(((((chain_bonus - 1) * chain_bonus) / 2) * 31.25))
+      self.score = self.score + math.ceil(200 * 1.25 ^ (chain_bonus - 2))
     end
-    self.score = self.score + SCORE_CHAIN_TA[chain_bonus]
   end
 end
 

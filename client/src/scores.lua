@@ -88,7 +88,7 @@ local function read_score_file()
   local scores = Scores()
   pcall(
     function()
-      local read_data = fileUtils.readJsonFile("scores.json")
+      local read_data = fileUtils.readJsonFile("scores_chaos.json")
       if read_data then
         if read_data.version and type(read_data.version) == "number" then
           scores.version = read_data.version
@@ -116,7 +116,7 @@ end
 
 function Scores.saveToFile(self)
   if self.version == currentVersion then
-    love.filesystem.write("scores.json", json.encode(self))
+    love.filesystem.write("scores_chaos.json", json.encode(self))
   end
 end
 

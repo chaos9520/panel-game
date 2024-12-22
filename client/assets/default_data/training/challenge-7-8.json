@@ -1,109 +1,116 @@
 {
-  "extraInfo": {
-    "playerName": "39",
-    "gpm": "22.9",
-    "matchLength": "0:40",
-    "dateGenerated": "2023-12-27-20-52-33"
-  }, 
-  "mergeComboMetalQueue": false,
-    "delayBeforeStart": 0,
-    "delayBeforeRepeat": 91,
-    "attackPatterns": [
-      {
-        "width": 3,
-        "height": 1,
-        "chain": false,
-        "startTime": 238,
-        "metal": false
-      },
-      {
-        "chainEndTime": 480,
-        "chain": [
-          322,
-          389
-        ]
-      },
-      {
-        "width": 5,
-        "height": 1,
-        "chain": false,
-        "startTime": 389,
-        "metal": false
-      },
-      {
-        "width": 4,
-        "height": 1,
-        "chain": false,
-        "startTime": 574,
-        "metal": false
-      },
-      {
-        "width": 5,
-        "height": 1,
-        "chain": false,
-        "startTime": 923,
-        "metal": false
-      },
-      {
-        "width": 5,
-        "height": 1,
-        "chain": false,
-        "startTime": 965,
-        "metal": false
-      },
-      {
-        "chainEndTime": 1330,
-        "chain": [
-          1129,
-          1196,
-          1263
-        ]
-      },
-      {
-        "chainEndTime": 1468,
-        "chain": [
-          1401
-        ]
-      },
-      {
-        "chainEndTime": 1822,
-        "chain": [
-          1614,
-          1763
-        ]
-      },
-      {
-        "chainEndTime": 2026,
-        "chain": [
-          1959
-        ]
-      },
-      {
-        "chainEndTime": 2366,
-        "chain": [
-          2261
-        ]
-      },
-      {
-        "width": 3,
-        "height": 1,
-        "chain": false,
-        "startTime": 2261,
-        "metal": false
-      },
-      {
-        "width": 4,
-        "height": 1,
-        "chain": false,
-        "startTime": 2261,
-        "metal": false
-      },
-      {
-        "width": 3,
-        "height": 1,
-        "chain": false,
-        "startTime": 2400,
-        "metal": false
-      }
-    ]
-  }
+	"extraInfo":	{
+		"playerName": "Randomizer952",
+		"gpm": "26",
+		"matchLength": "4:54",
+		"dateGenerated": "2024-12-20-19-06-47"
+		},
+	"name": "7-8",
+	"mergeComboMetalQueue": false,
+	"delayBeforeStart": 332,
+	"delayBeforeRepeat": 403,
+	"attackPatterns": [
+		{	"height": 3,	"startTime": 244,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 4,	"startTime": 910,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 3,	"startTime": 2306,	"chain": 303,	"chainEndDelta": 407	},
+		{	"height": 2,	"startTime": 3623,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 1,	"startTime": 3903,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 4123,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 4339,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 4537,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 5161,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 5457,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 3,	"startTime": 6488,	"chain": 303,	"chainEndDelta": 407	},
+		{	"height": 3,	"startTime": 7805,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 1,	"startTime": 8324,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 3,	"startTime": 8496,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 1,	"startTime": 9502,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 4,	"startTime": 9695,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 4,	"startTime": 11366,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 1,	"startTime": 11930,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 1,	"startTime": 12172,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 4,	"startTime": 12349,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 13726,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 13977,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 14493,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 4,	"startTime": 15082,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 2,	"startTime": 16129,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 3,	"startTime": 16407,	"chain": 69,	"chainEndDelta": 104	},
+		{	"height": 4,	"startTime": 16970,	"chain": 69,	"chainEndDelta": 104	},
+		{	"width": 4,	"height": 1,	"startTime": 1,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 89,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 214,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 531,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 658,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 824,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 1386,	"metal": false	},
+		{	"width": 5,	"height": 2,	"startTime": 1561,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 2008,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 2422,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 2601,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 2951,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 3147,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 3323,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 3551,	"metal": true	},
+		{	"width": 6,	"height": 2,	"startTime": 3696,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 4127,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 4302,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 4477,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 4635,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 4802,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 4922,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 5149,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 5267,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 5439,	"metal": true	},
+		{	"width": 5,	"height": 1,	"startTime": 5633,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 5826,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 5997,	"metal": true	},
+		{	"width": 5,	"height": 1,	"startTime": 6200,	"metal": false	},
+		{	"width": 5,	"height": 2,	"startTime": 6428,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 6806,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 6977,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 7112,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 7435,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 7615,	"metal": true	},
+		{	"width": 3,	"height": 1,	"startTime": 7869,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 8016,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 8225,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 8373,	"metal": true	},
+		{	"width": 3,	"height": 1,	"startTime": 8587,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 8703,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 8817,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 9745,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 9929,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 10230,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 10685,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 10797,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 11230,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 11435,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 11770,	"metal": true	},
+		{	"width": 5,	"height": 1,	"startTime": 11950,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 12134,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 12296,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 12698,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 12879,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 13046,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 13225,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 13640,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 13848,	"metal": false	},
+		{	"width": 5,	"height": 2,	"startTime": 14132,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 14480,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 14626,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 14774,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 14891,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 15116,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 15343,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 15539,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 15718,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 15916,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 16122,	"metal": true	},
+		{	"width": 3,	"height": 1,	"startTime": 16314,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 16470,	"metal": true	},
+		{	"width": 5,	"height": 2,	"startTime": 16616,	"metal": false	},
+		{	"width": 4,	"height": 1,	"startTime": 17037,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 17235,	"metal": false	},
+	]
+}

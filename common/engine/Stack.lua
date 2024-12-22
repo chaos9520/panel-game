@@ -122,7 +122,7 @@ Stack =
     s.garbageSizeDropColumnMaps = {
       {1, 2, 3, 4, 5, 6},
       {1, 3, 5,},
-      {1, 4},
+      {1, 2, 3, 4},
       {1, 2, 3},
       {1, 2},
       {1}
@@ -274,10 +274,10 @@ function Stack:calculateMultibarFrameCount()
 
   -- for a realistic max stop, let's only compare obtainable stop while topped out - while not topped out, stop doesn't matter after all
   -- x5 chain while topped out (bonus stop from extra chain links is capped at x5)
-  maxStop = math.max(maxStop, self:calculateStopTime(3, true, true, 5))
+  maxStop = math.max(maxStop, self:calculateStopTime(3, true, true, 13))
 
   -- while topped out, stop from combos is capped at 10 combo
-  maxStop = math.max(maxStop, self:calculateStopTime(10, true, false))
+  maxStop = math.max(maxStop, self:calculateStopTime(66, true, false))
 
   -- if we wanted to include stop in non-topped out states:
   -- combo stop is linear with combosize but +27 is a reasonable cutoff (garbage cap for combos)
@@ -1105,13 +1105,21 @@ function Stack.shouldDropGarbage(self)
       return true
     elseif garbage.isChain then
       -- drop chain garbage higher than 1 row immediately
-      return garbage.height > 1
+      if self.game_stopwatch >= 7200 then
+        return garbage.height >= 1
+      else
+        return garbage.height > 1
+      end
     else
       -- attackengine garbage higher than 1 (aka chain garbage) is treated as combo garbage
       -- that is to circumvent the garbage queue not allowing to send multiple chains simultaneously
       -- and because of that hack, we need to do another hack here and allow n-height combo garbage
       -- but only if the player is targetted by a detached attackengine
-      return garbage.height > 1 and self.match.attackEngines[self.player] ~= nil
+      if self.game_stopwatch >= 7200 then
+        return garbage.height >= 1
+      else
+        return garbage.height > 1
+      end
     end
   end
 end
@@ -1151,14 +1159,18 @@ function Stack.simulate(self)
   -- Increase the speed if applicable
   if self.levelData.speedIncreaseMode == 1 then
     -- increase per interval
-    if self.clock == self.nextSpeedIncreaseClock then
+    if self.game_stopwatch == self.nextSpeedIncreaseClock then
       self.speed = min(self.speed + 1, 99)
       self.nextSpeedIncreaseClock = self.nextSpeedIncreaseClock + DT_SPEED_INCREASE
     end
   elseif self.panels_to_speedup <= 0 then
     -- mode 2: increase speed based on cleared panels
     self.speed = min(self.speed + 1, 99)
-    self.panels_to_speedup = self.panels_to_speedup + PANELS_TO_NEXT_SPEED[self.speed]
+    if self.speed == 99 then
+      self.panels_to_speedup = math.huge
+    else
+      self.panels_to_speedup = 10
+    end
   end
   prof.pop("speed increase")
 
@@ -1179,7 +1191,7 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          self.rise_timer = self.rise_timer + consts.SPEED_TO_RISE_TIME[self.speed]
+          self.rise_timer = 100 - self.speed
         end
       end
     end
@@ -1244,7 +1256,11 @@ function Stack.simulate(self)
           SFX_Cur_Move_Play = 1
         end
         if self.cur_timer ~= self.cur_wait_time then
-          self.analytic:register_move()
+          if not self.game_stopwatch_running then
+            -- do nothing
+          else
+            self.analytic:register_move()
+          end
         end
       end
     else
@@ -1338,8 +1354,8 @@ function Stack.simulate(self)
   end
   prof.pop("chain update")
 
-  if (self.score > 99999) then
-    self.score = 99999
+  if (self.score > 999999) then
+    self.score = 999999
   -- lol owned
   end
 
@@ -1779,7 +1795,7 @@ function Stack.dropGarbage(self, width, height, isMetal)
   end
 
   self.garbageCreatedCount = self.garbageCreatedCount + 1
-  local shakeTime = self:shakeFramesForGarbageSize(width, height)
+  local shakeTime = math.min(82, 30 + (width * height * 2))
 
   for row = originRow, originRow + height - 1 do
     if not self.panels[row] then
@@ -1797,7 +1813,7 @@ function Stack.dropGarbage(self, width, height, isMetal)
           panel.height = height
           panel.y_offset = row - originRow
           panel.x_offset = col - originCol
-          panel.shake_time = shakeTime
+          panel.shake_time = math.min(shakeTime, math.max(18, math.ceil(shakeTime * math.max(0, ((100 - self.incomingGarbage:len()) / 100)))))
           panel.state = "falling"
           panel.row = row
           panel.column = col
@@ -1894,7 +1910,7 @@ function Stack:getAttackPatternData()
   data.attackPatterns = {}
   data.extraInfo = {}
   data.extraInfo.playerName = self.player.name
-  data.extraInfo.gpm = self.analytic:getRoundedGPM(self.clock) or 0
+  data.extraInfo.gpm = self.analytic:getRoundedGPM(self.game_stopwatch) or 0
   data.extraInfo.matchLength = " "
   if self.game_stopwatch and tonumber(self.game_stopwatch) then
     data.extraInfo.matchLength = frames_to_time_string(self.game_stopwatch)
@@ -1965,7 +1981,7 @@ function Stack.onPop(self, panel)
     end
     self.score = self.score + 10
 
-    self.panels_cleared = self.panels_cleared + 1
+    self.panels_cleared = self.panels_cleared + ((panel.combo_size - 2) * (panel.combo_size - 1)) / 2
     if self.match.stackInteraction ~= GameModes.StackInteractions.NONE
         and self.panels_cleared % self.levelData.shockFrequency == 0 then
           self.metal_panels_queued = min(self.metal_panels_queued + 1, self.levelData.shockCap)
@@ -2005,8 +2021,10 @@ function Stack.onGarbageLand(self, panel)
       if self:canPlaySfx() then
         if panel.height > 3 then
           self.sfx_garbage_thud = 3
+        elseif panel.height >= 2 and panel.height <= 3 then
+          self.sfx_garbage_thud = 2
         else
-          self.sfx_garbage_thud = panel.height
+          self.sfx_garbage_thud = 1
         end
       end
       self.shake_time_on_frame = max(self.shake_time_on_frame, panel.shake_time, self.peak_shake_time or 0)
@@ -2056,7 +2074,7 @@ function Stack.getActivePanelCount(self)
         if panel.color ~= 0
         -- dimmed is implicitly filtered by only checking in row 1 and up
         and panel.state ~= "normal"
-        and panel.state ~= "landing" then
+        and panel.state ~= "swapping" then
           count = count + 1
         end
       end

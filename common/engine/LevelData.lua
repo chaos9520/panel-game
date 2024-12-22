@@ -149,6 +149,11 @@ function LevelData:setMaxHealth(maxHealth)
   return self
 end
 
+function LevelData:setGarbageMargin(garbageMargin)
+  self.garbage_margin = garbageMargin
+  return self
+end
+
 ---@param formula STOP_FORMULA
 function LevelData:setStopFormula(formula)
   if formula ~= self.STOP_FORMULAS.MODERN and formula ~= self.STOP_FORMULAS.CLASSIC then
@@ -228,6 +233,7 @@ function LevelData.validate(data)
     return false
   elseif not data.maxHealth or type(data.maxHealth) ~= "number" then
     return false
+  -- Garbage margin can be nil
   elseif data.maxHealth < 1 then
     return false
   elseif not data.stop or type(data.stop) ~= "table" then

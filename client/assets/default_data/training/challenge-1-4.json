@@ -1,0 +1,32 @@
+{
+	"extraInfo":	{
+		"playerName": "Randomizer952",
+		"gpm": "3.9",
+		"matchLength": "4:54",
+		"dateGenerated": "2024-12-20-18-44-49"
+		},
+	"name": "1-4",
+	"mergeComboMetalQueue": false,
+	"delayBeforeStart": 292,
+	"delayBeforeRepeat": 1314,
+	"attackPatterns": [
+		{	"height": 2,	"startTime": 271,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 1,	"startTime": 3491,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 2,	"startTime": 4492,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 1,	"startTime": 6918,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 2,	"startTime": 8689,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 2,	"startTime": 12561,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 1,	"startTime": 16466,	"chain": 124,	"chainEndDelta": 186	},
+		{	"height": 1,	"startTime": 17062,	"chain": 124,	"chainEndDelta": 186	},
+		{	"width": 4,	"height": 1,	"startTime": 1,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 1350,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 3797,	"metal": false	},
+		{	"width": 5,	"height": 1,	"startTime": 4701,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 6193,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 7748,	"metal": false	},
+		{	"width": 3,	"height": 1,	"startTime": 9317,	"metal": false	},
+		{	"width": 3,	"height": 2,	"startTime": 10715,	"metal": false	},
+		{	"width": 6,	"height": 1,	"startTime": 13584,	"metal": false	},
+		{	"width": 4,	"height": 2,	"startTime": 15255,	"metal": false	},
+	]
+}

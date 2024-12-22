@@ -705,12 +705,12 @@ function Stack:drawAnalyticData()
   end
   local y = self.frameOriginY * self.gfxScale + backgroundPadding
 
-  local iconToTextSpacing = 30
-  local nextIconIncrement = 30
+  local iconToTextSpacing = 24
+  local nextIconIncrement = 24
   local column2Distance = 70
 
-  local fontIncrement = 8
-  local iconSize = 24
+  local fontIncrement = 5
+  local iconSize = 15
   local icon_width
   local icon_height
 
@@ -725,19 +725,38 @@ function Stack:drawAnalyticData()
 
   y = y + nextIconIncrement
 
+  -- Efficiency
+  if analytic.data.destroyed_panels > 0 then
+    local efficiency = ((analytic.data.destroyed_panels - analytic.data.wasted_panels) / analytic.data.destroyed_panels) * 100
+    analytic.efficiency = string.format("%0.1f", math.round(efficiency, 1))
+  end
+  panels[self.panels_dir]:drawPanelFrame(2, "face", x, y, iconSize)
+  GraphicsUtil.printf(analytic.efficiency.. "%", x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
 
+  y = y + nextIconIncrement
 
-  -- Garbage sent
+  -- Garbage lines sent
   icon_width, icon_height = characters[self.character].images.face:getDimensions()
   GraphicsUtil.draw(characters[self.character].images.face, x, y, 0, iconSize / icon_width, iconSize / icon_height)
   GraphicsUtil.printf(analytic.data.sent_garbage_lines, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
 
   y = y + nextIconIncrement
 
-  -- GPM
-  if analytic.lastGPM == 0 or math.fmod(self.clock, 60) < self.max_runs_per_frame then
-    if self.clock > 0 and (analytic.data.sent_garbage_lines > 0) then
-      analytic.lastGPM = analytic:getRoundedGPM(self.clock)
+  -- Garbage lines cleared
+  if analytic.data.garbage_cleared > 0 then
+    local lines_cleared = analytic.data.garbage_cleared / 6
+    analytic.lines_cleared = math.round(lines_cleared, 1)
+  end
+  icon_width, icon_height = characters[self.character].images.pop:getDimensions()
+  GraphicsUtil.draw(characters[self.character].images.pop, x, y, 0, iconSize / icon_width, iconSize / icon_height)
+  GraphicsUtil.printf(analytic.lines_cleared, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
+
+  y = y + nextIconIncrement
+
+  -- Garbage lines per minute
+  if analytic.lastGPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
+    if self.clock - 180 > 0 and (analytic.data.sent_garbage_lines > 0) then
+      analytic.lastGPM = analytic:getRoundedGPM(self.clock - 180)
     end
   end
   icon_width, icon_height = self.theme.images.IMG_gpm:getDimensions()
@@ -746,7 +765,38 @@ function Stack:drawAnalyticData()
 
   y = y + nextIconIncrement
 
-  -- Moves
+  -- Garbage pieces per minute
+  if analytic.lastPPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
+    if self.clock - 180 > 0 and (analytic.data.sent_garbage_lines > 0) then
+      analytic.lastPPM = analytic:getRoundedPPM(self.clock - 180)
+    end
+  end
+  icon_width, icon_height = characters[self.character].images.filler1:getDimensions()
+  GraphicsUtil.draw(characters[self.character].images.filler1, x, y, 0, iconSize / icon_width, iconSize / icon_height)
+  GraphicsUtil.printf(analytic.lastPPM .. "/m", x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
+
+  y = y + nextIconIncrement
+
+  -- Garbage lines cleared per minute
+  if analytic.lastGCPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
+    if self.clock - 180 > 0 and (analytic.data.garbage_cleared > 0) then
+      analytic.lastGCPM = analytic:getRoundedGCPM(self.clock - 180)
+    end
+  end
+  GraphicsUtil.draw(characters[self.character].images.flash, x, y, 0, iconSize / icon_width, iconSize / icon_height)
+  GraphicsUtil.printf(analytic.lastGCPM .. "/m", x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
+
+  y = y + nextIconIncrement
+
+  -- Garbage in queue
+  analytic.garbage_in_queue = self.incomingGarbage:len()
+  icon_width, icon_height = characters[self.character].images.filler2:getDimensions()
+  GraphicsUtil.draw(characters[self.character].images.filler2, x, y, 0, iconSize / icon_width, iconSize / icon_height)
+  GraphicsUtil.printf(analytic.garbage_in_queue, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
+
+  y = y + nextIconIncrement
+
+  --[[ Moves
   icon_width, icon_height = self.theme.images.IMG_cursorCount:getDimensions()
   GraphicsUtil.draw(self.theme.images.IMG_cursorCount, x, y, 0, iconSize / icon_width, iconSize / icon_height)
   GraphicsUtil.printf(analytic.data.move_count, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
@@ -760,12 +810,12 @@ function Stack:drawAnalyticData()
   end
   GraphicsUtil.printf(analytic.data.swap_count, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
 
-  y = y + nextIconIncrement
+  y = y + nextIconIncrement ]]
 
   -- APM
-  if analytic.lastAPM == 0 or math.fmod(self.clock, 60) < self.max_runs_per_frame then
-    if self.clock > 0 and (analytic.data.swap_count + analytic.data.move_count > 0) then
-      local actionsPerMinute = (analytic.data.swap_count + analytic.data.move_count) / (self.clock / 60 / 60)
+  if analytic.lastAPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
+    if self.clock - 180 > 0 and (analytic.data.swap_count + analytic.data.move_count > 0) then
+      local actionsPerMinute = (analytic.data.swap_count + analytic.data.move_count) / ((self.clock - 180) / 60 / 60)
       analytic.lastAPM = string.format("%0.0f", math.round(actionsPerMinute, 0))
     end
   end

@@ -1,5 +1,5 @@
 local consts = require("common.engine.consts")
-score_mode = consts.SCOREMODE_TA
+score_mode = consts.SCOREMODE_PDP64
 
 GARBAGE_TRANSIT_TIME = 45 -- the amount of time the garbage attack animation plays before getting to the telegraph
 GARBAGE_TELEGRAPH_TIME = 45 -- the amount of time the garbage stays in the telegraph after getting there from the attack animation
