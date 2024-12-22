@@ -1345,6 +1345,7 @@ function Stack.simulate(self)
       SFX_Fanfare_Play = self.chain_counter
     end
     self.analytic:register_chain(self.chain_counter)
+    self.analytic:register_pieces_sent(1)
     self.chain_counter = 0
 
     if self.outgoingGarbage then
