@@ -10,13 +10,13 @@ Nothing significant for now, everything was just ported over.
 - The Classic levels scale differently from the Modern levels.
 -# Level 8 is the closest to level 10 on the normal build, so I take it that will be the 'gold standard'.
 - Garbage Margin has been implemented in Vs modes. The more garbage a player has queued up, the less stop *and* shake time they get!
-- 'Speed margin' has been implemented into Endless; higher rise speed equates to less stop time.
+- 'Speed margin' has been implemented into the Classic levels; higher rise speed equates to less stop time.
 - Health regeneration has been removed. That means if you take damage, then your health will not regenerate!
 - 'Wiggling' has been disabled, but stealth bridging has been implemented. *hello modoki lol*
 - Rise Speed Algorithm: The formula for rise speed has been changed, and Classic levels now require 10 panels for a speed increase on *all* speed levels (for now, still a WIP).
-- There are now two scoring systems. The plan is to implement one scoring system for Classic levels, and the other for Modern levels.
+- There are now two scoring systems. The plan is to implement one scoring system for the Classic levels, and the other for the Modern levels.
 - The score cap has been raised to 999,999 as scoring paces will naturally be higher on this build.
-- The garbage queue and combo garbage have been completely changed.
+- The garbage queue and combo garbage system have been completely changed.
 - Challenge Mode has been completely revamped.
 - A few analytics have been removed, and new ones have been added:
     - Efficiency - any +3  that are not shock panels, is not part of a chain, and does not clear garbage will hurt efficiency.
