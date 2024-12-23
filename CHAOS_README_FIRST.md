@@ -29,10 +29,5 @@ Nothing significant for now, everything was just ported over.
 ## Server-Side Changes
 None yet, but I plan to implent my 'Chaos' ranking system to the server files when I am actually able to host my own server.
 
-Combo garbage now queues in the order it is made. Combo garbage from +8 and higher will send multiple pieces relative to combo size while sent during a x3 or larger, and that garbage queues behind chain garbage.
-Otherwise, it will send thicker garbage instead of multiple pieces relative to combo size, and it will queue in front of chain garbage.
-
-On the normal levels, single-line garbage will hold back other garbage while clearing panels or garbage.  However, on the Chaos levels, garbage will fall immediately if there's room for it to fall, even while clearing panels or garbage.
-
 ## What else do I plan to implement?
 Garbage Mode is the main goal I would like to accomplish. This would be very useful for training, but even more so for Challenge Mode stages.
