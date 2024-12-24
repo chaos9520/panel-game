@@ -2020,9 +2020,9 @@ function Stack.onGarbageLand(self, panel)
     --runtime optimization to not repeatedly update shaketime for the same piece of garbage
     if not tableUtils.contains(self.garbageLandedThisFrame, panel.garbageId) then
       if self:canPlaySfx() then
-        if panel.height > 3 then
+        if panel.height * panel.width > 18 then
           self.sfx_garbage_thud = 3
-        elseif panel.height >= 2 and panel.height <= 3 then
+        elseif panel.height * panel.width > 6 then
           self.sfx_garbage_thud = 2
         else
           self.sfx_garbage_thud = 1
