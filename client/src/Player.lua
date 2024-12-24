@@ -81,7 +81,7 @@ function Player:createStackFromSettings(match, which)
     if match.stackInteraction == GameModes.StackInteractions.NONE then
       args.allowAdjacentColors = true
     else
-      args.allowAdjacentColors = args.level < 8
+      args.allowAdjacentColors = args.level < 7
     end
   else
     args.difficulty = self.settings.difficulty
