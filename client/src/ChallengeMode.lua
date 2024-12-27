@@ -57,7 +57,7 @@ function ChallengeMode:createStages(difficulty)
   elseif difficulty == 2 then
     stageCount = 4
     framesToppedOutToLoseBase = 136
-    framesToppedOutToLoseIncrement = 135
+    framesToppedOutToLoseIncrement = 81
     lineClearGPMBase = 4.5
     lineClearGPMIncrement = 1.5
     panelLevel = 2
@@ -65,7 +65,7 @@ function ChallengeMode:createStages(difficulty)
   elseif difficulty == 3 then
     stageCount = 6
     framesToppedOutToLoseBase = 181
-    framesToppedOutToLoseIncrement = 108
+    framesToppedOutToLoseIncrement = 77
     lineClearGPMBase = 6.75
     lineClearGPMIncrement = 1.05
     panelLevel = 3
@@ -73,7 +73,7 @@ function ChallengeMode:createStages(difficulty)
   elseif difficulty == 4 then
     stageCount = 8
     framesToppedOutToLoseBase = 241
-    framesToppedOutToLoseIncrement = 103
+    framesToppedOutToLoseIncrement = 80
     lineClearGPMBase = 9
     lineClearGPMIncrement = 0.85
     panelLevel = 4
@@ -81,7 +81,7 @@ function ChallengeMode:createStages(difficulty)
   elseif difficulty == 5 then
     stageCount = 10
     framesToppedOutToLoseBase = 321
-    framesToppedOutToLoseIncrement = 106
+    framesToppedOutToLoseIncrement = 87
     lineClearGPMBase = 11.25
     lineClearGPMIncrement = 0.75
     panelLevel = 5
