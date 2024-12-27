@@ -122,7 +122,7 @@ Stack =
     s.garbageSizeDropColumnMaps = {
       {1, 2, 3, 4, 5, 6},
       {1, 3, 5,},
-      {1, 2, 3, 4},
+      {1, 4},
       {1, 2, 3},
       {1, 2},
       {1}
@@ -1346,6 +1346,7 @@ function Stack.simulate(self)
     end
     self.analytic:register_chain(self.chain_counter)
     self.analytic:register_pieces_sent(1)
+    self.analytic:register_lines_sent(self.chain_counter - 1)
     self.chain_counter = 0
 
     if self.outgoingGarbage then

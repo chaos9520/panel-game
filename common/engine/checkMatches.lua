@@ -814,7 +814,7 @@ function GarbageMultiplier(clock)
   if clock < initial_period then
     return 1
   else
-    return math.min(12, math.ceil((clock - initial_period) / 3600))
+    return math.min(4, math.ceil((clock - initial_period) / 3600))
   end
 end
 
@@ -838,36 +838,45 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   local combo_pieces = COMBO_GARBAGE[comboSize]
   local combo_pieces_classic = COMBO_GARBAGE_CLASSIC[comboSize]
   local pieces_sent = 1
+  local lines_sent
+  local width = comboSize % 4 + 3
+  local height
 
   if (self.chain_counter and self.chain_counter < 3) then
     -- Chaos Combo Garbage
+    height = math.ceil((comboSize - 3) / 4)
     for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch) do
       -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
       self.outgoingGarbage:push({
-        width = comboSize % 4 + 3,
-        height = math.ceil((comboSize - 3) / 4),
+        width = width,
+        height = height,
         isMetal = false,
         isChain = false,
         frameEarned = self.clock,
         rowEarned = coordinate.row,
         colEarned = coordinate.column
       })
+      lines_sent = math.round(width * height / 6, 1)
       self.analytic:register_pieces_sent(pieces_sent)
+      self.analytic:register_lines_sent(lines_sent)
     end
   else
     -- Classic Combo Garbage
+    height = 1
     for i = 1, #combo_pieces_classic * GarbageMultiplier(self.game_stopwatch) do
       -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
       self.outgoingGarbage:push({
-        width = comboSize % 4 + 3,
-        height = 1,
+        width = width,
+        height = height,
         isMetal = false,
         isChain = false,
         frameEarned = self.clock,
         rowEarned = coordinate.row,
         colEarned = coordinate.column
       })
+      lines_sent = math.round(width * height / 6, 1)
       self.analytic:register_pieces_sent(pieces_sent)
+      self.analytic:register_lines_sent(lines_sent)
     end
   end
 

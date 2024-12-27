@@ -3,7 +3,11 @@
 As some of you know, I have been working on this build for awhile. The initial idea behind this build was to scale out level difficulties properly and to cut down on match length. Funny thing is with all the changes I've implemented, this build has now transformed into something of it's own: a more 'modern' and competitive version of the game we all know and have a love/hate relationship with. :stuck_out_tongue_winking_eyes:
 
 ## Latest Changes
-Nothing significant for now, everything was just ported over.
+**3-wides no longer cascade; it has been reverted back to normal.** All of the Challenge Mode stages had to be redone because several stages had become way too easy for their difficulty.
+Modern levels now use one scoring system, and Classic levels use the other.
+Fixed a problem with GPM calculation.
+Training Mode: Made adjustments in how much garbage is sent in the basic training mode settings.
+Reduced the maximum garbage multiplier in overtime from 12 to 4.
 
 ## Client-Side Changes
 - The level data for both Modern and Classic levels have been changed so they scale in difficulty properly.
@@ -14,7 +18,7 @@ Nothing significant for now, everything was just ported over.
 - Health regeneration has been removed. That means if you take damage, then your health will not regenerate!
 - 'Wiggling' has been disabled, but stealth bridging has been implemented. *hello modoki lol*
 - Rise Speed Algorithm: The formula for rise speed has been changed, and Classic levels now require 10 panels for a speed increase on *all* speed levels (for now, still a WIP).
-- There are now two scoring systems. The plan is to implement one scoring system for the Classic levels, and the other for the Modern levels.
+- There are now two scoring systems. The plan is to implement one scoring system for the Classic levels, and the other for the Modern levels. (done)
 - The score cap has been raised to 999,999 as scoring paces will naturally be higher on this build.
 - The garbage queue and combo garbage system have been completely changed.
 - Challenge Mode has been completely revamped.
@@ -27,7 +31,7 @@ Nothing significant for now, everything was just ported over.
 - The default telegraph and garbage images have been changed.
 
 ## Server-Side Changes
-None yet, but I plan to implent my 'Chaos' ranking system to the server files when I am actually able to host my own server.
+None yet, but I plan to implent my 'Chaos' ranking system to the server files, especially when I am actually able to host my own server.
 
 ## What else do I plan to implement?
 Garbage Mode is the main goal I would like to accomplish. This would be very useful for training, but even more so for Challenge Mode stages.

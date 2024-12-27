@@ -198,8 +198,10 @@ function Player:setStyle(style)
   if style ~= self.settings.style then
     self.settings.style = style
     if style == GameModes.Styles.MODERN then
+      score_mode = consts.SCOREMODE_TA
       self:setLevelData(LevelPresets.getModern(self.settings.level or config.level))
     else
+      score_mode = consts.SCOREMODE_PDP64
       self:setLevelData(LevelPresets.getClassic(self.settings.difficulty or config.difficulty))
       self:setSpeed(self.settings.speed)
     end

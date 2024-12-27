@@ -8,7 +8,7 @@ local function create_blank_data()
   return {
     -- the amount of destroyed panels
     destroyed_panels = 0,
-    -- the amount of sent garbage
+    -- the amount of sent garbage (pretty much deprecated)
     sent_garbage_lines = 0,
     -- the amount of times the cursor was moved
     move_count = 0,
@@ -21,6 +21,9 @@ local function create_blank_data()
     shockGarbageCount = 0,
     -- the amound of wasted panels, used to determine efficiency
     wasted_panels = 0,
+    -- the amount of garbage lines sent (had to do this separately due to how sent_garbage_lines works)
+    -- amount_of_garbage_lines_per_combo technically is no longer needed, leaving it in so nothing breaks
+    garbage_lines_sent = 0,
     -- the amount of garbage pieces sent
     garbage_pieces_sent = 0,
     -- the amount of garbage panels cleared
@@ -62,6 +65,7 @@ local function analytic_clear(analytic)
   analytic.used_combos = {}
   analytic.shockGarbageCount = 0
   analytic.wasted_panels = 0
+  analytic.garbage_lines_sent = 0
   analytic.garbage_pieces_sent = 0
   analytic.garbage_cleared = 0
 end
@@ -184,7 +188,7 @@ local function output_pretty_analytics()
     text = text .. "Destroyed " .. analytic.destroyed_panels .. " panels.\n"
     text = text .. "Wasted" .. analytic.wasted_panels .. " panels.\n"
     text = text .. "Cleared " .. analytic.garbage_cleared .. " garbage panels.\n"
-    text = text .. "Sent " .. analytic.sent_garbage_lines .. " lines of garbage.\n"
+    text = text .. "Sent " .. analytic.garbage_lines_sent .. " lines of garbage.\n"
     text = text .. "Sent " .. analytic.garbage_pieces_sent .. " pieces of garbage.\n"
     text = text .. "Moved " .. analytic.move_count .. " times.\n"
     text = text .. "Swapped " .. analytic.swap_count .. " times.\n"
@@ -286,6 +290,13 @@ function AnalyticsInstance.register_move(self)
   end
 end
 
+function AnalyticsInstance.register_lines_sent(self, amount)
+  local analytics_filters = self:data_update_list()
+  for _, analytic in pairs(analytics_filters) do
+    analytic.garbage_lines_sent = analytic.garbage_lines_sent + amount
+  end
+end
+
 function AnalyticsInstance.register_pieces_sent(self, amount)
   local analytics_filters = self:data_update_list()
   for _, analytic in pairs(analytics_filters) do
@@ -320,7 +331,7 @@ function analytics.game_ends(analytic)
 end
 
 function AnalyticsInstance:getRoundedGPM(clock)
-  local garbagePerMinute = self.data.sent_garbage_lines / (clock / 60 / 60)
+  local garbagePerMinute = self.data.garbage_lines_sent / (clock / 60 / 60)
   return string.format("%0.1f", math.round(garbagePerMinute, 1))
 end
 
