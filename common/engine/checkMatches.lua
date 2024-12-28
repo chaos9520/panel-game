@@ -991,8 +991,8 @@ function Stack:updateScoreWithCombo(comboSize)
     if (score_mode == consts.SCOREMODE_TA) then
       self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 5) * 10) * 10 * math.max(1, self.chain_counter)
     elseif (score_mode == consts.SCOREMODE_PDP64) then
-      -- self.score = self.score + math.floor((((comboSize - 3) * 62.5) * math.max(1, self.chain_counter)))
-      self.score = self.score + math.ceil(( 200 * 1.1 ^ (comboSize - 4)) * 1.2 ^ (math.max(1, self.chain_counter) - 1))
+      -- self.score = self.score + math.floor((((comboSize - 3) * 50) * math.max(1, self.chain_counter)))
+      self.score = self.score + math.ceil(( 200 * 1.1 ^ (comboSize - 4)) * 1.25 ^ (math.max(1, self.chain_counter) - 1))
     end
   end
 end
@@ -1002,7 +1002,11 @@ function Stack:updateScoreWithChain()
   if (score_mode == consts.SCOREMODE_TA) then
     self.score = self.score + math.ceil(math.log(factorial(chain_bonus), 3) * 10) * 10
   elseif (score_mode == consts.SCOREMODE_PDP64) then
-    self.score = self.score + math.floor((chain_bonus - 1) * chain_bonus / 2 * 25)
+    if chain_bonus == 0 then
+      self.score = self.score
+    else
+      self.score = self.score + math.ceil(200 * 1.2 ^ (chain_bonus - 2))
+    end
   end
 end
 
