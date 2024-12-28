@@ -1002,12 +1002,7 @@ function Stack:updateScoreWithChain()
   if (score_mode == consts.SCOREMODE_TA) then
     self.score = self.score + math.ceil(math.log(factorial(chain_bonus), 3) * 10) * 10
   elseif (score_mode == consts.SCOREMODE_PDP64) then
-    if chain_bonus == 0 then
-      self.score = self.score
-    else
-      -- self.score = self.score + math.floor(((((chain_bonus - 1) * chain_bonus) / 2) * 31.25))
-      self.score = self.score + math.ceil(200 * 1.25 ^ (chain_bonus - 2))
-    end
+    self.score = self.score + math.floor((chain_bonus - 1) * chain_bonus / 2 * 25)
   end
 end
 

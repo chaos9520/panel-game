@@ -1981,9 +1981,9 @@ function Stack.onPop(self, panel)
       end
       self:enqueue_popfx(panel.column, panel.row, self.popSizeThisFrame)
     end
-    self.score = self.score + 10
+    self.score = self.score + ((panel.combo_size - 2) * (panel.combo_size - 1)) / 2
 
-    self.panels_cleared = self.panels_cleared + ((panel.combo_size - 2) * (panel.combo_size - 1)) / 2
+    self.panels_cleared = self.panels_cleared + 1
     if self.match.stackInteraction ~= GameModes.StackInteractions.NONE
         and self.panels_cleared % self.levelData.shockFrequency == 0 then
           self.metal_panels_queued = min(self.metal_panels_queued + 1, self.levelData.shockCap)
