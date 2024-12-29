@@ -1005,7 +1005,7 @@ function Stack:updateScoreWithChain()
     if chain_bonus == 0 then
       self.score = self.score
     else
-      self.score = self.score + math.ceil(200 * 1.2 ^ (chain_bonus - 2))
+      self.score = self.score + math.ceil(250 * 1.2 ^ (chain_bonus - 2))
     end
   end
 end

@@ -186,7 +186,7 @@ local function output_pretty_analytics()
   for i, analytic in pairs(analytics_filters) do
     text = text .. titles[i]
     text = text .. "Destroyed " .. analytic.destroyed_panels .. " panels.\n"
-    text = text .. "Wasted" .. analytic.wasted_panels .. " panels.\n"
+    text = text .. "Wasted " .. analytic.wasted_panels .. " panels.\n"
     text = text .. "Cleared " .. analytic.garbage_cleared .. " garbage panels.\n"
     text = text .. "Sent " .. analytic.garbage_lines_sent .. " lines of garbage.\n"
     text = text .. "Sent " .. analytic.garbage_pieces_sent .. " pieces of garbage.\n"
