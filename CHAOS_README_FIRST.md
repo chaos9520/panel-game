@@ -6,13 +6,12 @@ As some of you know, I have been working on this build for awhile. The initial i
 **3-wides no longer cascade; it has been reverted back to normal.** All of the Challenge Mode stages had to be redone because several stages had become way too easy for their difficulty.
 Modern levels now use one scoring system, and Classic levels use the other.
 Fixed a problem with GPM calculation.
-Training Mode: Made adjustments in how much garbage is sent in the basic training mode settings. This was done to prevent players' stop time from being depleted instantly.
+Training Mode: Made adjustments as to how much and how often garbage is sent in the basic training mode settings. This was done to prevent players from getting overwhelemed so quickly .
 Reduced the maximum garbage multiplier in overtime from 12 to 4.
 
 ## Client-Side Changes
-- The level data for both Modern and Classic levels have been changed so they scale in difficulty properly.
-- The Classic levels scale differently from the Modern levels.
--# Level 8 is the closest to level 10 on the normal build, so I take it that will be the 'gold standard'.
+- The level data for both Modern and Classic levels have been changed so they scale in difficulty properly. The Classic levels scale differently from the Modern levels.
+- *Level 8 is the closest to level 10 on the normal build, so I take it that will be the 'gold standard'.*
 - Garbage Margin has been implemented in Vs modes. The more garbage a player has queued up, the less stop *and* shake time they get!
 - 'Speed margin' has been implemented into the Classic levels; higher rise speed equates to less stop time.
 - Health regeneration has been removed. That means if you take damage, then your health will not regenerate!
@@ -34,4 +33,5 @@ Reduced the maximum garbage multiplier in overtime from 12 to 4.
 None yet, but I plan to implent my 'Chaos' ranking system to the server files, especially when I am actually able to host my own server.
 
 ## What else do I plan to implement?
+I need to port over shock panels from garbage.
 Garbage Mode is the main goal I would like to accomplish. This would be very useful for training, but even more so for Challenge Mode stages.
