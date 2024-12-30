@@ -528,11 +528,11 @@ challenge_difficulty_3,level 3,Normal,Normale,Normal,中くらい,Normal,Normal,
 challenge_difficulty_4,level 4,Hard,Difficile,Difícil,難しい,Difícil,Schwierig,Difficile,ยาก
 challenge_difficulty_5,level 5,Very Hard,Très difficile,Muito difícil,非常に難しい,Muy difícil,Sehr schwierig,Molto difficile,ยากมาก
 challenge_difficulty_6,level 6,Super Hard,Super difficile,Super difícil,???,Súper difícil,Super schwierig,Super difficile, ???
-challenge_difficulty_7,level 7,Intense,Intense,Intenso,???,Intenso,Intensiv,Intenso,เข้มข้น
+challenge_difficulty_7,level 7,Intense,Intense,Intenso,過激,Intenso,Intensiv,Intenso,เข้มข้น
 challenge_difficulty_8,level 8,Insane,Fou,Insano,無理だ,Loco,Verrückt,Pazzo,บ้า
 challenge_difficulty_9,level 9,Impossible,Impossible,Impossível,不可能,Imposible,Unmöglich,Impossibile,Impossibile,เป็นไปไม่ได้
-challenge_difficulty_10,level 10,EX Mode (5 colors)
-challenge_difficulty_11,level 11,EX Mode (6 colors)
+challenge_difficulty_10,level 10,Chaos Mode (5 colors),Mode Chaos (5 couleurs),Modo Caos (5 cores),カオスモード（5色),Modo caos (5 colores),Chaosmodus (5 Farben),Modalità Caos (5 colori),โหมดความโกลาหล (5 สี)
+challenge_difficulty_11,level 11,Chaos Mode (6 colors),Mode Chaos (6 couleurs),Modo Caos (6 cores),カオスモード（6色),Modo caos (6 colores),Chaosmodus (6 Farben),Modalità Caos (6 colori),โหมดความโกลาหล (6 สี)
 auto_updater_version_warning,Warning shown to users with an old autoupdater,"New updater available, please download from","Nouveau autoupdater disponible, veuillez installer à partir de","Novo autoupdater disponível, instale de",新しいautoupdaterを利用できます。からインストールしてください,"Nuevo autoupdater disponible, instale desde","Ein neuer Updater ist verfügbar, bitte lade ihn unter folgendem Link herunter:","Nuovo autoupdater disponibile, installa da",มีระบบอัพเดทอัตโนมัติเวอร์ชั่นใหม่ กรุณา Install โดยใช้ระบบนั้น
 username_blank_warning,shown in user name input when nothing is entered,Username cannot be blank,Le nom d'utilisateur ne peut pas être vide,O nome de usuário não pode ficar em branco,ユーザー名を空白にすることはできません,Nombre de usuario no puede estar en blanco,Benutzername darf nicht leer sein,Il nome utente non può essere vuoto,Username ไม่สามารถเป็นค่าว่างได้
 op_shakeIntensity,Option for the intensity of the shake animation,Shake Animation Intensity,,,,,Stärke der Aufprallanimation
