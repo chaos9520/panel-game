@@ -49,7 +49,7 @@ function Health:receiveGarbage(frameToReceive, garbage)
       else
         damage = damage
       end
-      self.currentLines = math.min(self.height * 1.2, self.currentLines + damage)
+      self.currentLines = math.min(self.height * (4/3), self.currentLines + damage)
     end
   end
 end

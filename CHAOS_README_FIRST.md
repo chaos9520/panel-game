@@ -6,7 +6,7 @@ As some of you know, I have been working on this build for awhile. The initial i
 **3-wides no longer cascade; it has been reverted back to normal.** All of the Challenge Mode stages had to be redone because several stages had become way too easy for their difficulty.
 Modern levels now use one scoring system, and Classic levels use the other.
 Fixed a problem with GPM calculation.
-Training Mode: Made adjustments as to how much and how often garbage is sent in the basic training mode settings. This was done to prevent players from getting overwhelemed so quickly .
+Training Mode: Made adjustments as to how much and how often garbage is sent in the basic training mode settings. This was done to prevent players from getting overwhelemed so quickly by the waves of garbage.
 Reduced the maximum garbage multiplier in overtime from 12 to 4.
 
 ## Client-Side Changes
