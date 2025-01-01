@@ -8,7 +8,7 @@ As some of you know, I have been working on this build for awhile. The initial i
 ### Global Changes
 - There are now two scoring systems; one for Modern, and the other for Classic.
 - The score cap has been raised to 999,999 as scoring paces will naturally be faster on this build.
--# Yes, 100k+ Time Attack runs are now possible on both Modern and Classic styles.
+<small>Yes, 100k+ Time Attack runs are now possible on both Modern and Classic styles.</small>
 - 'Wiggling' has been disabled, but stealth bridging has been implemented. It's a fair trade imo. *hello modoki lol*
 - Rise Speed Algorithm: The formula for rise speed has been changed.
 ### Modern Style (includes Vs)
