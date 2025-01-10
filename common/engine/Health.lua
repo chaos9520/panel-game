@@ -9,6 +9,7 @@ Health =
     self.maxSecondsToppedOutToLose = framesToppedOutToLose -- Starting value of framesToppedOutToLose
     self.lineClearRate = lineClearGPM / 60 -- How many "lines" we clear per second. Essentially how fast we recover.
     self.currentLines = 0 -- The current number of "lines" simulated
+    self.line_threshold = 24 -- The size of the opponent's 'board'.
     self.height = height -- How many "lines" need to be accumulated before we are "topped" out.
     self.lastWasFourCombo = false -- Tracks if the last combo was a +4. If two +4s hit in a row, it only counts as 1 "line"
     self.clock = 0 -- Current clock time, this should match the opponent
@@ -28,7 +29,7 @@ function Health:run()
   local staminaPercent = math.max(0.5, 1 - ((self.clock / 60) * (0.01 / 10)))
   local decrementLines = (self.lineClearRate * (1/60.0)) * staminaPercent
   self.currentLines = math.max(0, self.currentLines - decrementLines)
-  if self.currentLines >= self.height then
+  if self.currentLines >= self.line_threshold then
     self.framesToppedOutToLose = math.max(0, self.framesToppedOutToLose - 1)
   end
   self.clock = self.clock + 1
@@ -40,8 +41,7 @@ function Health:receiveGarbage(frameToReceive, garbage)
     local countGarbage = true
 
     if countGarbage then
-      local damage_height = (garbage.height * (garbage.height + 1)) / 2
-      local damage = (damage_height * garbage.width) / 6
+      local damage = (garbage.height * garbage.width) / 6
       if garbage.isChain then
         damage = damage
       elseif garbage.isMetal then
@@ -49,13 +49,13 @@ function Health:receiveGarbage(frameToReceive, garbage)
       else
         damage = damage
       end
-      self.currentLines = math.min(self.height * (4/3), self.currentLines + damage)
+      self.currentLines = self.currentLines + (damage / self.height) * self.line_threshold
     end
   end
 end
 
 function Health:getTopOutPercentage()
-  return math.max(0, self.currentLines) / self.height
+  return math.max(0, self.currentLines) / self.line_threshold
 end
 
 function Health:saveRollbackCopy()

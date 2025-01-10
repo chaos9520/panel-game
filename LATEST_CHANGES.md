@@ -1,6 +1,22 @@
 ## Latest Changes
-- Split up recent changes and the list of changes into separate files.
-- Added six panel sets.
+- Challenge Mode: Made adjustments to the damage formula, and made most difficulties a bit longer.
+- Fixed scoring so all bonuses will be multiples of 10.
+- Readjusted hover times:
+  - Level 1: 14 --> 16 frames
+  - Level 2: 12 --> 14 frames
+  - Level 3: 11 --> 12 frames
+  - Level 4: 9 --> 10 frames
+  - Level 5: 8 --> 9 frames
+  - Level 6: 7 --> 8 frames
+  - Level 7: 6 --> 7 frames
+  - Level 8: 5 --> 6 frames
+  - Level 9: 4 --> 6 frames
+  - Level 10: 4 --> 6 frames
+  - Level 11: 4 --> 6 frames
+  - Classic Easy: 14 --> 11 frames
+  - Classic Normal: 9 --> 8 frames
+  - Classic Hard: unchanged
+  - Classic EX: 4 --> 6 frames
 ## Build Goals
 - I need to port over shock panels from garbage from v047 to the refactor.
 - Garbage Mode is the main goal I would like to accomplish. This would be very useful for training, but even more so for Challenge Mode stages.
