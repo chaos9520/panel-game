@@ -1,13 +1,10 @@
 leagues = { {league="Provisional",     min_rating = -9999},
-            {league="Newbie",         min_rating = -1000},
-            {league="Beginner",         min_rating =1000},
-            {league="Novice",         min_rating = 1200},
-            {league="Intermediate",         min_rating = 1400},
-            {league="Advanced",         min_rating = 1600},
-            {league="Expert",     min_rating = 1800},
-            {league="Master",      min_rating = 2000},
-            {league="Grandmaster",       min_rating = 2200},
-            {league="Super Grandmaster",       min_rating = 2400},
+            {league="Copper",         min_rating = -1000},
+            {league="Bronze",         min_rating =750},
+            {league="Silver",         min_rating = 1050},
+            {league="Gold",         min_rating = 1350},
+            {league="Platinum",         min_rating = 1650},
+            {league="Diamond",     min_rating = 1950},
           }
 PLACEMENT_MATCH_COUNT_REQUIREMENT = 0
 DEFAULT_RATING = 1500 -- With the new formula, DEFAULT_RATING and RATING_SPREAD_MODIFIER should be the same (50% of rating_scale).
