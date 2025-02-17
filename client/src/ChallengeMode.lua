@@ -43,97 +43,109 @@ function ChallengeMode:createStages(difficulty)
   local framesToppedOutToLoseIncrement
   local lineClearGPMBase
   local lineClearGPMIncrement
-  local lineHeightToKill
+  local lineHeightToKillBase
+  local lineHeightToKillIncrement
   local panelLevel
 
   if difficulty == 1 then
     stageCount = 4
-    framesToppedOutToLoseBase = 193
-    framesToppedOutToLoseIncrement = 193
-    lineClearGPMBase = 1.5
-    lineClearGPMIncrement = 1.5
+    framesToppedOutToLoseBase = 300
+    framesToppedOutToLoseIncrement = 200
+    lineClearGPMBase = 9
+    lineClearGPMIncrement = 1.66
     panelLevel = 1
-    lineHeightToKill = 3
+    lineHeightToKillBase = 4
+    lineHeightToKillIncrement = 1.33
   elseif difficulty == 2 then
     stageCount = 6
-    framesToppedOutToLoseBase = 258
-    framesToppedOutToLoseIncrement = 142
-    lineClearGPMBase = 4.5
-    lineClearGPMIncrement = 0.9
+    framesToppedOutToLoseBase = 300
+    framesToppedOutToLoseIncrement = 120
+    lineClearGPMBase = 10.5
+    lineClearGPMIncrement = 1.1
     panelLevel = 2
-    lineHeightToKill = 4
+    lineHeightToKillBase = 4
+    lineHeightToKillIncrement = 1
   elseif difficulty == 3 then
     stageCount = 8
-    framesToppedOutToLoseBase = 322
-    framesToppedOutToLoseIncrement = 126
-    lineClearGPMBase = 6.75
-    lineClearGPMIncrement = 0.75
+    framesToppedOutToLoseBase = 300
+    framesToppedOutToLoseIncrement = 214
+    lineClearGPMBase = 12
+    lineClearGPMIncrement = 0.85
     panelLevel = 3
-    lineHeightToKill = 5
+    lineHeightToKillBase = 5
+    lineHeightToKillIncrement = 0.71
   elseif difficulty == 4 then
     stageCount = 10
-    framesToppedOutToLoseBase = 403
-    framesToppedOutToLoseIncrement = 123
-    lineClearGPMBase = 9
-    lineClearGPMIncrement = 0.66
+    framesToppedOutToLoseBase = 600
+    framesToppedOutToLoseIncrement = 133
+    lineClearGPMBase = 13.5
+    lineClearGPMIncrement = 0.72
     panelLevel = 4
-    lineHeightToKill = 6
+    lineHeightToKillBase = 5
+    lineHeightToKillIncrement = 0.66
   elseif difficulty == 5 then
     stageCount = 12
-    framesToppedOutToLoseBase = 503
-    framesToppedOutToLoseIncrement = 125
-    lineClearGPMBase = 11.25
-    lineClearGPMIncrement = 0.61
+    framesToppedOutToLoseBase = 600
+    framesToppedOutToLoseIncrement = 190
+    lineClearGPMBase = 15
+    lineClearGPMIncrement = 0.63
     panelLevel = 5
-    lineHeightToKill = 7
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = 0.54
   elseif difficulty == 6 then
     stageCount = 12
-    framesToppedOutToLoseBase = 629
-    framesToppedOutToLoseIncrement = 157
-    lineClearGPMBase = 13.5
+    framesToppedOutToLoseBase = 900
+    framesToppedOutToLoseIncrement = 163
+    lineClearGPMBase = 16.5
     lineClearGPMIncrement = 0.68
     panelLevel = 6
-    lineHeightToKill = 8
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = 0.54
   elseif difficulty == 7 then
     stageCount = 12
-    framesToppedOutToLoseBase = 786
-    framesToppedOutToLoseIncrement = 196
-    lineClearGPMBase = 15.75
-    lineClearGPMIncrement = 0.75
-    panelLevel = 7
-    lineHeightToKill = 9
-  elseif difficulty == 8 then
-    stageCount = 12
-    framesToppedOutToLoseBase = 983
+    framesToppedOutToLoseBase = 900
     framesToppedOutToLoseIncrement = 245
     lineClearGPMBase = 18
-    lineClearGPMIncrement = 0.81
+    lineClearGPMIncrement = 0.72
+    panelLevel = 7
+    lineHeightToKillBase = 7
+    lineHeightToKillIncrement = 0.45
+  elseif difficulty == 8 then
+    stageCount = 12
+    framesToppedOutToLoseBase = 1200
+    framesToppedOutToLoseIncrement = 218
+    lineClearGPMBase = 19.5
+    lineClearGPMIncrement = 0.77
     panelLevel = 8
-    lineHeightToKill = 10
+    lineHeightToKillBase = 7
+    lineHeightToKillIncrement = 0.45
   elseif difficulty == 9 then
     stageCount = 8
-    framesToppedOutToLoseBase = 1229
-    framesToppedOutToLoseIncrement = 482
-    lineClearGPMBase = 20.25
-    lineClearGPMIncrement = 1.39
+    framesToppedOutToLoseBase = 1200
+    framesToppedOutToLoseIncrement = 342
+    lineClearGPMBase = 21
+    lineClearGPMIncrement = 1.28
     panelLevel = 9
-    lineHeightToKill = 11
+    lineHeightToKillBase = 8
+    lineHeightToKillIncrement = 0.57
   elseif difficulty == 10 then
     stageCount = 8
-    framesToppedOutToLoseBase = 1536
-    framesToppedOutToLoseIncrement = 603
+    framesToppedOutToLoseBase = 1200
+    framesToppedOutToLoseIncrement = 342
     lineClearGPMBase = 22.5
-    lineClearGPMIncrement = 1.5
+    lineClearGPMIncrement = 1.35
     panelLevel = 10
-    lineHeightToKill = 12
+    lineHeightToKillBase = 8
+    lineHeightToKillIncrement = 0.57
   elseif difficulty == 11 then
     stageCount = 8
-    framesToppedOutToLoseBase = 1920
-    framesToppedOutToLoseIncrement = 754
-    lineClearGPMBase = 24.75
-    lineClearGPMIncrement = 1.6
+    framesToppedOutToLoseBase = 1200
+    framesToppedOutToLoseIncrement = 342
+    lineClearGPMBase = 24
+    lineClearGPMIncrement = 1.14
     panelLevel = 11
-    lineHeightToKill = 13
+    lineHeightToKillBase = 8
+    lineHeightToKillIncrement = 0.57
   else
     error("Invalid challenge mode difficulty level of " .. difficulty)
   end
@@ -145,7 +157,7 @@ function ChallengeMode:createStages(difficulty)
     stage.healthSettings = {
       framesToppedOutToLose = framesToppedOutToLoseBase + framesToppedOutToLoseIncrement * incrementMultiplier,
       lineClearGPM = lineClearGPMBase + lineClearGPMIncrement * incrementMultiplier,
-      lineHeightToKill = lineHeightToKill,
+      lineHeightToKill = lineHeightToKillBase + lineHeightToKillIncrement * incrementMultiplier,
       riseSpeed = levelPresets.getModern(panelLevel).startingSpeed
     }
     stage.playerLevel = panelLevel

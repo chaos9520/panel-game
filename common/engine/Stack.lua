@@ -1806,6 +1806,8 @@ function Stack.dropGarbage(self, width, height, isMetal)
       -- so iterate from 1 to stack width instead of column to column + width - 1
       for col = 1, self.width do
         local panel = self:createPanelAt(row, col)
+        -- local shake_margin = ((self.levelData.garbage_margin * 2) - self.incomingGarbage:len()) / (self.levelData.garbage_margin * 2)
+        local shake_margin = (100 - self.incomingGarbage:len()) / 100
 
         if isPartOfGarbage(col) then
           panel.garbageId = self.garbageCreatedCount
@@ -1815,7 +1817,7 @@ function Stack.dropGarbage(self, width, height, isMetal)
           panel.height = height
           panel.y_offset = row - originRow
           panel.x_offset = col - originCol
-          panel.shake_time = math.min(shakeTime, math.max(18, math.ceil(shakeTime * math.max(0, ((100 - self.incomingGarbage:len()) / 100)))))
+          panel.shake_time = math.min(shakeTime, math.max(18, math.ceil(shakeTime * math.max(0, shake_margin))))
           panel.state = "falling"
           panel.row = row
           panel.column = col

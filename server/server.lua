@@ -315,7 +315,7 @@ function Server:closeRoom(room)
   end
 end
 
-function Server:calculate_rating_adjustment(Rc, Ro, Oa, k) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
+function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
   --[[ --Algorithm we are implementing, per community member Bbforky:
       Formula for Calculating expected outcome:
       RATING_SPREAD_MODIFIER = 400
@@ -335,8 +335,9 @@ function Server:calculate_rating_adjustment(Rc, Ro, Oa, k) -- -- print("calculat
   ]] -- print("vs")
   -- print(players[player_number].opponent.name.." Ranking: "..leaderboard.players[players[player_number].opponent.user_id].rating)
   Oe = 1 / (1 + 10 ^ ((Ro - Rc) / RATING_SPREAD_MODIFIER))
+
   -- print("expected outcome: "..Oe)
-  Rn = Rc + k * (Oa - Oe)
+  Rn = Rc + Rd * (Oa - Oe)
   return Rn
 end
 
@@ -363,12 +364,20 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     placement_done[players[player_number].user_id] = leaderboard.players[players[player_number].user_id].placement_done
   end
   for player_number = 1, 2 do
-    local k, Oa  --max point change per match, actual outcome
+    local Rd, Oa  --max point change per match, actual outcome
     room.ratings[player_number] = {}
+
+    local ranked_games_played = room.ratings[player_number].ranked_games_played
+    -- Rd variables
+    local rating_scale = 3000
+    local max_rd = rating_scale / 10
+    local min_rd = 10
+    
+    -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
-      k = 10
+      Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played + 1))))
     else
-      k = 50
+      Rd = max_rd
     end
     if players[player_number].player_number == winning_player_number then
       Oa = 1
@@ -378,7 +387,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     if placement_done[players[player_number].user_id] then
       if placement_done[players[player_number].opponent.user_id] then
         logger.debug("Player " .. player_number .. " played a non-placement ranked match.  Updating his rating now.")
-        room.ratings[player_number].new = self:calculate_rating_adjustment(leaderboard.players[players[player_number].user_id].rating, leaderboard.players[players[player_number].opponent.user_id].rating, Oa, k)
+        room.ratings[player_number].new = self:calculate_rating_adjustment(leaderboard.players[players[player_number].user_id].rating, leaderboard.players[players[player_number].opponent.user_id].rating, Oa, Rd)
         self.database:insertPlayerELOChange(players[player_number].user_id, room.ratings[player_number].new, gameID)
       else
         logger.debug("Player " .. player_number .. " played ranked against an unranked opponent.  We'll process this match when his opponent has finished placement")
@@ -408,7 +417,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
         if not leaderboard.players[players[player_number].user_id] then
           leaderboard.players[players[player_number].user_id] = {}
         end
-        leaderboard.players[players[player_number].user_id].placement_rating = self:calculate_rating_adjustment(leaderboard.players[players[player_number].user_id].placement_rating or DEFAULT_RATING, leaderboard.players[players[player_number].opponent.user_id].rating, Oa, PLACEMENT_MATCH_K)
+        leaderboard.players[players[player_number].user_id].placement_rating = self:calculate_rating_adjustment(leaderboard.players[players[player_number].user_id].placement_rating or DEFAULT_RATING, leaderboard.players[players[player_number].opponent.user_id].rating, Oa, Rd)
         logger.debug("New newcomer rating: " .. leaderboard.players[players[player_number].user_id].placement_rating)
         leaderboard.players[players[player_number].user_id].ranked_games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
         if Oa == 1 then
