@@ -1,6 +1,6 @@
 leagues = { {league="Provisional",     min_rating = -9999},
-            {league="Newbie",         min_rating = -1000},
-            {league="Beginner",         min_rating =750},
+            {league="Newbie",         min_rating = -3000},
+            {league="Beginner",         min_rating = 750},
             {league="Novice",         min_rating = 1050},
             {league="Intermediate",         min_rating = 1350},
             {league="Advanced",         min_rating = 1650},
