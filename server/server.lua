@@ -375,7 +375,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
-      Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played + 1))))
+      Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played - 8))))
     else
       Rd = max_rd
     end
