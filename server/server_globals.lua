@@ -1,4 +1,4 @@
-leagues = { {league="",     min_rating = -9999},
+leagues = { {league="Provisional",     min_rating = -9999},
             {league="Copper",         min_rating = -3000},
             {league="Bronze",         min_rating = 750},
             {league="Silver",         min_rating = 1050},
