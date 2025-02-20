@@ -368,14 +368,16 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
 
     local ranked_games_played = room.ratings[player_number].ranked_games_played
+    local ranked_games_won = room.ratings[player_number].ranked_games_won
+    local ranked_games_lost = ranked_games_played - ranked_games_won
     -- Rd variables
     local rating_scale = 3000
     local max_rd = rating_scale / 10
-    local min_rd = 10
+    local min_rd = max_rd * 0.05
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
-      Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played - 8))))
+      Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played - 8))) * 0.999 ^ math.abs(ranked_games_won - ranked_games_lost))
     else
       Rd = max_rd
     end
