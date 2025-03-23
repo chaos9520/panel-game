@@ -367,9 +367,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     local Rd, Oa  --max point change per match, actual outcome
     room.ratings[player_number] = {}
 
-    local ranked_games_played = room.ratings[player_number].ranked_games_played
-    local ranked_games_won = room.ratings[player_number].ranked_games_won
-    local ranked_games_lost = ranked_games_played - ranked_games_won
+    local ranked_games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
     -- Rd variables
     local rating_scale = 3000
     local max_rd = rating_scale / 10
@@ -377,7 +375,11 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
-      Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played + 1))) * 0.999 ^ math.abs(ranked_games_won - ranked_games_lost))
+      if ranked_games_played == nil then
+        Rd = max_rd
+      else
+        Rd = math.max(min_rd, (max_rd / (0.5 + math.log(ranked_games_played + 1))) * 0.999 ^ ranked_games_played)
+      end
     else
       Rd = max_rd
     end
