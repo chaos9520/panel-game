@@ -34,7 +34,11 @@ local function orderComboGarbage(a, b)
   end
 end
 
-local function orderFrameEarned(a, b)
+local function orderFrameEarnedForward(a, b)
+  return a.frameEarned > b.frameEarned
+end
+
+local function orderFrameEarnedReverse(a, b)
   return a.frameEarned < b.frameEarned
 end
 
@@ -62,7 +66,7 @@ local function orderGarbage(garbageQueue, treatMetalAsCombo)
         return not a.isChain
       end
     else
-      return orderFrameEarned(a, b)
+      return orderFrameEarnedReverse(a, b)
     end
   end)
 

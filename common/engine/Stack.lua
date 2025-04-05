@@ -1100,7 +1100,7 @@ function Stack.shouldDropGarbage(self)
 
   -- new garbage can't drop if the stack is full
   -- new garbage always drops one by one
-  if not self.panels_in_top_row and not self:has_falling_garbage() then
+  if not self.panels_in_top_row then
     if not self:hasActivePanels() then
       return true
     elseif garbage.isChain then
@@ -1169,7 +1169,7 @@ function Stack.simulate(self)
     if self.speed == 99 then
       self.panels_to_speedup = math.huge
     else
-      self.panels_to_speedup = 10
+      self.panels_to_speedup = 10 + 10 * math.floor((self.speed + 1) / 20)
     end
   end
   prof.pop("speed increase")
@@ -2032,8 +2032,8 @@ function Stack.onGarbageLand(self, panel)
         end
       end
       self.shake_time_on_frame = max(self.shake_time_on_frame, panel.shake_time, self.peak_shake_time or 0)
-      --a smaller garbage block landing should renew the largest of the previous blocks' shake times since our shake time was last zero.
-      self.peak_shake_time = max(self.shake_time_on_frame, self.peak_shake_time or 0)
+      --a smaller garbage block landing should NOT renew the largest of the previous blocks' shake times since our shake time was last zero.
+      self.peak_shake_time = min(self.shake_time_on_frame, self.peak_shake_time or 0)
 
       -- to prevent from running this code dozens of time for the same garbage block
       -- all panels of a garbage block have the same id + shake time
@@ -2078,7 +2078,7 @@ function Stack.getActivePanelCount(self)
         if panel.color ~= 0
         -- dimmed is implicitly filtered by only checking in row 1 and up
         and panel.state ~= "normal"
-        and panel.state ~= "swapping" then
+        and panel.state ~= "landing" then -- up for debate, change back to landing if removed
           count = count + 1
         end
       end
@@ -2088,11 +2088,9 @@ function Stack.getActivePanelCount(self)
   return count
 end
 
-function Stack.updateRiseLock(self)
+function Stack.updateRiseLock(self) -- add arguments to effectively make speed 99 the kill screen in endless.
   self.prev_rise_lock = self.rise_lock
   if self.do_countdown then
-    self.rise_lock = true
-  elseif self:swapQueued()then
     self.rise_lock = true
   elseif self.shake_time > 0 then
     self.rise_lock = true
