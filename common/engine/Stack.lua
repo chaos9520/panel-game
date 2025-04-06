@@ -35,7 +35,7 @@ local GARBAGE_SIZE_TO_SHAKE_FRAMES = {
   66, 66, 66, 66, 66, 76
 }
 
-local DT_SPEED_INCREASE = 15 * 60 -- frames it takes to increase the speed level by 1
+local DT_SPEED_INCREASE = 6 * 60 -- frames it takes to increase the speed level by 1
 
 -- endless and 1P time attack use a speed system in which
 -- speed increases based on the number of panels you clear.
@@ -1169,7 +1169,7 @@ function Stack.simulate(self)
     if self.speed == 99 then
       self.panels_to_speedup = math.huge
     else
-      self.panels_to_speedup = 10 + 10 * math.floor((self.speed + 1) / 20)
+      self.panels_to_speedup = 13
     end
   end
   prof.pop("speed increase")
@@ -1191,7 +1191,7 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          self.rise_timer = 100 - self.speed
+          self.rise_timer = math.ceil(1 * 1.05 ^ (99 - self.speed))
         end
       end
     end
@@ -2091,6 +2091,8 @@ end
 function Stack.updateRiseLock(self) -- add arguments to effectively make speed 99 the kill screen in endless.
   self.prev_rise_lock = self.rise_lock
   if self.do_countdown then
+    self.rise_lock = true
+  elseif self:swapQueued() then
     self.rise_lock = true
   elseif self.shake_time > 0 then
     self.rise_lock = true
