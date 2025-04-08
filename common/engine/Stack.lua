@@ -2088,7 +2088,7 @@ function Stack.getActivePanelCount(self)
   return count
 end
 
-function Stack.updateRiseLock(self) -- add arguments to effectively make speed 99 the kill screen in endless.
+function Stack.updateRiseLock(self)
   self.prev_rise_lock = self.rise_lock
   if self.do_countdown then
     self.rise_lock = true

@@ -987,18 +987,19 @@ function Stack:updateScoreWithBonus(comboSize)
   self:updateScoreWithCombo(comboSize)
 end
 
-function ScoreMultiplier(gameMode, level)
-  if gameMode ~= ONE_PLAYER_ENDLESS then
+function ScoreMultiplier(mode, level)
+  if mode ~= ONE_PLAYER_ENDLESS then
     return 1
   else
     return 2 ^ (math.ceil(level / 4) - 1)
   end
 end
 
+
 function Stack:updateScoreWithCombo(comboSize)
   if comboSize > 3 then
     if (score_mode == consts.SCOREMODE_TA) then
-      self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 5) * 10) * 10 * math.max(1, self.chain_counter)
+      self.score = self.score + (math.ceil(math.log(factorial(comboSize - 2), 5) * 10) * 10 * math.max(1, self.chain_counter)) * ScoreMultiplier(self.GameModes, self.level)
     elseif (score_mode == consts.SCOREMODE_PDP64) then
       -- self.score = self.score + math.floor((((comboSize - 3) * 50) * math.max(1, self.chain_counter)))
       self.score = self.score + math.ceil((( 200 * 1.1 ^ (comboSize - 4)) * 1.25 ^ (math.max(1, self.chain_counter) - 1)) / 10) * 10
@@ -1009,7 +1010,7 @@ end
 function Stack:updateScoreWithChain()
   local chain_bonus = self.chain_counter
   if (score_mode == consts.SCOREMODE_TA) then
-    self.score = self.score + math.ceil(math.log(factorial(chain_bonus), 3) * 10) * 10
+    self.score = self.score + (math.ceil(math.log(factorial(chain_bonus), 3) * 10) * 10)  * ScoreMultiplier(self.gameModes, self.level)
   elseif (score_mode == consts.SCOREMODE_PDP64) then
     if chain_bonus == 0 then
       self.score = self.score
