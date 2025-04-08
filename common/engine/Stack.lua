@@ -35,7 +35,7 @@ local GARBAGE_SIZE_TO_SHAKE_FRAMES = {
   66, 66, 66, 66, 66, 76
 }
 
-local DT_SPEED_INCREASE = 6 * 60 -- frames it takes to increase the speed level by 1
+local DT_SPEED_INCREASE = 15 * 60 -- frames it takes to increase the speed level by 1
 
 -- endless and 1P time attack use a speed system in which
 -- speed increases based on the number of panels you clear.
@@ -1169,7 +1169,7 @@ function Stack.simulate(self)
     if self.speed == 99 then
       self.panels_to_speedup = math.huge
     else
-      self.panels_to_speedup = 13
+      self.panels_to_speedup = 10 + math.ceil((self.speed + 1) / 10) * 10
     end
   end
   prof.pop("speed increase")
@@ -1191,7 +1191,7 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          self.rise_timer = math.ceil(1 * 1.05 ^ (99 - self.speed))
+          self.rise_timer = math.ceil(1 * 1.055 ^ (95 - self.speed))
         end
       end
     end
@@ -2188,6 +2188,15 @@ function Stack:checkGameOver()
           return true
         end
         if #self.analytic.data.reached_chains > 0 and not self:hasChainingPanels() then
+          -- We achieved a chain, finished chaining, but haven't won yet -> fail
+          return true
+        end
+      elseif gameOverCondition == GameModes.GameOverConditions.ENDLESS_ENDGAME then
+        if self.speed == 99 and #self.analytic.data.reached_chains == 0 and self.analytic.data.destroyed_panels > 0 then
+          -- We finished matching but never made a chain -> fail
+          return true
+        end
+        if self.speed == 99 and #self.analytic.data.reached_chains > 0 and not self:hasChainingPanels() then
           -- We achieved a chain, finished chaining, but haven't won yet -> fail
           return true
         end

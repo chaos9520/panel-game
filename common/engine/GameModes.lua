@@ -14,7 +14,7 @@ local MatchWinConditions = { LAST_ALIVE = 1, SCORE = 2, TIME = 3 }
 -- these are game winning objectives on the stack level, the stack stops running without going game over
 local GameWinConditions = { NO_MATCHABLE_PANELS = 1, NO_MATCHABLE_GARBAGE = 2}
 -- these are game losing objectives on the stack level, the stack goes game over or is forced to stop running in another way
-local GameOverConditions = { NEGATIVE_HEALTH = 1, TIME_OUT = 2, NO_MOVES_LEFT = 3, CHAIN_DROPPED = 4 }
+local GameOverConditions = { NEGATIVE_HEALTH = 1, TIME_OUT = 2, NO_MOVES_LEFT = 3, CHAIN_DROPPED = 4, ENDLESS_ENDGAME = 5 }
 
 local OnePlayerVsSelf = {
   style = Styles.MODERN,
@@ -55,7 +55,7 @@ local OnePlayerEndless = {
   playerCount = 1,
   stackInteraction = StackInteractions.NONE,
   winConditions = { },
-  gameOverConditions = { GameOverConditions.NEGATIVE_HEALTH },
+  gameOverConditions = { GameOverConditions.NEGATIVE_HEALTH, GameOverConditions.ENDLESS_ENDGAME },
   doCountdown = true,
 }
 

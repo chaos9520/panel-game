@@ -987,6 +987,14 @@ function Stack:updateScoreWithBonus(comboSize)
   self:updateScoreWithCombo(comboSize)
 end
 
+function ScoreMultiplier(gameMode, level)
+  if gameMode ~= ONE_PLAYER_ENDLESS then
+    return 1
+  else
+    return 2 ^ (math.ceil(level / 4) - 1)
+  end
+end
+
 function Stack:updateScoreWithCombo(comboSize)
   if comboSize > 3 then
     if (score_mode == consts.SCOREMODE_TA) then
