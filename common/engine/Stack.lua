@@ -111,7 +111,12 @@ Stack =
       -- mode 1: increase speed based on fixed intervals
       s.nextSpeedIncreaseClock = DT_SPEED_INCREASE
     else
-      s.panels_to_speedup = PANELS_TO_NEXT_SPEED[s.speed]
+      if s.speed == 99 then
+        s.panels_to_speedup = math.huge
+      else
+        s.panels_to_speedup = 10 + math.floor((s.speed + 1) / 10) * 10
+      end
+      -- s.panels_to_speedup = PANELS_TO_NEXT_SPEED[s.speed]
     end
 
     s.health = s.levelData.maxHealth
@@ -1169,7 +1174,7 @@ function Stack.simulate(self)
     if self.speed == 99 then
       self.panels_to_speedup = math.huge
     else
-      self.panels_to_speedup = 10 + math.ceil((self.speed + 1) / 10) * 10
+      self.panels_to_speedup = 10 + math.floor((self.speed + 1) / 10) * 10
     end
   end
   prof.pop("speed increase")
@@ -2192,13 +2197,10 @@ function Stack:checkGameOver()
           return true
         end
       elseif gameOverCondition == GameModes.GameOverConditions.ENDLESS_ENDGAME then
-        if self.speed == 99 and #self.analytic.data.reached_chains == 0 and self.analytic.data.destroyed_panels > 0 then
-          -- We finished matching but never made a chain -> fail
-          return true
-        end
-        if self.speed == 99 and #self.analytic.data.reached_chains > 0 and not self:hasChainingPanels() then
-          -- We achieved a chain, finished chaining, but haven't won yet -> fail
-          return true
+        if self.speed == 99 then
+          if self:hasActivePanels() and not self:hasChainingPanels() then
+            return true
+          end
         end
       end
     end
