@@ -72,7 +72,7 @@ function MainMenu:createMainMenu()
       switchToScene(ChallengeModeMenu())
     end),
     MenuItem.createButtonMenuItem("mm_2_vs_online", {""}, nil, function()
-      switchToScene(Lobby({serverIp = "localhost"}))
+      switchToScene(Lobby({serverIp = "pa-server.chaos952.org"}))
       -- pa-server.chaos952.org
     end),
     MenuItem.createButtonMenuItem("mm_2_vs_local", nil, nil, function()
