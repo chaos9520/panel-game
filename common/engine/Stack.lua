@@ -127,7 +127,7 @@ Stack =
     s.garbageSizeDropColumnMaps = {
       {1, 2, 3, 4, 5, 6},
       {1, 3, 5,},
-      {1, 4},
+      {1, 2, 3, 4},
       {1, 2, 3},
       {1, 2},
       {1}
@@ -2201,6 +2201,10 @@ function Stack:checkGameOver()
           if self:hasActivePanels() and not self:hasChainingPanels() then
             return true
           end
+        end
+      elseif gameOverCondition == GameModes.GameOverConditions.GARBAGE_LIMIT_REACHED then
+        if self.incomingGarbage:len() >= 100 then
+          return true
         end
       end
     end

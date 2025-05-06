@@ -987,13 +987,27 @@ function Stack:updateScoreWithBonus(comboSize)
   self:updateScoreWithCombo(comboSize)
 end
 
+function ScoreMultiplier(speed)
+  if speed >= 89 then
+    return 2.5
+  elseif speed >= 79 then
+    return 2
+  elseif speed >= 69 then
+    return 1.5
+  elseif speed >= 59 then
+    return 1.25
+  else
+    return 1
+  end
+end
+
 function Stack:updateScoreWithCombo(comboSize)
   if comboSize > 3 then
     if (score_mode == consts.SCOREMODE_TA) then
-      self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 5) * 10) * 10 * math.max(1, self.chain_counter)
+      self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 2) * 10) * 10 * math.max(1, self.chain_counter)
     elseif (score_mode == consts.SCOREMODE_PDP64) then
       -- self.score = self.score + math.floor((((comboSize - 3) * 50) * math.max(1, self.chain_counter)))
-      self.score = self.score + math.ceil((( 200 * 1.1 ^ (comboSize - 4)) * 1.25 ^ (math.max(1, self.chain_counter) - 1)) / 10) * 10
+      self.score = self.score + math.floor(100 * (comboSize - 3) * ScoreMultiplier(self.levelData.startingSpeed)) * math.max(1, self.chain_counter)
     end
   end
 end
@@ -1001,12 +1015,12 @@ end
 function Stack:updateScoreWithChain()
   local chain_bonus = self.chain_counter
   if (score_mode == consts.SCOREMODE_TA) then
-    self.score = self.score + math.ceil(math.log(factorial(chain_bonus), 3) * 10) * 10
+    self.score = self.score + math.ceil(math.log(factorial(chain_bonus), 2) * 10) * 10
   elseif (score_mode == consts.SCOREMODE_PDP64) then
     if chain_bonus == 0 then
       self.score = self.score
     else
-      self.score = self.score + math.ceil((250 * 1.2 ^ (chain_bonus - 2)) / 10) * 10
+      self.score = self.score + math.ceil((250 * 1.2 ^ (chain_bonus - 2)) / 10 * ScoreMultiplier(self.levelData.startingSpeed)) * 10
     end
   end
 end

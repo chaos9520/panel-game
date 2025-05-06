@@ -29,8 +29,8 @@ end
 
 local function createBasicTrainingMode(name, width, height)
   local delayBeforeStart = 180
-  local delayBeforeRepeat = 1800
-  local attacksPerVolley = math.ceil(96 / (width * height))
+  local attacksPerVolley = math.ceil(72 / (width * height))
+  local delayBeforeRepeat = ((30 * height) + (((height * (height + 1)) / 2) * (width * 7))) * attacksPerVolley
   local attackPatterns = {}
 
   for i = 1, attacksPerVolley do
@@ -59,7 +59,7 @@ function TrainingMenu:load(sceneParams)
     nil,
     createBasicTrainingMode(loc("combo_storm"), 4, 1),
     createBasicTrainingMode(loc("factory"), 6, 2),
-    createBasicTrainingMode(loc("large_garbage"), 6, 12),
+    createBasicTrainingMode(loc("large_garbage"), 6, 6),
   }
   local translatableGarbagePatternNames = {"combo_storm", "factory", "large_garbage"}
   for _, value in ipairs(readAttackFiles("training")) do
