@@ -347,7 +347,8 @@ function GarbageQueue:addChainLink(frameEarned, row, column)
     self:push(self.currentChain)
   else
     -- currentChain is always part of the queue already (see push in branch above)
-    self.currentChain.height = self.currentChain.height + 1
+    -- chain garbage is capped at 12 height
+    self.currentChain.height = math.min(12, self.currentChain.height + 1)
     self.currentChain.frameEarned = frameEarned
     self.currentChain.links[frameEarned] = {
       rowEarned = row,

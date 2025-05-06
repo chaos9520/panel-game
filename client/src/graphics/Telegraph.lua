@@ -184,7 +184,8 @@ function Telegraph:renderStageGarbageIcon(sender, receiver, garbage, telegraphIn
           return
         else
           -- 14 is the maximum we have default data for
-          displayHeight = math.min(displayHeight, 14)
+          -- garbage height is capped at 12, so 12 it is
+          displayHeight = math.min(displayHeight, 12)
           image = character.telegraph_garbage_images[displayHeight][6]
         end
       else
