@@ -54,8 +54,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 9
     lineClearGPMIncrement = 1.66
     panelLevel = 1
-    lineHeightToKillBase = 4
-    lineHeightToKillIncrement = 1.33
+    lineHeightToKillBase = 3
+    lineHeightToKillIncrement = (1 / 3)
   elseif difficulty == 2 then
     stageCount = 6
     framesToppedOutToLoseBase = 300
@@ -63,8 +63,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 10.5
     lineClearGPMIncrement = 1.1
     panelLevel = 2
-    lineHeightToKillBase = 4
-    lineHeightToKillIncrement = 1
+    lineHeightToKillBase = 3
+    lineHeightToKillIncrement = 0.2
   elseif difficulty == 3 then
     stageCount = 8
     framesToppedOutToLoseBase = 300
@@ -72,8 +72,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 12
     lineClearGPMIncrement = 0.85
     panelLevel = 3
-    lineHeightToKillBase = 5
-    lineHeightToKillIncrement = 0.71
+    lineHeightToKillBase = 4
+    lineHeightToKillIncrement = (2 / 7)
   elseif difficulty == 4 then
     stageCount = 10
     framesToppedOutToLoseBase = 600
@@ -81,8 +81,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 13.5
     lineClearGPMIncrement = 0.72
     panelLevel = 4
-    lineHeightToKillBase = 5
-    lineHeightToKillIncrement = 0.66
+    lineHeightToKillBase = 4
+    lineHeightToKillIncrement = (2 / 9)
   elseif difficulty == 5 then
     stageCount = 12
     framesToppedOutToLoseBase = 600
@@ -90,8 +90,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 15
     lineClearGPMIncrement = 0.63
     panelLevel = 5
-    lineHeightToKillBase = 6
-    lineHeightToKillIncrement = 0.54
+    lineHeightToKillBase = 5
+    lineHeightToKillIncrement = (3 / 11)
   elseif difficulty == 6 then
     stageCount = 12
     framesToppedOutToLoseBase = 900
@@ -99,8 +99,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 16.5
     lineClearGPMIncrement = 0.68
     panelLevel = 6
-    lineHeightToKillBase = 6
-    lineHeightToKillIncrement = 0.54
+    lineHeightToKillBase = 5
+    lineHeightToKillIncrement = (3 / 11)
   elseif difficulty == 7 then
     stageCount = 12
     framesToppedOutToLoseBase = 900
@@ -108,8 +108,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 18
     lineClearGPMIncrement = 0.72
     panelLevel = 7
-    lineHeightToKillBase = 7
-    lineHeightToKillIncrement = 0.45
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = (4 / 11)
   elseif difficulty == 8 then
     stageCount = 12
     framesToppedOutToLoseBase = 1200
@@ -117,8 +117,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 19.5
     lineClearGPMIncrement = 0.77
     panelLevel = 8
-    lineHeightToKillBase = 7
-    lineHeightToKillIncrement = 0.45
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = (4 / 11)
   elseif difficulty == 9 then
     stageCount = 8
     framesToppedOutToLoseBase = 1200
@@ -126,8 +126,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 21
     lineClearGPMIncrement = 1.28
     panelLevel = 9
-    lineHeightToKillBase = 8
-    lineHeightToKillIncrement = 0.57
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = (4 / 7)
   elseif difficulty == 10 then
     stageCount = 8
     framesToppedOutToLoseBase = 1200
@@ -135,8 +135,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 22.5
     lineClearGPMIncrement = 1.35
     panelLevel = 10
-    lineHeightToKillBase = 8
-    lineHeightToKillIncrement = 0.57
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = (6 / 7)
   elseif difficulty == 11 then
     stageCount = 8
     framesToppedOutToLoseBase = 1200
@@ -144,8 +144,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 24
     lineClearGPMIncrement = 1.14
     panelLevel = 11
-    lineHeightToKillBase = 8
-    lineHeightToKillIncrement = 0.57
+    lineHeightToKillBase = 6
+    lineHeightToKillIncrement = (6 / 7)
   else
     error("Invalid challenge mode difficulty level of " .. difficulty)
   end
