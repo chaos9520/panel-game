@@ -1,21 +1,23 @@
-leagues = { {league="Provisional",     min_rating = -9999},
+leagues = { {league="Unranked",     min_rating = -9999},
             {league="Newbie",         min_rating = -3000},
-            {league="Beginner I",         min_rating = 250},
-            {league="Beginner II",         min_rating = 500},
-            {league="Novice I",         min_rating = 750},
+            {league="Beginner I",         min_rating = 400},
+            {league="Beginner II",         min_rating = 600},
+            {league="Novice I",         min_rating = 800},
             {league="Novice II",         min_rating = 1000},
-            {league="Intermediate I",         min_rating = 1250},
-            {league="Intermediate II",         min_rating = 1500},
-            {league="Advanced I",         min_rating = 1750},
-            {league="Advanced II",         min_rating = 2000},
-            {league="Expert",     min_rating = 2250},
-            {league="Candidate Master",     min_rating = 2500},
-            {league="Master",     min_rating = 2750},
+            {league="Intermediate I",         min_rating = 1200},
+            {league="Intermediate II",         min_rating = 1400},
+            {league="Advanced I",         min_rating = 1600},
+            {league="Advanced II",         min_rating = 1800},
+            {league="Expert",     min_rating = 2000},
+            {league="Candidate Master",     min_rating = 2200},
+            {league="Master I",     min_rating = 2400},
+            {league="Master II",     min_rating = 2600},
+            {league="Master III",     min_rating = 2800},
             {league="Grandmaster",     min_rating = 3000},
           }
 PLACEMENT_MATCH_COUNT_REQUIREMENT = 10
-DEFAULT_RATING = 1500 -- With the new formula, DEFAULT_RATING and RATING_SPREAD_MODIFIER should be the same (50% of rating_scale).
-RATING_SPREAD_MODIFIER = 1500
+DEFAULT_RATING = 1400
+RATING_SPREAD_MODIFIER = 960
 ALLOWABLE_RATING_SPREAD_MULITPLIER = 1 --set this to a huge number like 100 if you want everyone to be able to play with anyone, regardless of rating gap
 NAME_LENGTH_LIMIT = 16
 PLACEMENT_MATCHES_ENABLED = false -- This needs to stay false for everything to work properly.
