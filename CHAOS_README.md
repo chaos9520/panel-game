@@ -8,7 +8,6 @@ As some of you know, I have been working on this build for awhile. The initial i
 ### Global Changes
 - There are now two scoring systems; one for Modern, and the other for Classic.
 - The score cap has been raised to 999,999 as scoring paces will naturally be faster on this build. Yes, 100k+ Time Attack runs are now possible on both Modern and Classic styles.
-- 'Wiggling' has been disabled, but stealth bridging has been implemented. It's a fair trade imo. *hello modoki lol*
 - Rise Speed Algorithm: The formula for rise speed has been changed.
 ### Modern Style (includes Vs)
 - **Garbage Margin has been implemented.** The more garbage a player has queued up, the less stop *and* shake time they get!
@@ -20,7 +19,7 @@ As some of you know, I have been working on this build for awhile. The initial i
 - Base shake time for most garbage has been increased.
 - Health regeneration has been removed. That means if you take damage, then your health will not regenerate!
 ### Classic Style
-- 'Speed margin' has been implemented into the Classic levels; higher rise speed equates to less base stop time.
+- Stop time has been removed.
 - Speed levels now require 10 panels for a speed increase on *all* speed levels.
 ## Other Changes
 - Challenge Mode has been revamped.

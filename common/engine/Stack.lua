@@ -2202,10 +2202,6 @@ function Stack:checkGameOver()
             return true
           end
         end
-      elseif gameOverCondition == GameModes.GameOverConditions.GARBAGE_LIMIT_REACHED then
-        if self.incomingGarbage:len() >= 100 then
-          return true
-        end
       end
     end
   else
