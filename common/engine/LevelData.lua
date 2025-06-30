@@ -74,6 +74,7 @@ local LevelData = class(function(self)
     FACE = nil,
     -- how long it takes for 1 panel of a match to pop (go from popping to popped)
     POP = nil,
+    GARBAGE_POP = nil,
   }
 end)
 
@@ -214,6 +215,11 @@ function LevelData:setPop(pop)
   return self
 end
 
+function LevelData:setGarbagePop(gpop)
+  self.frameConstants.GARBAGE_POP = gpop
+  return self
+end
+
 function LevelData.validate(data)
   if not data.startingSpeed or type(data.startingSpeed) ~= "number" then
     return false
@@ -266,6 +272,7 @@ function LevelData.validate(data)
   elseif not data.frameConstants.POP or type(data.frameConstants.POP) ~= "number" then
     return false
   end
+  -- GARBAGE_POP can be nil
 
   return true
 end

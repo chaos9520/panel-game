@@ -152,11 +152,11 @@ function Stack:checkMatches()
     if garbagePanels then
       logger.debug("Matched " .. comboSize .. " panels, clearing " .. #garbagePanels .. " panels of garbage")
       garbagePanelCountOnScreen = getOnScreenCount(self.height, garbagePanels)
-      local garbageMatchTime = frameConstants.FLASH + frameConstants.FACE + frameConstants.POP * (comboSize + garbagePanelCountOnScreen)
+      local garbageMatchTime = frameConstants.FLASH + frameConstants.FACE + (frameConstants.POP * comboSize) + (frameConstants.GARBAGE_POP * garbagePanelCountOnScreen)
       self:matchGarbagePanels(garbagePanels, garbageMatchTime, isChainLink, garbagePanelCountOnScreen)
     end
 
-    local preStopTime = frameConstants.FLASH + frameConstants.FACE + frameConstants.POP * (comboSize + garbagePanelCountOnScreen)
+    local preStopTime = frameConstants.FLASH + frameConstants.FACE + (frameConstants.POP * comboSize) + (frameConstants.GARBAGE_POP * garbagePanelCountOnScreen)
     self.pre_stop_time = math.max(self.pre_stop_time, preStopTime)
     self:awardStopTime(isChainLink, comboSize)
 
@@ -749,7 +749,7 @@ function Stack:matchGarbagePanels(garbagePanels, garbageMatchTime, isChain, onSc
     panel:setTimer(garbageMatchTime + 1)
     panel.initial_time = garbageMatchTime
     -- these two may end up with nonsense values for off-screen garbage but it doesn't matter
-    panel.pop_time = self.levelData.frameConstants.POP * (onScreenCount - i)
+    panel.pop_time = self.levelData.frameConstants.GARBAGE_POP * (onScreenCount - i)
     panel.pop_index = math.min(i, 10)
   end
 
@@ -843,7 +843,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   local height
   -- * GarbageMultiplier(self.game_stopwatch)
 
-  if (self.chain_counter and self.chain_counter < 3) then
+  if (self.chain_counter and self.chain_counter < 3) and self.level < 10 then
     -- Chaos Combo Garbage
     height = math.ceil((comboSize - 3) / 4)
     for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch) do
