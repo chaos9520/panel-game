@@ -124,7 +124,7 @@ Stack =
     -- Which columns each size garbage is allowed to fall in.
     -- This is typically constant but maybe some day we would allow different ones 
     -- for different game modes or need to change it based on board width.
-    if s.level >= 10 then
+    if s.level and s.level >= 10 then
       s.garbageSizeDropColumnMaps = {
       {1, 2, 3, 4, 5, 6},
       {1, 3, 5,},
@@ -1207,7 +1207,11 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          self.rise_timer = math.ceil(1 * 1.055 ^ (95 - self.speed))
+          if self.speed >= 90 then
+            self.rise_timer = 100 - self.speed
+          else
+            self.rise_timer = 10 + math.ceil(math.log(factorial(92 - self.speed)) / 2)
+          end
         end
       end
     end
@@ -2105,17 +2109,34 @@ function Stack.getActivePanelCount(self)
 end
 
 function Stack.updateRiseLock(self)
-  self.prev_rise_lock = self.rise_lock
-  if self.do_countdown then
-    self.rise_lock = true
-  elseif self:swapQueued() then
-    self.rise_lock = true
-  elseif self.shake_time > 0 then
-    self.rise_lock = true
-  elseif self:hasActivePanels() then
-    self.rise_lock = true
+  if self.match.stackInteraction == GameModes.StackInteractions.NONE then
+    -- Rise lock arguments for Endless and Time Attack
+    self.prev_rise_lock = self.rise_lock
+    if self.do_countdown then
+      self.rise_lock = true
+    elseif self:swapQueued() then
+      self.rise_lock = true
+    elseif self.shake_time > 0 then
+      self.rise_lock = true
+    elseif self:hasActivePanels() and self.chain_counter > 0 then
+      self.manual_raise = false
+      self.rise_lock = false
+    else
+      self.rise_lock = false
+    end
   else
-    self.rise_lock = false
+    self.prev_rise_lock = self.rise_lock
+    if self.do_countdown then
+      self.rise_lock = true
+    elseif self:swapQueued() then
+      self.rise_lock = true
+    elseif self.shake_time > 0 then
+      self.rise_lock = true
+    elseif self:hasActivePanels() then
+      self.rise_lock = true
+    else
+      self.rise_lock = false
+    end
   end
 
   -- prevent manual raise is set true when manually raising
@@ -2206,12 +2227,6 @@ function Stack:checkGameOver()
         if #self.analytic.data.reached_chains > 0 and not self:hasChainingPanels() then
           -- We achieved a chain, finished chaining, but haven't won yet -> fail
           return true
-        end
-      elseif gameOverCondition == GameModes.GameOverConditions.ENDLESS_ENDGAME then
-        if self.speed == 99 then
-          if self:hasActivePanels() and not self:hasChainingPanels() then
-            return true
-          end
         end
       end
     end

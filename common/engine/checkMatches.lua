@@ -156,7 +156,7 @@ function Stack:checkMatches()
       self:matchGarbagePanels(garbagePanels, garbageMatchTime, isChainLink, garbagePanelCountOnScreen)
     end
 
-    local preStopTime = frameConstants.FLASH + frameConstants.FACE + (frameConstants.POP * comboSize) + (frameConstants.GARBAGE_POP * garbagePanelCountOnScreen)
+    local preStopTime = frameConstants.FLASH + frameConstants.FACE + (frameConstants.POP * comboSize) + ((frameConstants.GARBAGE_POP or 0) * garbagePanelCountOnScreen)
     self.pre_stop_time = math.max(self.pre_stop_time, preStopTime)
     self:awardStopTime(isChainLink, comboSize)
 
@@ -809,12 +809,16 @@ function Stack:getGarbagePanelRow()
   return garbagePanelRow
 end
 
-function GarbageMultiplier(clock)
+function GarbageMultiplier(clock, level)
   local initial_period = 3600
-  if clock < initial_period then
+  if level == nil then
     return 1
   else
-    return math.min(4, math.ceil((clock - initial_period) / 3600))
+    if clock < initial_period then
+      return 1
+    else
+      return math.min(4, math.ceil((clock - initial_period) / 3600))
+    end
   end
 end
 
@@ -841,12 +845,11 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   local lines_sent
   local width = comboSize % 4 + 3
   local height
-  -- * GarbageMultiplier(self.game_stopwatch)
 
-  if (self.chain_counter and self.chain_counter < 3) and self.level < 10 then
+  if (self.chain_counter and self.chain_counter < 3) and (self.level and self.level < 10) then
     -- Chaos Combo Garbage
     height = math.ceil((comboSize - 3) / 4)
-    for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch) do
+    for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch, self.level) do
       -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
       self.outgoingGarbage:push({
         width = width,
@@ -864,7 +867,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   else
     -- Classic Combo Garbage
     height = 1
-    for i = 1, #combo_pieces_classic * GarbageMultiplier(self.game_stopwatch) do
+    for i = 1, #combo_pieces_classic * GarbageMultiplier(self.game_stopwatch, self.level) do
       -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
       self.outgoingGarbage:push({
         width = width,
@@ -989,13 +992,13 @@ end
 
 function ScoreMultiplier(speed)
   if speed >= 89 then
-    return 2.5
+    return 5
   elseif speed >= 79 then
-    return 2
+    return 4
   elseif speed >= 69 then
-    return 1.5
+    return 3
   elseif speed >= 59 then
-    return 1.25
+    return 2
   else
     return 1
   end
