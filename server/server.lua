@@ -150,7 +150,7 @@ local function addPublicPlayerData(players, playerName, player)
   end
 
   if player.rating then
-    players[playerName].rating = math.round(player.rating)
+    players[playerName].rating = math.floor(player.rating)
   end
 
   if player.ranked_games_played then
@@ -395,8 +395,8 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       else
         logger.debug("Player " .. player_number .. " played ranked against an unranked opponent.  We'll process this match when his opponent has finished placement")
         room.ratings[player_number].placement_matches_played = leaderboard.players[players[player_number].user_id].ranked_games_played
-        room.ratings[player_number].new = math.round(leaderboard.players[players[player_number].user_id].rating)
-        room.ratings[player_number].old = math.round(leaderboard.players[players[player_number].user_id].rating)
+        room.ratings[player_number].new = math.floor(leaderboard.players[players[player_number].user_id].rating)
+        room.ratings[player_number].old = math.floor(leaderboard.players[players[player_number].user_id].rating)
         room.ratings[player_number].difference = 0
       end
     else -- this player has not finished placement
@@ -435,15 +435,15 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
           if not room.ratings[op_player_number] then
             room.ratings[op_player_number] = {}
           end
-          room.ratings[op_player_number].old = math.round(leaderboard.players[players[op_player_number].user_id].rating)
+          room.ratings[op_player_number].old = math.floor(leaderboard.players[players[op_player_number].user_id].rating)
           self:process_placement_matches(players[player_number].user_id)
 
-          room.ratings[player_number].new = math.round(leaderboard.players[players[player_number].user_id].rating)
+          room.ratings[player_number].new = math.floor(leaderboard.players[players[player_number].user_id].rating)
 
           room.ratings[player_number].difference = math.round(room.ratings[player_number].new - room.ratings[player_number].old)
           room.ratings[player_number].league = self:get_league(room.ratings[player_number].new)
 
-          room.ratings[op_player_number].new = math.round(leaderboard.players[players[op_player_number].user_id].rating)
+          room.ratings[op_player_number].new = math.floor(leaderboard.players[players[op_player_number].user_id].rating)
 
           room.ratings[op_player_number].difference = math.round(room.ratings[op_player_number].new - room.ratings[op_player_number].old)
           room.ratings[op_player_number].league = self:get_league(room.ratings[player_number].new)
@@ -482,8 +482,8 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     for player_number = 1, 2 do
       --round and calculate rating gain or loss (difference) to send to the clients
       if placement_done[players[player_number].user_id] then
-        room.ratings[player_number].old = math.round(room.ratings[player_number].old or leaderboard.players[players[player_number].user_id].rating)
-        room.ratings[player_number].new = math.round(room.ratings[player_number].new or leaderboard.players[players[player_number].user_id].rating)
+        room.ratings[player_number].old = math.floor(room.ratings[player_number].old or leaderboard.players[players[player_number].user_id].rating)
+        room.ratings[player_number].new = math.floor(room.ratings[player_number].new or leaderboard.players[players[player_number].user_id].rating)
         room.ratings[player_number].difference = room.ratings[player_number].new - room.ratings[player_number].old
       else
         room.ratings[player_number].old = 0

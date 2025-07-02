@@ -36,7 +36,7 @@ function(self, a, b, roomNumber, leaderboard, server)
 
   if a.user_id then
     if leaderboard.players[a.user_id] and leaderboard.players[a.user_id].rating then
-      a_rating = math.round(leaderboard.players[a.user_id].rating)
+      a_rating = math.floor(leaderboard.players[a.user_id].rating)
     end
     local a_qualifies, a_progress = self.server:qualifies_for_placement(a.user_id)
     if not (leaderboard.players[a.user_id] and leaderboard.players[a.user_id].placement_done) and not a_qualifies then
@@ -46,7 +46,7 @@ function(self, a, b, roomNumber, leaderboard, server)
 
   if b.user_id then
     if leaderboard.players[b.user_id] and leaderboard.players[b.user_id].rating then
-      b_rating = math.round(leaderboard.players[b.user_id].rating or 0)
+      b_rating = math.floor(leaderboard.players[b.user_id].rating or 0)
     end
     local b_qualifies, b_progress = self.server:qualifies_for_placement(b.user_id)
     if not (leaderboard.players[b.user_id] and leaderboard.players[b.user_id].placement_done) and not b_qualifies then
@@ -165,12 +165,12 @@ function Room:start_match()
 
   if roomIsRanked then
     if leaderboard.players[a.user_id] then
-      aRating = math.round(leaderboard.players[a.user_id].rating)
+      aRating = math.floor(leaderboard.players[a.user_id].rating)
     else
       aRating = DEFAULT_RATING
     end
     if leaderboard.players[b.user_id] then
-      bRating = math.round(leaderboard.players[b.user_id].rating)
+      bRating = math.floor(leaderboard.players[b.user_id].rating)
     else
       bRating = DEFAULT_RATING
     end
