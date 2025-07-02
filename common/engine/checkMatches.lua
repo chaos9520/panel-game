@@ -992,15 +992,13 @@ end
 
 function ScoreMultiplier(speed)
   if speed >= 94 then
-    return 25
+    return 16
   elseif speed >= 89 then
-    return 10
+    return 8
   elseif speed >= 79 then
-    return 5
+    return 4
   elseif speed >= 69 then
-    return 2.5
-  elseif speed >= 59 then
-    return 1.25
+    return 2
   else
     return 1
   end
