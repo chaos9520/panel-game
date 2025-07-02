@@ -991,17 +991,7 @@ function Stack:updateScoreWithBonus(comboSize)
 end
 
 function ScoreMultiplier(speed)
-  if speed >= 94 then
-    return 16
-  elseif speed >= 89 then
-    return 8
-  elseif speed >= 79 then
-    return 4
-  elseif speed >= 69 then
-    return 2
-  else
-    return 1
-  end
+  return 1
 end
 
 function Stack:updateScoreWithCombo(comboSize)
