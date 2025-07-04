@@ -370,7 +370,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     local ranked_games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
     -- Rd variables
     local max_rd = 150 -- Deviation Spread
-    local min_rd = 16
+    local min_rd = 10
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
