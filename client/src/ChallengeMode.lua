@@ -177,7 +177,7 @@ function ChallengeMode:createStages(difficulty)
     panelLevel = 9
     panelLevelIncrement = (1 / 3)
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = 0.75
+    lineHeightToKillIncrement = 0.625
   else
     error("Invalid challenge mode difficulty level of " .. difficulty)
   end
