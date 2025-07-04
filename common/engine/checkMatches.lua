@@ -997,10 +997,10 @@ end
 function Stack:updateScoreWithCombo(comboSize)
   if comboSize > 3 then
     if (score_mode == consts.SCOREMODE_TA) then
-      self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 2) * 10) * 10 * math.max(1, self.chain_counter)
+      self.score = self.score + math.ceil(math.log(factorial(comboSize - 2), 2) * 10) * 10 * math.max(1, math.min(13, self.chain_counter))
     elseif (score_mode == consts.SCOREMODE_PDP64) then
       -- self.score = self.score + math.floor((((comboSize - 3) * 50) * math.max(1, self.chain_counter)))
-      self.score = self.score + math.floor(100 * (comboSize - 3) * ScoreMultiplier(self.levelData.startingSpeed)) * math.max(1, self.chain_counter)
+      self.score = self.score + math.floor(100 * (comboSize - 3) * ScoreMultiplier(self.levelData.startingSpeed)) * math.max(1, math.min(13, self.chain_counter))
     end
   end
 end
