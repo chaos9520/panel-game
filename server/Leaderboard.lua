@@ -75,7 +75,7 @@ function Leaderboard.update_timestamp(self, user_id)
   if self.players[user_id] then
     local timestamp = os.time()
     -- deteriorate player's rating by 1% for every 30 days the player has not logged in
-    if timestamp - self.players[user_id].last_login_time >= 60 then --2592000
+    if self.players[user_id].last_login_time ~= nil and timestamp - self.players[user_id].last_login_time >= 60 then --2592000
       local new_rating = math.max(0, self.players[user_id].rating * 0.99 ^ math.floor((timestamp - self.players[user_id].last_login_time) / 60))
       logger.debug(user_id .. " has not logged in for 30+ days, deteriorating the player's rating.")
       logger.debug(user_id .. "'s new rating: " .. new_rating)
