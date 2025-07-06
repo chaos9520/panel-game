@@ -47,7 +47,7 @@ function Leaderboard.get_report(self, user_id_of_requester)
       local player_is_leaderboard_requester = nil
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
-          if v.last_login_time ~= nil and os.time() - v.last_login_time >= 60 then -- don't include players that have not logged in for 30+ days
+          if v.last_login_time or os.time() - v.last_login_time >= 60 then -- don't include players that have not logged in for 30+ days
             if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
               if k == user_id_of_requester then
                 player_is_leaderboard_requester = true
