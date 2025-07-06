@@ -1,5 +1,5 @@
 leagues = { {league="Unranked",     min_rating = -9999},
-            {league="Iron",         min_rating = -3000},
+            {league="Iron",         min_rating = 1},
             {league="Copper",         min_rating = 1000},
             {league="Bronze",         min_rating = 1200},
             {league="Silver",         min_rating = 1400},

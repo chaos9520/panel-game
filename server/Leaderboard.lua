@@ -47,16 +47,18 @@ function Leaderboard.get_report(self, user_id_of_requester)
       local player_is_leaderboard_requester = nil
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
-          if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
-            if k == user_id_of_requester then
-              player_is_leaderboard_requester = true
-            end
-            if report[insert_index] and report[insert_index].rating and v.rating >= report[insert_index].rating then
-              table.insert(report, insert_index, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester})
-              break
-            elseif insert_index == leaderboard_player_count or #report == 0 then
-              table.insert(report, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester}) -- at the end of the table.
-              break
+          if os.time() - v.last_login_time >= 2592000 then -- don't include players that have not logged in for 30+ days
+            if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
+              if k == user_id_of_requester then
+                player_is_leaderboard_requester = true
+              end
+              if (report[insert_index] and report[insert_index].rating and v.rating >= report[insert_index].rating) then
+                table.insert(report, insert_index, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester})
+                break
+              elseif insert_index == leaderboard_player_count or #report == 0 then
+                table.insert(report, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester}) -- at the end of the table.
+                break
+              end
             end
           end
         end
@@ -72,7 +74,14 @@ end
 function Leaderboard.update_timestamp(self, user_id)
   if self.players[user_id] then
     local timestamp = os.time()
+    -- deteriorate player's rating by 1% for every 30 days the player has not logged in
+    if timestamp - self.players[user_id].last_login_time >= 259200 then
+      local new_rating = self.players[user_id].rating * 0.99 ^ math.floor((timestamp - self.players[user_id].last_login_time) / 2592000)
+      logger.debug(user_id .. " has not logged in for 30+ days, deteriorating the player's rating.")
+      logger.debug(user_id .. "'s new rating: " .. new_rating)
+    end
     self.players[user_id].last_login_time = timestamp
+    self.players[user_id].rating = new_rating
     write_leaderboard_file()
     logger.debug(user_id .. "'s login timestamp has been updated to " .. timestamp)
   else
