@@ -48,7 +48,7 @@ function Leaderboard.get_report(self, user_id_of_requester)
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
-            if k ~= user_id_of_requester and os.time() - v.last_login_time >= 60 then -- don't include players that have not logged in for 30+ days
+            if k ~= user_id_of_requester and (v.last_login_time or os.time() - v.last_login_time >= 60) then -- don't include players that have not logged in for 30+ days
               if k == user_id_of_requester then
                 player_is_leaderboard_requester = true
               end
@@ -74,9 +74,9 @@ end
 function Leaderboard.update_timestamp(self, user_id)
   if self.players[user_id] then
     local timestamp = os.time()
-    logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
       local inactive_time = timestamp - self.players[user_id].last_login_time
+      logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
       if inactive_time >= 180 then
         -- reset the player's rating
         self.players[user_id].rating = DEFAULT_RATING
