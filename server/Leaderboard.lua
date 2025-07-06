@@ -74,9 +74,9 @@ end
 function Leaderboard.update_timestamp(self, user_id)
   if self.players[user_id] then
     local timestamp = os.time()
-    local inactive_time = timestamp - self.players[user_id].last_login_time
     logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
+      local inactive_time = timestamp - self.players[user_id].last_login_time
       if inactive_time >= 180 then
         -- reset the player's rating
         self.players[user_id].rating = DEFAULT_RATING
