@@ -368,19 +368,17 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
 
     local ranked_games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
-    -- Rd variables
-    local max_rd = 150 -- Deviation Spread
-    local min_rd = 10
+    local deviation = leaderboard.players[players[player_number].user_id].rd
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
       if ranked_games_played == nil then
-        Rd = max_rd
+        Rd = DEVIATION_SPREAD
       else
-        Rd = math.min(max_rd, math.max(min_rd, max_rd / (0.5 + math.log(ranked_games_played + 1))))
+        Rd = deviation
       end
     else
-      Rd = max_rd
+      Rd = DEVIATION_SPREAD
     end
     if players[player_number].player_number == winning_player_number then
       Oa = 1

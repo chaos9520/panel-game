@@ -13,6 +13,7 @@ leagues = { {league="Unranked",     min_rating = -9999},
 PLACEMENT_MATCH_COUNT_REQUIREMENT = 10
 DEFAULT_RATING = 1400
 RATING_SPREAD_MODIFIER = 960
+DEVIATION_SPREAD = 150 -- The starting and maximum allowed rating deviation.
 ALLOWABLE_RATING_SPREAD_MULITPLIER = 1 --set this to a huge number like 100 if you want everyone to be able to play with anyone, regardless of rating gap
 NAME_LENGTH_LIMIT = 16
 PLACEMENT_MATCHES_ENABLED = false -- This needs to stay false for everything to work properly.

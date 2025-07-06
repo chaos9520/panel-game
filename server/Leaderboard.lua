@@ -22,6 +22,8 @@ function Leaderboard.update(self, user_id, new_rating, match_details)
     for k, v in pairs(match_details) do
       self.players[user_id].ranked_games_won = (self.players[user_id].games_won or 0) + v.outcome
       self.players[user_id].ranked_games_played = (self.players[user_id].ranked_games_played or 0) + 1
+      self.players[user_id].inactive_counter = math.max(0, self.players[user_id].inactive_counter - 1)
+      self.players[user_id].rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(self.players[user_id].ranked_games_played + 1))) * 1.1 ^ self.players[user_id].inactive_counter) or DEVIATION_SPREAD
     end
   end
   logger.debug("new_rating = " .. new_rating)
@@ -48,7 +50,7 @@ function Leaderboard.get_report(self, user_id_of_requester)
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
-            if k ~= user_id_of_requester and (v.last_login_time or os.time() - v.last_login_time >= 60) then -- don't include players that have not logged in for 30+ days
+            if v.rd or v.rd >= 30 then -- don't include players with a rating deviation higher than 30.
               if k == user_id_of_requester then
                 player_is_leaderboard_requester = true
               end
@@ -77,24 +79,12 @@ function Leaderboard.update_timestamp(self, user_id)
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
       local inactive_time = timestamp - self.players[user_id].last_login_time
       logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
-      if inactive_time >= 180 then
-        -- reset the player's rating
-        self.players[user_id].rating = DEFAULT_RATING
-        self.players[user_id].ranked_games_played = nil
-        logger.debug(user_id .. " has been inactive for 360+ days, resetting the player's rating.")
-      elseif inactive_time >= 60 then --2592000
-        -- deteriorate player's rating by 2% for every 30 days the player has not logged in
-        local new_rating = self.players[user_id].rating * 0.98 ^ math.floor((timestamp - self.players[user_id].last_login_time) / 60)
-        logger.debug(user_id .. " has not logged in for 30+ days, deteriorating the player's rating.")
-        if new_rating < 1300 then
-          -- reset the player's rating bescuse it fell below the threshold
-          self.players[user_id].rating = DEFAULT_RATING
-          self.players[user_id].ranked_games_played = nil
-          logger.debug(user_id .. " 's new rating has fallen below the threshold, resetting the player's rating.")
-        else
-          self.players[user_id].rating = new_rating
-          logger.debug(user_id .. "'s new rating: " .. new_rating)
-        end
+      if inactive_time >= 60 then -- 2592000
+        -- increase the player's inactive counter by 1 for every 30 days the player has not logged in
+        local counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60)
+        self.players[user_id].inactive_counter = counter
+        logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
+        logger.debug(user_id .. "'s inactive counter raised to " .. counter)
       end
     end
     self.players[user_id].last_login_time = timestamp
