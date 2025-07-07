@@ -378,7 +378,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       if ranked_games_played == nil then
         Rd = DEVIATION_SPREAD
         leaderboard.players[players[player_number].user_id].rd = Rd
-        logger.debug("Gave " .. placement_done[players[player_number].user_id] .. " the starting RD of " .. DEVIATION_SPREAD)
         write_leaderboard_file()
       else
         Rd = deviation
