@@ -379,8 +379,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     Rd = Server:calculate_rd(self.players[user_id].ranked_games_played, self.players[user_id].inactive_counter)
-    leaderboard.players[players[player_number].user_id].rd = Rd
-    write_leaderboard_file()
     if players[player_number].player_number == winning_player_number then
       Oa = 1
     else
@@ -475,6 +473,8 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       logger.debug("Old rating:" .. leaderboard.players[players[player_number].user_id].rating)
       room.ratings[player_number].old = leaderboard.players[players[player_number].user_id].rating
       leaderboard.players[players[player_number].user_id].ranked_games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
+      leaderboard.players[players[player_number].user_id].inactive_counter = math.max(0, (leaderboard.players[players[player_number].user_id].inactive_counter or 0) - 1)
+      leaderboard.players[players[player_number].user_id].rd = Server:calculate_rd(leaderboard.players[players[player_number].user_id].ranked_games_played, leaderboard.players[players[player_number].user_id].inactive_counter)
       leaderboard:update(players[player_number].user_id, room.ratings[player_number].new)
       logger.debug("New rating:" .. leaderboard.players[players[player_number].user_id].rating)
     end
