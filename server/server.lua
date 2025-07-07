@@ -378,7 +378,17 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
     
     -- calculate Rd
-    Rd = Server:calculate_rd(self.players[user_id].ranked_games_played, self.players[user_id].inactive_counter)
+    leaderboard.players[players[player_number].user_id].rd
+    local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
+    local counter = leaderboard.players[players[player_number].user_id].inactive_counter
+    if games_played == nil then
+      Rd = DEVIATION_SPREAD
+    else
+      Rd = Server:calculate_rd(games_played, counter)
+      leaderboard.players[players[player_number].user_id].rd = Rd
+      logger.debug("Rating Deviation: " .. Rd)
+      write_leaderboard_file()
+    end
     if players[player_number].player_number == winning_player_number then
       Oa = 1
     else
