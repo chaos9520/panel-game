@@ -24,7 +24,7 @@ function Leaderboard.update(self, user_id, new_rating, match_details)
   if self.players[user_id] then
     counter = math.max(0, (self.players[user_id].inactive_counter or 0) - 1)
     games_played = (self.players[user_id].ranked_games_played or 0) + 1
-    rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played + 1))) * 1.02 ^ counter)
+    rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
   end
   if match_details and match_details ~= "" then
     for k, v in pairs(match_details) do
