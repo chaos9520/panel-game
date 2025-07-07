@@ -320,12 +320,15 @@ function Server:closeRoom(room)
 end
 
 function Server:calculate_rd(games_played, counter)
+  local deviation
   if games_played == nil then
     return DEVIATION_SPREAD
+  elseif counter == nil then
+    deviation = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))))
   else
-    local deviation = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
-    return deviation
+    deviation = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
   end
+  return deviation
 end
 
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
