@@ -377,11 +377,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
     
     -- calculate Rd
-    if placement_done[players[player_number].user_id] == true then
-      Rd = leaderboard.players[players[player_number].user_id].rd
-    else
-      Rd = DEVIATION_SPREAD
-    end
+    Rd = leaderboard.players[players[player_number].user_id].rd
     if players[player_number].player_number == winning_player_number then
       Oa = 1
     else
