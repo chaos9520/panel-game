@@ -156,6 +156,10 @@ local function addPublicPlayerData(players, playerName, player)
   if player.ranked_games_played then
     players[playerName].ranked_games_played = player.ranked_games_played
   end
+
+  if player.rd then
+    players[playerName].rd = math.floor(player.rd)
+  end
 end
 
 function Server:setLobbyChanged()
