@@ -468,10 +468,15 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
   if continue then
     --now that both new room.ratings have been calculated properly, actually update the leaderboard
     for player_number = 1, 2 do
+      local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
+      local counter = math.max(0, (leaderboard.players[players[player_number].user_id].inactive_counter or 0) - 1)
+      local rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
       logger.debug(self.playerbase.players[players[player_number].user_id])
       logger.debug("Old rating:" .. leaderboard.players[players[player_number].user_id].rating)
       room.ratings[player_number].old = leaderboard.players[players[player_number].user_id].rating
-      leaderboard.players[players[player_number].user_id].ranked_games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
+      leaderboard.players[players[player_number].user_id].ranked_games_played = games_played
+      leaderboard.players[players[player_number].user_id].inactive_counter = counter
+      leaderboard.players[players[player_number].user_id].rd = rd
       leaderboard:update(players[player_number].user_id, room.ratings[player_number].new)
       logger.debug("New rating:" .. leaderboard.players[players[player_number].user_id].rating)
     end
