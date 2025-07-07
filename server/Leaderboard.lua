@@ -20,11 +20,12 @@ function Leaderboard.update(self, user_id, new_rating, match_details)
   end
   if match_details and match_details ~= "" then
     for k, v in pairs(match_details) do
-      local counter = 0
+      local counter = math.max(0, (self.players[user_id].inactive_counter or 0) - 1)
+      local games_played = (self.players[user_id].ranked_games_played or 0) + 1
+      local rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played + 1))) * 1.02 ^ counter)
       self.players[user_id].ranked_games_won = (self.players[user_id].games_won or 0) + v.outcome
-      self.players[user_id].ranked_games_played = (self.players[user_id].ranked_games_played or 0) + 1
-      self.players[user_id].inactive_counter = math.max(0, (self.players[user_id].inactive_counter or 0) - 1)
-      local rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(self.players[user_id].ranked_games_played + 1))) * 1.02 ^ self.players[user_id].inactive_counter)
+      self.players[user_id].ranked_games_played = games_played
+      self.players[user_id].inactive_counter = counter
       self.players[user_id].rd = rd
     end
   end
