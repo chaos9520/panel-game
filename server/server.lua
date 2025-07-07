@@ -315,6 +315,9 @@ function Server:closeRoom(room)
   end
 end
 
+function Server:calculate_rd()
+end
+
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
   --[[ --Algorithm we are implementing, per community member Bbforky:
       Formula for Calculating expected outcome:
@@ -374,6 +377,9 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     if placement_done[players[player_number].user_id] == true then
       if ranked_games_played == nil then
         Rd = DEVIATION_SPREAD
+        leaderboard.players[players[player_number].user_id].rd = Rd
+        logger.debug("Gave " .. placement_done[players[player_number].user_id] .. " the starting RD of " .. DEVIATION_SPREAD)
+        write_leaderboard_file()
       else
         Rd = deviation
       end
