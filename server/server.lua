@@ -324,7 +324,8 @@ function Server:calculate_rd(games_played, counter)
     return DEVIATION_SPREAD
   else
     local deviation = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
-  return deviation
+    return deviation
+  end
 end
 
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
