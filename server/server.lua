@@ -378,7 +378,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
     
     -- calculate Rd
-    leaderboard.players[players[player_number].user_id].rd
     local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
     local counter = leaderboard.players[players[player_number].user_id].inactive_counter
     if games_played == nil then
