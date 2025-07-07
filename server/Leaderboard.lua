@@ -61,7 +61,7 @@ function Leaderboard.get_report(self, user_id_of_requester)
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
             if v.rd then
-              if v.rd >= 100 then -- don't include players with a rating deviation higher than 30.
+              if k ~= user_id_of_requester and v.rd >= 100 then -- don't include players with a rating deviation higher than 30.
                 if k == user_id_of_requester then
                   player_is_leaderboard_requester = true
                 end

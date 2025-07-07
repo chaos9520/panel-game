@@ -373,18 +373,13 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
   for player_number = 1, 2 do
     local Rd, Oa  --max point change per match, actual outcome
     room.ratings[player_number] = {}
-
-    local ranked_games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
-    local deviation = leaderboard.players[players[player_number].user_id].rd
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
       if ranked_games_played == nil then
         Rd = DEVIATION_SPREAD
-        leaderboard.players[players[player_number].user_id].rd = Rd
-        write_leaderboard_file()
       else
-        Rd = deviation
+        Rd = leaderboard.players[players[player_number].user_id].rd
       end
     else
       Rd = DEVIATION_SPREAD
