@@ -20,10 +20,11 @@ function Leaderboard.update(self, user_id, new_rating, match_details)
   end
   if match_details and match_details ~= "" then
     for k, v in pairs(match_details) do
+      local counter = 0
       self.players[user_id].ranked_games_won = (self.players[user_id].games_won or 0) + v.outcome
       self.players[user_id].ranked_games_played = (self.players[user_id].ranked_games_played or 0) + 1
-      self.players[user_id].inactive_counter = math.max(0, self.players[user_id].inactive_counter - 1)
-      local rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(self.players[user_id].ranked_games_played + 1))) * 1.1 ^ self.players[user_id].inactive_counter)
+      self.players[user_id].inactive_counter = math.max(0, (self.players[user_id].inactive_counter or 0) - 1)
+      local rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(self.players[user_id].ranked_games_played + 1))) * 1.02 ^ self.players[user_id].inactive_counter)
       self.players[user_id].rd = rd
     end
   end
@@ -85,10 +86,10 @@ function Leaderboard.update_timestamp(self, user_id)
       local inactive_time = timestamp - self.players[user_id].last_login_time
       logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
       if inactive_time >= 60 then -- 2592000
-        -- increase the player's inactive counter by 1 for every 30 days the player has not logged in
-        local counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60)
+        -- increase the player's inactive counter by 5 for every 30 days the player has not logged in
+        local counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
         self.players[user_id].inactive_counter = counter
-        self.players[user_id].rd = math.min(DEVIATION_SPREAD, self.players[user_id].rd * 1.1 ^ counter)
+        self.players[user_id].rd = math.min(DEVIATION_SPREAD, self.players[user_id].rd * 1.02 ^ counter)
         logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
         logger.debug(user_id .. "'s inactive counter raised to " .. counter)
         logger.debug(user_id .. "'s new RD: " .. self.players[user_id].rd)        
