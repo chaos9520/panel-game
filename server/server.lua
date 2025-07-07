@@ -320,8 +320,11 @@ function Server:closeRoom(room)
 end
 
 function Server:calculate_rd(games_played, counter)
-  Rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
-  return Rd
+  if games_played == nil then
+    return DEVIATION_SPREAD
+  else
+    local deviation = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
+  return deviation
 end
 
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
@@ -380,14 +383,16 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     -- calculate Rd
     local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
     local counter = leaderboard.players[players[player_number].user_id].inactive_counter
-    if games_played == nil then
-      Rd = DEVIATION_SPREAD
-    else
+    
+    if placement_done[players[player_number].user_id] == true then
       Rd = Server:calculate_rd(games_played, counter)
       leaderboard.players[players[player_number].user_id].rd = Rd
-      logger.debug("Rating Deviation: " .. Rd)
+      logger.debug(player_number .. "'s Rating Deviation: " .. Rd)
       write_leaderboard_file()
+    else
+      Rd = DEVIATION_SPREAD
     end
+    
     if players[player_number].player_number == winning_player_number then
       Oa = 1
     else
@@ -482,8 +487,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       logger.debug("Old rating:" .. leaderboard.players[players[player_number].user_id].rating)
       room.ratings[player_number].old = leaderboard.players[players[player_number].user_id].rating
       leaderboard.players[players[player_number].user_id].ranked_games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
-      leaderboard.players[players[player_number].user_id].inactive_counter = math.max(0, (leaderboard.players[players[player_number].user_id].inactive_counter or 0) - 1)
-      leaderboard.players[players[player_number].user_id].rd = Server:calculate_rd(leaderboard.players[players[player_number].user_id].ranked_games_played, leaderboard.players[players[player_number].user_id].inactive_counter)
       leaderboard:update(players[player_number].user_id, room.ratings[player_number].new)
       logger.debug("New rating:" .. leaderboard.players[players[player_number].user_id].rating)
     end
