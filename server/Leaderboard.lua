@@ -95,7 +95,7 @@ function Leaderboard.update_timestamp(self, user_id)
         -- increase the player's inactive counter by 5 for every 30 days the player has not logged in
         local counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
         self.players[user_id].inactive_counter = counter
-        self.players[user_id].rd = math.min(DEVIATION_SPREAD, self.players[user_id].rd * 1.02 ^ counter)
+        self.players[user_id].rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(self.players[user_id].ranked_games_played)) * 1.02 ^ counter)
         logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
         logger.debug(user_id .. "'s inactive counter raised to " .. counter)
         logger.debug(user_id .. "'s new RD: " .. self.players[user_id].rd)        
