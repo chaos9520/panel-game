@@ -92,9 +92,13 @@ function Leaderboard.update_timestamp(self, user_id)
         logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
         logger.debug(user_id .. "'s inactive counter raised to " .. counter)
         logger.debug(user_id .. "'s new RD: " .. self.players[user_id].rd)
+      else
+        self.players[user_id].inactive_counter = 0
+        logger.debug(user_id .. "'s inactive counter has been set to 0")
       end
     end
     self.players[user_id].last_login_time = timestamp
+    
     write_leaderboard_file()
     logger.debug(user_id .. "'s login timestamp has been updated to " .. timestamp)
   else
