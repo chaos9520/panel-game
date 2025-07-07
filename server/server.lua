@@ -319,7 +319,9 @@ function Server:closeRoom(room)
   end
 end
 
-function Server:calculate_rd()
+function Server:calculate_rd(games_played, counter)
+  Rd = math.min(DEVIATION_SPREAD, (DEVIATION_SPREAD / (0.5 + math.log(games_played))) * 1.02 ^ counter)
+  return Rd
 end
 
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
@@ -363,7 +365,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
         leaderboard.players[players[player_number].user_id].placement_done = true
         self.database:insertPlayerELOChange(players[player_number].user_id, DEFAULT_RATING, gameID)
       end
-      leaderboard.players[players[player_number].user_id].rd = DEVIATION_SPREAD
       logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " the starting RD of " .. DEVIATION_SPREAD)
       write_leaderboard_file()
     end
@@ -377,7 +378,9 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
     
     -- calculate Rd
-    Rd = leaderboard.players[players[player_number].user_id].rd
+    Rd = Server:calculate_rd(self.players[user_id].ranked_games_played, self.players[user_id].inactive_counter)
+    leaderboard.players[players[player_number].user_id].rd = Rd
+    write_leaderboard_file()
     if players[player_number].player_number == winning_player_number then
       Oa = 1
     else
