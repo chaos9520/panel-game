@@ -61,7 +61,7 @@ function Leaderboard.get_report(self, user_id_of_requester)
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
             if v.rd then
-              if k ~= user_id_of_requester and v.rd >= 100 then -- don't include players with a rating deviation higher than 30.
+              if v.rd >= 100 then -- don't include players with a rating deviation higher than 30.
                 if k == user_id_of_requester then
                   player_is_leaderboard_requester = true
                 end
@@ -87,24 +87,31 @@ end
 
 function Leaderboard.update_timestamp(self, user_id)
   if self.players[user_id] then
+    local inactive_time
+    local rd
+    local counter
+    games_played = self.players[user_id].ranked_games_played
     local timestamp = os.time()
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
-      local inactive_time = timestamp - self.players[user_id].last_login_time
+      inactive_time = timestamp - self.players[user_id].last_login_time
       logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
       if inactive_time >= 60 then -- 2592000
         -- increase the player's inactive counter by 5 for every 30 days the player has not logged in
-        local counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
+        counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
         self.players[user_id].inactive_counter = counter
-        self.players[user_id].rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(self.players[user_id].ranked_games_played)) * 1.02 ^ counter)
+        rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(games_played)) * 1.02 ^ counter)
         logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
         logger.debug(user_id .. "'s inactive counter raised to " .. counter)
-        logger.debug(user_id .. "'s new RD: " .. self.players[user_id].rd)        
+        logger.debug(user_id .. "'s new RD: " .. rd)        
       end  
     else
       self.players[user_id].inactive_counter = 0
+      rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(games_played)))
       logger.debug(user_id .. "'s inactive counter has been set to 0")
+      logger.debug(user_id .. "'s RD has been set to " .. rd)
     end
     self.players[user_id].last_login_time = timestamp
+    self.players[user_id].rd = rd
     write_leaderboard_file()
     logger.debug(user_id .. "'s login timestamp has been updated to " .. timestamp)
   else

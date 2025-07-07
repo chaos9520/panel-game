@@ -355,7 +355,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
   local placement_match_progress
   room.ratings = {}
   for player_number = 1, 2 do
-    --if they aren't on the leaderboard yet, give them the default rating
+    --if they aren't on the leaderboard yet, give them the default rating and RD
     if not leaderboard.players[players[player_number].user_id] or not leaderboard.players[players[player_number].user_id].rating then
       leaderboard.players[players[player_number].user_id] = {user_name = self.playerbase.players[players[player_number].user_id], rating = DEFAULT_RATING}
       logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " a new rating of " .. DEFAULT_RATING)
@@ -363,6 +363,8 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
         leaderboard.players[players[player_number].user_id].placement_done = true
         self.database:insertPlayerELOChange(players[player_number].user_id, DEFAULT_RATING, gameID)
       end
+      leaderboard.players[players[player_number].user_id].rd = DEVIATION_SPREAD
+      logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " the starting RD of " .. DEVIATION_SPREAD)
       write_leaderboard_file()
     end
   end
@@ -376,11 +378,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     if placement_done[players[player_number].user_id] == true then
-      if ranked_games_played == nil then
-        Rd = DEVIATION_SPREAD
-      else
-        Rd = leaderboard.players[players[player_number].user_id].rd
-      end
+      Rd = leaderboard.players[players[player_number].user_id].rd
     else
       Rd = DEVIATION_SPREAD
     end
