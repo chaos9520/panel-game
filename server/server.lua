@@ -499,7 +499,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
       local rd = Server:calculate_rd(games_played, counter)
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
-      leaderboard.players[players[player_number].user_id].inactive_counter = rd
+      leaderboard.players[players[player_number].user_id].rd = rd
       logger.debug(player_number .. "'s new RD = " .. rd)
       logger.debug(player_number .. "'s new Inactive Counter = " .. counter)
       write_leaderboard_file()
