@@ -386,13 +386,12 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
-    local counter = leaderboard.players[players[player_number].user_id].inactive_counter
-    
     if placement_done[players[player_number].user_id] == true then
-      Rd = Server:calculate_rd(games_played, counter)
-      leaderboard.players[players[player_number].user_id].rd = Rd
-      logger.debug(player_number .. "'s Rating Deviation: " .. Rd)
-      write_leaderboard_file()
+      if games_played == nil then 
+        Rd = DEVIATION_SPREAD
+      else
+        Rd = leaderboard.players[players[player_number].user_id].rd
+      end
     else
       Rd = DEVIATION_SPREAD
     end
@@ -493,6 +492,17 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       leaderboard.players[players[player_number].user_id].ranked_games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       leaderboard:update(players[player_number].user_id, room.ratings[player_number].new)
       logger.debug("New rating:" .. leaderboard.players[players[player_number].user_id].rating)
+    end
+    -- update other things on the leaderboard
+    for player_number = 1, 2 do
+      local counter = math.max(0, (leaderboard.players[players[player_number].user_id].inactive_counter or 0) - 1)
+      local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
+      local rd = Server:calculate_rd(games_played, counter)
+      leaderboard.players[players[player_number].user_id].inactive_counter = counter
+      leaderboard.players[players[player_number].user_id].inactive_counter = rd
+      logger.debug(player_number .. "'s new RD = " .. rd)
+      logger.debug(player_number .. "'s new Inactive Counter = " .. counter)
+      write_leaderboard_file()
     end
     for player_number = 1, 2 do
       --round and calculate rating gain or loss (difference) to send to the clients
