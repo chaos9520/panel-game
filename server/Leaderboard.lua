@@ -91,18 +91,13 @@ function Leaderboard.update_timestamp(self, user_id)
         counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
         self.players[user_id].inactive_counter = counter
         rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(games_played)) * 1.02 ^ counter)
+        self.players[user_id].rd = rd
         logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
         logger.debug(user_id .. "'s inactive counter raised to " .. counter)
         logger.debug(user_id .. "'s new RD: " .. rd)        
       end  
-    else
-      self.players[user_id].inactive_counter = 0
-      rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(games_played)))
-      logger.debug(user_id .. "'s inactive counter has been set to 0")
-      logger.debug(user_id .. "'s RD has been set to " .. rd)
     end
     self.players[user_id].last_login_time = timestamp
-    self.players[user_id].rd = rd
     write_leaderboard_file()
     logger.debug(user_id .. "'s login timestamp has been updated to " .. timestamp)
   else

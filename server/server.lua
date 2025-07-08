@@ -496,7 +496,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     -- update other things on the leaderboard
     for player_number = 1, 2 do
       local counter = math.max(0, (leaderboard.players[players[player_number].user_id].inactive_counter or 0) - 1)
-      local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
+      local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       local rd = Server:calculate_rd(games_played, counter)
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
       leaderboard.players[players[player_number].user_id].rd = rd
