@@ -501,7 +501,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
       leaderboard.players[players[player_number].user_id].rd = rd
       logger.debug(player_number .. "'s new RD = " .. rd)
-      logger.debug(player_number .. "'s new Inactive Counter = " .. counter)
+      logger.debug(player_number .. "'s new Relegation Counter = " .. counter)
       write_leaderboard_file()
     end
     for player_number = 1, 2 do

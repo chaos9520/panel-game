@@ -86,15 +86,15 @@ function Leaderboard.update_timestamp(self, user_id)
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
       inactive_time = timestamp - self.players[user_id].last_login_time
       logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
-      if inactive_time >= 60 then -- 2592000
+      if inactive_time >= 2592000 then
         logger.debug(user_id .. " has not logged in for 30+ days.")
         if deviation >= DEVIATION_SPREAD then
           -- do not increase relegation counter because RD is already maxed out.
           logger.debug(user_id .. "'s RD is already maxed out, counter remains unchanged.")
         else
-          -- Increase the player's inactive counter by 5 for every 30 days the player has not logged in if RD isn't maxed out.
+          -- Increase the player's relegation counter by 5 for every 30 days the player has not logged in if RD isn't maxed out.
           -- Relegation counter maxes out at 30, and the relegation counter will no longer increase once the RD maxes out.
-          counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
+          counter = math.floor((timestamp - self.players[user_id].last_login_time) / 2592000) * 5
           while (DEVIATION_SPREAD / (0.5 + math.log(games_played)) * 1.02 ^ increment) < DEVIATION_SPREAD do
             increment = increment + 1
           end
