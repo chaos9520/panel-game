@@ -51,19 +51,15 @@ function Leaderboard.get_report(self, user_id_of_requester)
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
-            if v.rd then
-              if v.rd >= 100 then -- don't include players with a rating deviation higher than 40.
-                if k == user_id_of_requester then
-                  player_is_leaderboard_requester = true
-                end
-                if (report[insert_index] and report[insert_index].rating and v.rating >= report[insert_index].rating) then
-                  table.insert(report, insert_index, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester})
-                  break
-                elseif insert_index == leaderboard_player_count or #report == 0 then
-                  table.insert(report, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester}) -- at the end of the table.
-                  break
-                end
-              end
+            if k == user_id_of_requester then
+              player_is_leaderboard_requester = true
+            end
+            if (report[insert_index] and report[insert_index].rating and v.rating >= report[insert_index].rating) then
+              table.insert(report, insert_index, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester})
+              break
+            elseif insert_index == leaderboard_player_count or #report == 0 then
+              table.insert(report, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester}) -- at the end of the table.
+              break
             end
           end
         end
@@ -81,20 +77,30 @@ function Leaderboard.update_timestamp(self, user_id)
     local inactive_time
     local rd
     local counter
-    games_played = self.players[user_id].ranked_games_played
+    local games_played = self.players[user_id].ranked_games_played
+    local deviation = self.players[user_id].rd
+    local relegation = self.players[user_id].inactive_counter
+    local total
     local timestamp = os.time()
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
       inactive_time = timestamp - self.players[user_id].last_login_time
       logger.debug(user_id .. " was inactive for " .. math.round(inactive_time / 86400, 1) .. " days.")
       if inactive_time >= 60 then -- 2592000
-        -- increase the player's inactive counter by 5 for every 30 days the player has not logged in
-        counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
-        self.players[user_id].inactive_counter = counter
-        rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(games_played)) * 1.02 ^ counter)
-        self.players[user_id].rd = rd
-        logger.debug(user_id .. " has not logged in for 30+ days, raising the inactive counter.")
-        logger.debug(user_id .. "'s inactive counter raised to " .. counter)
-        logger.debug(user_id .. "'s new RD: " .. rd)        
+        logger.debug(user_id .. " has not logged in for 30+ days.")
+        if deviation >= DEVIATION_SPREAD then
+          -- do not increase relegation counter because RD is already maxed out.
+          logger.debug(user_id .. "'s RD is already maxed out, counter remains unchanged.")
+        else
+          -- Increase the player's inactive counter by 5 for every 30 days the player has not logged in if RD isn't maxed out.
+          -- Relegation counter maxes out at 30.
+          counter = math.floor((timestamp - self.players[user_id].last_login_time) / 60) * 5
+          total = math.min(30, relegation + counter)
+          rd = math.min(DEVIATION_SPREAD, DEVIATION_SPREAD / (0.5 + math.log(games_played)) * 1.02 ^ total)
+          self.players[user_id].inactive_counter = total
+          self.players[user_id].rd = rd
+          logger.debug(user_id .. "'s relegation counter set to " .. counter)
+          logger.debug(user_id .. "'s new RD: " .. rd)
+        end
       end  
     end
     self.players[user_id].last_login_time = timestamp
