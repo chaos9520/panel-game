@@ -81,7 +81,7 @@ function Leaderboard.update_timestamp(self, user_id)
     local deviation = self.players[user_id].rd
     local relegation = self.players[user_id].inactive_counter
     local total
-    local increment
+    local increment = 1
     local timestamp = os.time()
     if self.players[user_id].rating ~= nil and self.players[user_id].last_login_time ~= nil then
       inactive_time = timestamp - self.players[user_id].last_login_time
