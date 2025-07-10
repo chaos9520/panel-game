@@ -2060,8 +2060,8 @@ function Stack.onGarbageLand(self, panel)
       self.garbageLandedThisFrame[#self.garbageLandedThisFrame+1] = panel.garbageId
     end
 
-    -- whether we ran through it or not, the panel should lose its shake time
-    panel.shake_time = nil
+    -- whether we ran through it or not, the panel should NEVER lose its shake time
+    -- panel.shake_time = nil
   end
 end
 
