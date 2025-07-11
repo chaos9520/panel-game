@@ -25,6 +25,7 @@ local time = os.time
 
 -- Represents the full server object.
 -- Currently we are transitioning variables into this, but to start we will use this to define API
+-- IMPORTANT: Self-reminder to remove code that references placement matches as my ranking system does not require them.
 Server =
   class(
   function(self, databaseParam)
@@ -331,6 +332,15 @@ function Server:calculate_rd(games_played, counter)
   return deviation
 end
 
+function Server:adjust_for_level_differences(dev, p1, p2)
+  return dev * (((p1_level * p2_level / 2) / 8) * ((10 - math.abs(p1_level - p2_level)) * 0.1))
+end
+
+function Server:adjust_starting_rating(level)
+  local adjusted_rating = {400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000}
+  return adjusted_rating[level]
+end
+
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
   --[[ --Algorithm we are implementing, per community member Bbforky:
       Formula for Calculating expected outcome:
@@ -362,12 +372,14 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
   local players = {room.a, room.b}
   local continue = true
   local placement_match_progress
+  local adjusted_rating
   room.ratings = {}
   for player_number = 1, 2 do
     --if they aren't on the leaderboard yet, give them the default rating and RD
     if not leaderboard.players[players[player_number].user_id] or not leaderboard.players[players[player_number].user_id].rating then
-      leaderboard.players[players[player_number].user_id] = {user_name = self.playerbase.players[players[player_number].user_id], rating = DEFAULT_RATING}
-      logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " a new rating of " .. DEFAULT_RATING)
+      adjusted_rating = Server:adjust_starting_rating(players[player_number].level)
+      leaderboard.players[players[player_number].user_id] = {user_name = self.playerbase.players[players[player_number].user_id], rating = adjusted_rating}
+      logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " a new rating of " .. adjusted_rating)
       if not PLACEMENT_MATCHES_ENABLED then
         leaderboard.players[players[player_number].user_id].placement_done = true
         self.database:insertPlayerELOChange(players[player_number].user_id, DEFAULT_RATING, gameID)
@@ -386,16 +398,22 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
+    local deviation
+    local p1_level = room.a.level
+    local p2_level = room.b.level
     if placement_done[players[player_number].user_id] == true then
       if games_played == nil then 
-        Rd = DEVIATION_SPREAD
+        deviation = DEVIATION_SPREAD
       else
-        Rd = leaderboard.players[players[player_number].user_id].rd
+        deviation = leaderboard.players[players[player_number].user_id].rd
       end
     else
-      Rd = DEVIATION_SPREAD
+      deviation = DEVIATION_SPREAD
     end
     
+    Rd = Server:adjust_for_level_differences(deviation, p1_level, p2_level)
+    logger.debug(self.playerbase.players[players[player_number].user_id] .. "'s adjusted RD for this game: " .. Rd)
+
     if players[player_number].player_number == winning_player_number then
       Oa = 1
     else
