@@ -124,25 +124,14 @@ Stack =
     -- Which columns each size garbage is allowed to fall in.
     -- This is typically constant but maybe some day we would allow different ones 
     -- for different game modes or need to change it based on board width.
-    if s.level and s.level >= 10 then
-      s.garbageSizeDropColumnMaps = {
+    s.garbageSizeDropColumnMaps = {
       {1, 2, 3, 4, 5, 6},
       {1, 3, 5,},
-      {1, 4},
+      {1, 2, 3, 4},
       {1, 2, 3},
       {1, 2},
       {1}
     }
-    else
-      s.garbageSizeDropColumnMaps = {
-        {1, 2, 3, 4, 5, 6},
-        {1, 3, 5,},
-        {1, 2, 3, 4},
-        {1, 2, 3},
-        {1, 2},
-        {1}
-      }
-    end
     -- The current index of the above table we are currently using for the drop column.
     -- This increases by 1 wrapping every time garbage drops.
     s.currentGarbageDropColumnIndexes = {1, 1, 1, 1, 1, 1}
@@ -1117,25 +1106,8 @@ function Stack.shouldDropGarbage(self)
   -- new garbage can't drop if the stack is full
   -- new garbage always drops one by one
   if not self.panels_in_top_row then
-    if not self:hasActivePanels() then
+    if self.chain_counter == 0 then
       return true
-    elseif garbage.isChain then
-      -- drop chain garbage higher than 1 row immediately
-      if self.game_stopwatch >= 7200 then
-        return garbage.height >= 1
-      else
-        return garbage.height > 1
-      end
-    else
-      -- attackengine garbage higher than 1 (aka chain garbage) is treated as combo garbage
-      -- that is to circumvent the garbage queue not allowing to send multiple chains simultaneously
-      -- and because of that hack, we need to do another hack here and allow n-height combo garbage
-      -- but only if the player is targetted by a detached attackengine
-      if self.game_stopwatch >= 7200 then
-        return garbage.height >= 1
-      else
-        return garbage.height > 1
-      end
     end
   end
 end

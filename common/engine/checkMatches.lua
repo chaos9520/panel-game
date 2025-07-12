@@ -846,7 +846,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   local width = comboSize % 4 + 3
   local height
 
-  if (self.chain_counter and self.chain_counter < 3) and (self.level and self.level < 10) then
+  if (self.chain_counter and self.chain_counter < 3) then
     -- Chaos Combo Garbage
     height = math.ceil((comboSize - 3) / 4)
     for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch, self.level) do
