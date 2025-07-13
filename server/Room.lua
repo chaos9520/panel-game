@@ -547,11 +547,11 @@ function Room:rating_adjustment_approved()
   -- if playerColorsOutOfBoundsForRanked then
   --   reasons[#reasons + 1] = "Only color counts between " .. MIN_COLORS_FOR_RANKED .. " and " .. MAX_COLORS_FOR_RANKED .. " are allowed for ranked play."
   -- end
-  if players[1].level ~= players[2].level then
-    reasons[#reasons + 1] = "Levels don't match"
+  -- if players[1].level ~= players[2].level then
+    -- reasons[#reasons + 1] = "Levels don't match"
   -- elseif not deep_content_equal(players[1].levelData or LevelPresets.getModern(players[1].level), players[2].levelData or LevelPresets.getModern(players[2].level)) then
   --  reasons[#reasons + 1] = "Level data doesn't match"
-  end
+  -- end
 
   for i, player in ipairs(players) do
     if not deep_content_equal(player.levelData, LevelPresets.getModern(player.level)) then
