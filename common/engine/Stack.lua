@@ -1789,7 +1789,7 @@ function Stack.dropGarbage(self, width, height, isMetal)
   end
 
   self.garbageCreatedCount = self.garbageCreatedCount + 1
-  local shakeTime = math.min(82, 18 + (width * height * 2))
+  local shakeTime = math.min(82, 18 + (width * height))
 
   for row = originRow, originRow + height - 1 do
     if not self.panels[row] then
