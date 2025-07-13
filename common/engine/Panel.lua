@@ -708,7 +708,7 @@ function Panel.canSwap(self)
     if self.state == "normal"
     or self.state == "swapping"
     or self.state == "falling"
-    -- or self.state == "hovering" -- had to be removed
+    or self.state == "hovering" -- IT'S BACK BABY
     or self.state == "landing" then
       return true
     else
