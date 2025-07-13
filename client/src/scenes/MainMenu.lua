@@ -71,8 +71,12 @@ function MainMenu:createMainMenu()
     MenuItem.createButtonMenuItem("mm_1_challenge_mode", nil, nil, function()
       switchToScene(ChallengeModeMenu())
     end),
-    MenuItem.createButtonMenuItem("mm_2_vs_online", {""}, nil, function()
+    MenuItem.createButtonMenuItem("Ranked Server", {""}, nil, function()
       switchToScene(Lobby({serverIp = "pa-server.chaos952.org"}))
+      -- pa-server.chaos952.org
+    end),
+    MenuItem.createButtonMenuItem("Casual Server", {""}, nil, function()
+      switchToScene(Lobby({serverIp = "127.0.0.1"}))
       -- pa-server.chaos952.org
     end),
     MenuItem.createButtonMenuItem("mm_2_vs_local", nil, nil, function()
