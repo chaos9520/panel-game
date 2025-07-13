@@ -156,7 +156,14 @@ function Stack:checkMatches()
       self:matchGarbagePanels(garbagePanels, garbageMatchTime, isChainLink, garbagePanelCountOnScreen)
     end
 
-    local preStopTime = frameConstants.FLASH + frameConstants.FACE + (frameConstants.POP * comboSize) + ((frameConstants.GARBAGE_POP or 0) * garbagePanelCountOnScreen + (frameConstants.GARBAGE_HOVER or 0))
+    local ghover
+    if garbagePanels then
+      ghover = (frameConstants.GARBAGE_HOVER or 0)
+    else
+      ghover = 0
+    end
+
+    local preStopTime = frameConstants.FLASH + frameConstants.FACE + (frameConstants.POP * comboSize) + ((frameConstants.GARBAGE_POP or 0) * garbagePanelCountOnScreen + ghover)
     self.pre_stop_time = math.max(self.pre_stop_time, preStopTime)
     self:awardStopTime(isChainLink, comboSize)
 
