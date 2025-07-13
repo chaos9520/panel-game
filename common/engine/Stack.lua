@@ -2092,8 +2092,6 @@ function Stack.updateRiseLock(self)
     self.prev_rise_lock = self.rise_lock
     if self.do_countdown then
       self.rise_lock = true
-    elseif self:swapQueued() then
-      self.rise_lock = true
     elseif self.shake_time > 0 then
       self.rise_lock = true
     elseif self:hasActivePanels() and self.chain_counter > 0 then
@@ -2105,8 +2103,6 @@ function Stack.updateRiseLock(self)
   else
     self.prev_rise_lock = self.rise_lock
     if self.do_countdown then
-      self.rise_lock = true
-    elseif self:swapQueued() then
       self.rise_lock = true
     elseif self.shake_time > 0 then
       self.rise_lock = true
