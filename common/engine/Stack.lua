@@ -2184,14 +2184,8 @@ function Stack:checkGameOver()
   if self.game_over_clock <= 0 then
     for _, gameOverCondition in ipairs(self.gameOverConditions) do
       if gameOverCondition == GameModes.GameOverConditions.NEGATIVE_HEALTH then
-        if self.panels_in_top_row and not self.rise_lock and self.health == 1 and self.stop_time == 0 then
-          self.cursorLock = true  
-          if self.health <= 0 and self.shake_time <= 0 then
-            return true
-          end
-        else
-          self.cursorLock = nil
-        end
+        if self.health <= 0 and self.shake_time <= 0 then
+          return true
         elseif not self.rise_lock and self.behaviours.allowManualRaise and self.panels_in_top_row and self.manual_raise then
           return true
         end
