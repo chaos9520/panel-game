@@ -1167,10 +1167,17 @@ function Stack.simulate(self)
   -- Phase 0 //////////////////////////////////////////////////////////////
   -- Stack automatic rising
   if self.behaviours.passiveRaise then
+    self.cursorLock = nil
     if not self.manual_raise and self.stop_time == 0 and not self.rise_lock then
       if self.panels_in_top_row then
         self.health = self.health - 1
+        if self.health <= 1 and self.shake_time <= 0 then
+          self.cursorLock = true
+        else
+          self.cursorLock = nil
+        end
       else
+        self.cursorLock = nil
         self.rise_timer = self.rise_timer - 1
         if self.rise_timer <= 0 then -- try to rise
           self.displacement = self.displacement - 1
