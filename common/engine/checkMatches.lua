@@ -757,7 +757,7 @@ function Stack:matchGarbagePanels(garbagePanels, garbageMatchTime, isChain, onSc
     panel.initial_time = garbageMatchTime
     -- these two may end up with nonsense values for off-screen garbage but it doesn't matter
     panel.pop_time = self.levelData.frameConstants.GARBAGE_POP * (onScreenCount - i)
-    panel.pop_index = math.min(i, 10)
+    panel.pop_index = math.min(i, 72)
   end
 
   self:convertGarbagePanels(isChain)

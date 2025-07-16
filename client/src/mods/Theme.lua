@@ -637,7 +637,7 @@ function Theme:loadIngameSfx()
     }
     self.sounds.pops = {}
 
-  for popLevel = 1, 4 do
+  for popLevel = 1, 9 do
     self.sounds.pops[popLevel] = {}
     for popIndex = 1, 10 do
       self.sounds.pops[popLevel][popIndex] = loadThemeSfx(self, "pop" .. popLevel .. "-" .. popIndex)
