@@ -1457,7 +1457,7 @@ function Stack.simulate(self)
       characters[self.character]:playAttackSfx(self.combo_chain_play)
       self.combo_chain_play = nil
     end
-    if SFX_garbage_match_play and self.chain_counter == 0 then
+    if SFX_garbage_match_play then
       characters[self.character]:playGarbageMatchSfx()
       SFX_garbage_match_play = nil
     end

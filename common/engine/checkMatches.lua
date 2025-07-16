@@ -745,7 +745,9 @@ function Stack:matchGarbagePanels(garbagePanels, garbageMatchTime, isChain, onSc
   garbagePanels = sortByPopOrder(garbagePanels, true)
 
   if self:canPlaySfx() then
-    SFX_garbage_match_play = true
+    if self.chain_counter == 0 then
+      SFX_garbage_match_play = true
+    end
   end
   
   for i = 1, #garbagePanels do
