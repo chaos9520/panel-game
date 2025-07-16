@@ -1457,7 +1457,7 @@ function Stack.simulate(self)
       characters[self.character]:playAttackSfx(self.combo_chain_play)
       self.combo_chain_play = nil
     end
-    if SFX_garbage_match_play then
+    if SFX_garbage_match_play and self.chain_counter == 0 then
       characters[self.character]:playGarbageMatchSfx()
       SFX_garbage_match_play = nil
     end
@@ -1484,7 +1484,7 @@ function Stack.simulate(self)
       else
         SoundController:playSfx(themes[config.theme].sounds.garbage_thud[self.sfx_garbage_thud])
       end
-      if interrupted_thud == nil then
+      if interrupted_thud == nil and self.chain_counter == 0 then
         characters[self.character]:playGarbageLandSfx()
       end
       self.sfx_garbage_thud = 0
