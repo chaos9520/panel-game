@@ -124,14 +124,25 @@ Stack =
     -- Which columns each size garbage is allowed to fall in.
     -- This is typically constant but maybe some day we would allow different ones 
     -- for different game modes or need to change it based on board width.
-    s.garbageSizeDropColumnMaps = {
-      {1, 2, 3, 4, 5, 6},
-      {1, 3, 5,},
-      {1, 2, 3, 4},
-      {1, 2, 3},
-      {1, 2},
-      {1}
+    if s.level and s.level > 11 then
+      s.garbageSizeDropColumnMaps = {
+        {1, 2, 3, 4, 5, 6},
+        {1, 3, 5,},
+        {1, 4},
+        {1, 2, 3},
+        {1, 2},
+        {1}
     }
+    else
+      s.garbageSizeDropColumnMaps = {
+        {1, 2, 3, 4, 5, 6},
+        {1, 3, 5,},
+        {1, 2, 3, 4},
+        {1, 2, 3},
+        {1, 2},
+        {1}
+    }
+    end
     -- The current index of the above table we are currently using for the drop column.
     -- This increases by 1 wrapping every time garbage drops.
     s.currentGarbageDropColumnIndexes = {1, 1, 1, 1, 1, 1}
@@ -1105,9 +1116,19 @@ function Stack.shouldDropGarbage(self)
 
   -- new garbage can't drop if the stack is full
   -- new garbage always drops one by one
-  if not self.panels_in_top_row then
-    if self.chain_counter == 0 then
-      return true
+  if self.level and self.level > 11 then
+    if not self.panels_in_top_row and not self:has_falling_garbage() then
+      if not self:hasActivePanels() then
+        return true
+      elseif self.chain_counter == 0 and not self:has_falling_garbage() then
+        return true
+      end
+    end
+  else
+    if not self.panels_in_top_row then
+      if self.chain_counter == 0 then
+        return true
+      end
     end
   end
 end
@@ -1168,8 +1189,9 @@ function Stack.simulate(self)
   -- Stack automatic rising
   if self.behaviours.passiveRaise then
     self.cursorLock = nil
-    if not self.manual_raise and self.stop_time == 0 and not self.rise_lock then
+    if self.stop_time == 0 and not self.rise_lock then
       if self.panels_in_top_row then
+        self.prevent_manual_raise = true
         self.health = self.health - 1
         if self.health <= 1 and self.shake_time <= 0 then
           self.cursorLock = true
@@ -1309,9 +1331,7 @@ function Stack.simulate(self)
     if self.manual_raise then
       if not self.rise_lock then
         if self.panels_in_top_row then
-          if self:checkGameOver() then
-            self:setGameOver()
-          end
+          self.manual_raise = false
         else
           self.has_risen = true
           self.displacement = self.displacement - 1
@@ -1796,7 +1816,12 @@ function Stack.dropGarbage(self, width, height, isMetal)
   end
 
   self.garbageCreatedCount = self.garbageCreatedCount + 1
-  local shakeTime = math.min(82, 24 + (width * height))
+  local shakeTime
+  if self.level and self.level > 11 then
+    shakeTime = math.min(82, 30 + (width * height * 2))
+  else
+    shakeTime = math.min(82, 24 + (width * height))
+  end
 
   for row = originRow, originRow + height - 1 do
     if not self.panels[row] then
@@ -2040,7 +2065,11 @@ function Stack.onGarbageLand(self, panel)
     end
 
     -- whether we ran through it or not, the panel should NEVER lose its shake time
-    -- panel.shake_time = nil
+    if self.level and self.level > 11 then
+      panel.shake_time = nil
+    else
+      -- do nothing, keeps its shake time
+    end
   end
 end
 
@@ -2074,8 +2103,10 @@ function Stack.getActivePanelCount(self)
           count = count + 1
         end
       else
-        if self.health > 1 then
-          if panel.color ~= 0 and panel.state ~= "normal" and panel.state ~= "swapping" then
+        if self.health > 2 then
+          if panel.color ~= 0 
+          and panel.state ~= "normal"
+          and panel.state ~= "swapping" then
             count = count + 1
           end
         else
@@ -2104,12 +2135,16 @@ function Stack.updateRiseLock(self)
     elseif self:hasActivePanels() and self.chain_counter > 0 then
       self.manual_raise = false
       self.rise_lock = false
+    elseif self:hasActivePanels() then
+      self.rise_lock = true
     else
       self.rise_lock = false
     end
   else
     self.prev_rise_lock = self.rise_lock
     if self.do_countdown then
+      self.rise_lock = true
+    elseif self:swapQueued() then
       self.rise_lock = true
     elseif self.shake_time > 0 then
       self.rise_lock = true
@@ -2192,8 +2227,6 @@ function Stack:checkGameOver()
     for _, gameOverCondition in ipairs(self.gameOverConditions) do
       if gameOverCondition == GameModes.GameOverConditions.NEGATIVE_HEALTH then
         if self.health <= 0 and self.shake_time <= 0 then
-          return true
-        elseif not self.rise_lock and self.behaviours.allowManualRaise and self.panels_in_top_row and self.manual_raise then
           return true
         end
       elseif gameOverCondition == GameModes.GameOverConditions.NO_MOVES_LEFT then

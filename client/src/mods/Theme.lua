@@ -488,9 +488,9 @@ function Theme:loadLevelNumberAtlasses()
   self.images.levelNumberAtlas[1].image = self:load_theme_img("level_numbers_1P")
   self.images.levelNumberAtlas[2] = {}
   self.images.levelNumberAtlas[2].image = self:load_theme_img("level_numbers_2P")
-  local levels = 11
+  local levels = 15 -- added classic levels
   for i = 1, #self.images.levelNumberAtlas do
-    local charWidth = self.images.levelNumberAtlas[i].image:getWidth() / levels
+    local charWidth = self.images.levelNumberAtlas[i].image:getWidth() / 11 -- changed from levels so that most levels will display properly
     local charHeight = self.images.levelNumberAtlas[i].image:getHeight()
     local quads = {}
     for j = 1, levels do

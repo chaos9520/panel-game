@@ -413,7 +413,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     end
     
     Rd = Server:adjust_for_level_differences(deviation, p1_level, p2_level)
-    logger.debug(self.playerbase.players[players[player_number].user_id] .. "'s adjusted RD for this game: " .. Rd)
+    logger.debug(players[player_number].name .. "'s adjusted RD for this game: " .. Rd)
 
     if players[player_number].player_number == winning_player_number then
       Oa = 1

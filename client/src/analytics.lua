@@ -156,7 +156,7 @@ end
 function analytics.init()
   pcall(
     function()
-      local data = fileUtils.readJsonFile("analytics_chaos.json")
+      local data = fileUtils.readJsonFile("analytics_chaos_v2.json")
       if data then
         analytics_data = data
       end
@@ -210,7 +210,7 @@ local function output_pretty_analytics()
   end
   pcall(
     function()
-      love.filesystem.write("analytics_chaos.txt", text)
+      love.filesystem.write("analytics_chaos_v2.txt", text)
     end
   )
 end
@@ -222,7 +222,7 @@ local function write_analytics_files()
         return
       end
 
-      love.filesystem.write("analytics_chaos.json", json.encode(analytics_data))
+      love.filesystem.write("analytics_chaos_v2.json", json.encode(analytics_data))
     end
   )
   output_pretty_analytics()
