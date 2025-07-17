@@ -400,8 +400,8 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     -- calculate Rd
     local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
     local deviation
-    local p1_level = room.a.level
-    local p2_level = room.b.level
+    local p1_level = players[1].level
+    local p2_level = players[2].level
     if placement_done[players[player_number].user_id] == true then
       if games_played == nil then 
         deviation = DEVIATION_SPREAD
