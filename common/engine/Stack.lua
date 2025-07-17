@@ -251,6 +251,8 @@ Stack =
     s.combo_chain_play = nil
     s.sfx_land = false
     s.sfx_garbage_thud = 0
+    -- garbage pop index
+    s.g_poppedPanelIndex = s.g_poppedPanelIndex or 1
 
     s.card_q = Queue()
 
@@ -1331,7 +1333,9 @@ function Stack.simulate(self)
     if self.manual_raise then
       if not self.rise_lock then
         if self.panels_in_top_row then
-          self.manual_raise = false
+          if self:checkGameOver() then
+            self:setGameOver()
+          end
         else
           self.has_risen = true
           self.displacement = self.displacement - 1
@@ -1489,14 +1493,9 @@ function Stack.simulate(self)
       end
       self.sfx_garbage_thud = 0
     end
-    if SFX_Pop_Play or SFX_Garbage_Pop_Play then
+    if SFX_Pop_Play then
       local popLevel = min(max(self.chain_counter, 1), 4)
-      local popIndex = 1
-      if SFX_Garbage_Pop_Play then
-        popIndex = min(SFX_Garbage_Pop_Play + self.poppedPanelIndex, 10)
-      else
-        popIndex = min(self.poppedPanelIndex, 10)
-      end
+      local popIndex = min(self.poppedPanelIndex, 10)
       --stop the previous pop sound
       SoundController:stopSfx(themes[config.theme].sounds.pops[self.lastPopLevelPlayed][self.lastPopIndexPlayed])
       --play the appropriate pop sound
@@ -1505,13 +1504,13 @@ function Stack.simulate(self)
       self.lastPopIndexPlayed = popIndex
       SFX_Pop_Play = nil
       SFX_Garbage_Pop_Play = nil
-    --[[ elseif SFX_Garbage_Pop_Play then
+    elseif SFX_Garbage_Pop_Play then
       local popLevel = 9
       local popIndex
-      if self.poppedPanelIndex <= 4 then
-        popIndex = self.poppedPanelIndex
+      if self.g_poppedPanelIndex <= 4 then
+        popIndex = self.g_poppedPanelIndex
       else
-        popIndex = 5 + (self.poppedPanelIndex - 1) % 4
+        popIndex = 5 + (self.g_poppedPanelIndex - 1) % 4
       end
       --stop the previous pop sound
       SoundController:stopSfx(themes[config.theme].sounds.pops[self.lastPopLevelPlayed][self.lastPopIndexPlayed])
@@ -1520,7 +1519,7 @@ function Stack.simulate(self)
       self.lastPopLevelPlayed = popLevel
       self.lastPopIndexPlayed = popIndex
       SFX_Pop_Play = nil
-      SFX_Garbage_Pop_Play = nil ]]
+      SFX_Garbage_Pop_Play = nil 
     end
   end
   prof.pop("stack sfx")
@@ -2008,9 +2007,9 @@ function Stack.onPop(self, panel)
       self:enqueue_popfx(panel.column, panel.row, self.popSizeThisFrame)
     end
     if self:canPlaySfx() then
-      SFX_Garbage_Pop_Play = panel.pop_index -- 1
+      SFX_Garbage_Pop_Play = 1
     end
-    -- self.poppedPanelIndex = panel.pop_index
+    self.g_poppedPanelIndex = panel.pop_index
   else
     if config.popfx == true then
       if (panel.combo_size > 6) or self.chain_counter > 1 then
