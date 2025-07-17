@@ -51,17 +51,15 @@ function Leaderboard.get_report(self, user_id_of_requester)
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
-            if v.rd >= 100 then -- don't include entries whose RD is 40 or higher.
-              if k == user_id_of_requester then
-                player_is_leaderboard_requester = true
-              end
-              if (report[insert_index] and report[insert_index].rating and v.rating >= report[insert_index].rating) then
-                table.insert(report, insert_index, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester})
-                break
-              elseif insert_index == leaderboard_player_count or #report == 0 then
-                table.insert(report, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester}) -- at the end of the table.
+            if k == user_id_of_requester then
+              player_is_leaderboard_requester = true
+            end
+            if (report[insert_index] and report[insert_index].rating and v.rating >= report[insert_index].rating) then
+              table.insert(report, insert_index, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester})
               break
-              end
+            elseif insert_index == leaderboard_player_count or #report == 0 then
+              table.insert(report, {user_name = self.server.playerbase.players[k], rating = v.rating, is_you = player_is_leaderboard_requester}) -- at the end of the table.
+              break
             end
           end
         end
