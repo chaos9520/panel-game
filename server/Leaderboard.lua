@@ -51,7 +51,7 @@ function Leaderboard.get_report(self, user_id_of_requester)
       if self.server.playerbase.players[k] then --only include in the report players who are still listed in the playerbase
         if v.placement_done then --don't include players who haven't finished placement
           if v.rating then -- don't include entries who's rating is nil (which shouldn't happen anyway)
-            if v.rd and v.rd >= 100 then -- don't include entries whose RD is 40 or higher.
+            if v.rd >= 100 then -- don't include entries whose RD is 40 or higher.
               if k == user_id_of_requester then
                 player_is_leaderboard_requester = true
               end
