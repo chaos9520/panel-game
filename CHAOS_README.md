@@ -21,11 +21,13 @@ There are quite a number of changes in the modern levels. Some changes are globa
 - **An overtime mechanic has been implemented.** At 2 minutes, combo garbage attacks will send more garbage. Attack sizes increase every minute, and it maxes out at 5 minutes *(if you manage to survive that long!)*. This does *not* affect garbage patterns in Training or Challenge modes.
 - Shake time will always occur when down stacking with garbage, but the base shake time has been decreased from normal.
 - A player playing on these levels can send thicker combo garbage, but any 3-wides received from the opponent will cascade.
+- Queued garbage will fall all at once.
 #### Changes exclusive to Classic Levels 1 to 4
 I have recently ported over the Classic style levels over so that they are playable in Versus. At the select screen, they will show as levels 1 to 4, but the numbers will have a gray background instead of a colored one. There is no overtime mechanic for these levels.
 - Base shake time has been increased from normal for most garbage.
 - Shake time from garbage does not reset unless the next piece of garbage causes more shake time. However, shake time occurs only when falling onto the screen.
 - Any 3-wides received from the opponent will not cascade.
+- Queued garbage will fall one by one.
 ### Classic Style Changes
 - Stop time has been removed.
 - The amount of panels needed to rise the speed level has been adjusted.
