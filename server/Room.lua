@@ -511,6 +511,7 @@ function Room:rating_adjustment_approved()
   end
 
   --don't let players too far apart in rating play ranked
+  --Include clause to prevent shadow-banned players from playing ranked.
   local ratings = {}
   for k, v in ipairs(players) do
     if leaderboard.players[v.user_id] then
@@ -525,7 +526,9 @@ function Room:rating_adjustment_approved()
       ratings[k] = DEFAULT_RATING
     end
   end
-  if math.abs(ratings[1] - ratings[2]) > RATING_SPREAD_MODIFIER * ALLOWABLE_RATING_SPREAD_MULITPLIER then
+  if (ratings[1] == -9999 and ratings[2] == -9999) or (ratings[1] == -9999 or ratings[2] == -9999) then
+    reasons[#reasons + 1] = "One or both players have been shadow banned from ranked."
+  elseif math.abs(ratings[1] - ratings[2]) > RATING_SPREAD_MODIFIER * ALLOWABLE_RATING_SPREAD_MULITPLIER then
     reasons[#reasons + 1] = "Players' ratings are too far apart"
   end
 
@@ -570,14 +573,6 @@ function Room:rating_adjustment_approved()
     end
   end]]
 
-  -- for shadow banning players that attempt to sandbag or exploit the rating system.
-  for k, v in ipairs(players) do
-    if leaderboard.players[v.user_id] then
-      if leaderboard.players[v.user_id].rating == -9999 then
-        reasons[#reasons + 1] = "This player has been shadow banned from ranked."
-      end
-    end
-  end
   if reasons[1] then
     return false, reasons
   else
