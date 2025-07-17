@@ -2123,7 +2123,8 @@ function Stack.getActivePanelCount(self)
         if self.health > 2 then
           if panel.color ~= 0 
           and panel.state ~= "normal"
-          and panel.state ~= "swapping" then
+          and panel.state ~= "swapping"
+          and panel.state ~= "landing" then
             count = count + 1
           end
         else
