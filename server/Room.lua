@@ -562,15 +562,20 @@ function Room:rating_adjustment_approved()
   if players[1].inputMethod == "touch" or players[2].inputMethod == "touch" then
     reasons[#reasons + 1] = "Touch input is not currently allowed in ranked matches."
   end
-  for player_number = 1, 2 do
+  
+  -- Forces all games to be ranked.
+  --[[ for player_number = 1, 2 do
     if not players[player_number].wants_ranked_match then
       reasons[#reasons + 1] = players[player_number].name .. " doesn't want ranked"
     end
-  end
+  end]]
+
   -- for shadow banning players that attempt to sandbag or exploit the rating system.
-  for player_number = 1, 2 do
-    if leaderboard.players[v.user_id].rating and leaderboard.players[v.user_id].rating == -9999 then
-      reasons[#reasons + 1] = players[player_number].name .. " has been shadow banned from ranked."
+  for k, v in ipairs(players) do
+    if leaderboard.players[v.user_id] then
+      if leaderboard.players[v.user_id].rating == -9999 then
+        reasons[#reasons + 1] = "This player has been shadow banned from ranked."
+      end
     end
   end
   if reasons[1] then
