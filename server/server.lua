@@ -333,7 +333,7 @@ function Server:calculate_rd(games_played, counter)
 end
 
 function Server:adjust_for_level_differences(dev, p1, p2)
-  return dev * (((p1_level * p2_level / 2) / 8) * ((11 - math.abs(p1_level - p2_level)) / 11))
+  return dev * (((p1 * p2 / 2) / 8) * ((11 - math.abs(p1 - p2)) / 11))
 end
 
 function Server:adjust_starting_rating(level)
