@@ -569,7 +569,7 @@ function Room:rating_adjustment_approved()
   end
   -- for shadow banning players that attempt to sandbag or exploit the rating system.
   for player_number = 1, 2 do
-    if players[i].rating == -9999 then
+    if players[i].rating and players[i].rating == -9999 then
       reasons[#reasons + 1] = players[player_number].name .. " has been shadow banned from ranked."
     end
   end
