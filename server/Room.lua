@@ -527,7 +527,7 @@ function Room:rating_adjustment_approved()
     end
   end
   if (ratings[1] == -9999 and ratings[2] == -9999) or (ratings[1] == -9999 or ratings[2] == -9999) then
-    reasons[#reasons + 1] = "One or both players have been shadow banned from ranked."
+    reasons[#reasons + 1] = "One or both players has been shadow banned from ranked."
   elseif math.abs(ratings[1] - ratings[2]) > RATING_SPREAD_MODIFIER * ALLOWABLE_RATING_SPREAD_MULITPLIER then
     reasons[#reasons + 1] = "Players' ratings are too far apart"
   end
