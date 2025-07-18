@@ -1190,10 +1190,9 @@ function Stack.simulate(self)
   -- Phase 0 //////////////////////////////////////////////////////////////
   -- Stack automatic rising
   if self.behaviours.passiveRaise then
-    self.cursorLock = nil
-    if self.stop_time == 0 and not self.rise_lock then
+    if not self.manual_raise and self.stop_time == 0 and not self.rise_lock then
+      self.cursorLock = nil
       if self.panels_in_top_row then
-        self.prevent_manual_raise = true
         self.health = self.health - 1
         if self.health <= 1 and self.shake_time <= 0 then
           self.cursorLock = true
@@ -1333,6 +1332,7 @@ function Stack.simulate(self)
     if self.manual_raise then
       if not self.rise_lock then
         if self.panels_in_top_row then
+          self.health = self.health - 1
           if self:checkGameOver() then
             self:setGameOver()
           end
