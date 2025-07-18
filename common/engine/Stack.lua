@@ -1195,7 +1195,7 @@ function Stack.simulate(self)
       self.cursorLock = nil
       if self.panels_in_top_row then
         self.health = self.health - 1
-        if self.health <= 90 and self.shake_time <= 0 then
+        if self.health <= 1 and self.shake_time <= 0 then
           self.cursorLock = true
         else
           self.cursorLock = nil
