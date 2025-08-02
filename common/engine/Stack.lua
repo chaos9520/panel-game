@@ -1839,7 +1839,7 @@ function Stack.dropGarbage(self, width, height, isMetal)
   if self.level and self.level > 11 then
     shakeTime = math.min(82, 30 + (width * height * 2))
   else
-    shakeTime = math.min(82, 24 + (width * height))
+    shakeTime = math.min(82, math.floor(30 * 1.025 ^ (width * height)))
   end
 
   for row = originRow, originRow + height - 1 do
