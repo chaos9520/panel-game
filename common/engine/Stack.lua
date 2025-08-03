@@ -1210,11 +1210,7 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          if self.speed >= 90 then
-            self.rise_timer = 100 - self.speed
-          else
-            self.rise_timer = 10 + math.ceil(math.log(factorial(92 - self.speed)) / 2)
-          end
+          self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
         end
       end
     end
