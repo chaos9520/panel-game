@@ -2084,7 +2084,9 @@ function Stack.onGarbageLand(self, panel)
     if self.level and self.level > 11 then
       panel.shake_time = nil
     else
-      -- do nothing, keeps its shake time
+      local shakeTime = math.min(82, math.floor(30 * 1.025 ^ (panel.width * panel.height)))
+      local shake_margin = (100 - self.incomingGarbage:len()) / 100
+      panel.shake_time = math.min(shakeTime, math.max(18, math.ceil(shakeTime * math.max(0, shake_margin))))
     end
   end
 end
