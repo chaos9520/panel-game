@@ -333,7 +333,12 @@ function Server:calculate_rd(games_played, counter)
 end
 
 function Server:adjust_for_level_differences(dev, p1, p2)
-  return dev * ((((p1 + p2) / 2) / 8) * ((11 - math.abs(p1 - p2)) / 11))
+  local average = math.floor((p1 + p2) / 2)
+  local adjust_for_speed = {7/10, 7/10, 7/9, 7/9, 7/8, 7/8, 1, 1, 1, 7/6, 7/6}
+  local adjust_for_colors = {2/3, 5/6, 5/6, 1, 5/6, 1, 5/6, 1, 7/6, 5/6, 1}
+  local adjusted_value = adjust_for_speed[average] * adjust_for_colors[average]
+
+  return dev * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
 end
 
 function Server:adjust_starting_rating(level)
