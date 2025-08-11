@@ -1306,7 +1306,7 @@ function Stack.simulate(self)
     if (self.swap_1 or self.swap_2) and not swapped_this_frame then
       local canSwap = self:canSwap(self.cur_row, self.cur_col)
       if canSwap then
-        if self.panels_in_top_row and self.health <= 2 and self.shake_time <= 0 then
+        if self.panels_in_top_row and self.health <= 2 and self.stop_time + self.pre_stop_time <= 0 and self.shake_time <= 0 then
           -- do nothing, block the swap
         else
           self:setQueuedSwapPosition(self.cur_col, self.cur_row)
