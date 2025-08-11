@@ -1190,18 +1190,10 @@ function Stack.simulate(self)
   -- Phase 0 //////////////////////////////////////////////////////////////
   -- Stack automatic rising
   if self.behaviours.passiveRaise then
-    self.cursorLock = nil
     if not self.manual_raise and self.stop_time == 0 and not self.rise_lock then
-      self.cursorLock = nil
       if self.panels_in_top_row then
         self.health = self.health - 1
-        if self.health <= 1 and self.shake_time <= 0 then
-          self.cursorLock = true
-        else
-          self.cursorLock = nil
-        end
       else
-        self.cursorLock = nil
         self.rise_timer = self.rise_timer - 1
         if self.rise_timer <= 0 then -- try to rise
           self.displacement = self.displacement - 1
@@ -1314,8 +1306,12 @@ function Stack.simulate(self)
     if (self.swap_1 or self.swap_2) and not swapped_this_frame then
       local canSwap = self:canSwap(self.cur_row, self.cur_col)
       if canSwap then
-        self:setQueuedSwapPosition(self.cur_col, self.cur_row)
-        self.analytic:register_swap()
+        if self.panels_in_top_row and self.health <= 2 and self.shake_time <= 0 then
+          -- do nothing, block the swap
+        else
+          self:setQueuedSwapPosition(self.cur_col, self.cur_row)
+          self.analytic:register_swap()
+        end
       end
       self.swap_1 = false
       self.swap_2 = false
