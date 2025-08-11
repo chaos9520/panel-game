@@ -527,10 +527,20 @@ function Room:rating_adjustment_approved()
     end
   end
   if (ratings[1] == -9999 and ratings[2] == -9999) or (ratings[1] == -9999 or ratings[2] == -9999) then
-    reasons[#reasons + 1] = "One or both players has been shadow banned from ranked."
+    reasons[#reasons + 1] = "One or both players has been banned from playing ranked matches."
   elseif math.abs(ratings[1] - ratings[2]) > RATING_SPREAD_MODIFIER * ALLOWABLE_RATING_SPREAD_MULITPLIER then
     reasons[#reasons + 1] = "Players' ratings are too far apart"
   end
+
+  -- Players must play at a certain level or higher for a match to be ranked. It is based on the player's rating.
+  local max_rating_for_level = {800, 1000, 1200, 1200, 1600, 1600}
+  local min_level_for_rating = min(7, math.floor(players[i].rating / 400) * 2 - 1)
+  for i = 1, 2 do
+    if players[i].level < 7 and (players[i].rating >= max_rating_for_level[players[i].level]) then
+      reasons[#reasons + 1] = players[i].name .. " must play on level " .. min_level_for_rating .. " or higher for the match to be ranked."
+    end
+  end
+
 
   local player_level_out_of_bounds_for_ranked = false
   for i = 1, 2 do --we'll change 2 here when more players are allowed.
@@ -566,7 +576,7 @@ function Room:rating_adjustment_approved()
     reasons[#reasons + 1] = "Touch input is not currently allowed in ranked matches."
   end
   
-  -- Forces all games to be ranked.
+  -- Forces all games within range to be ranked.
   --[[ for player_number = 1, 2 do
     if not players[player_number].wants_ranked_match then
       reasons[#reasons + 1] = players[player_number].name .. " doesn't want ranked"
