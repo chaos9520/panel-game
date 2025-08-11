@@ -533,14 +533,13 @@ function Room:rating_adjustment_approved()
   end
 
   -- Players must play at a certain level or higher for a match to be ranked. It is based on the player's rating.
-  local max_rating_for_level = {800, 1000, 1200, 1200, 1600, 1600}
+  local max_rating_for_level = {800, 800, 1200, 1200, 1600, 1600}
   local min_level_for_rating = min(7, math.floor(players[i].rating / 400) * 2 - 1)
   for i = 1, 2 do
     if players[i].level < 7 and (players[i].rating >= max_rating_for_level[players[i].level]) then
       reasons[#reasons + 1] = players[i].name .. " must play on level " .. min_level_for_rating .. " or higher for the match to be ranked."
     end
   end
-
 
   local player_level_out_of_bounds_for_ranked = false
   for i = 1, 2 do --we'll change 2 here when more players are allowed.
