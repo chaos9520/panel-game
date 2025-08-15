@@ -532,12 +532,12 @@ function Room:rating_adjustment_approved()
     reasons[#reasons + 1] = "Players' ratings are too far apart"
   end
 
-  -- Players must play at a certain level or higher for a match to be ranked. It is based on the player's rating.
-  local max_rating_for_level = {800, 800, 1200, 1200, 1600, 1600}
-  local min_level_for_rating = min(7, math.floor(players[i].rating / 400) * 2 - 1)
   for i = 1, 2 do
-    if players[i].level < 7 and (players[i].rating >= max_rating_for_level[players[i].level]) then
-      reasons[#reasons + 1] = players[i].name .. " must play on level " .. min_level_for_rating .. " or higher for the match to be ranked."
+    -- Players must play within a certain level range in order for a match to be ranked. It is based on the player's rating.
+    local min_level_for_rating = min(8, math.floor(math.max(400, players[i].rating) / 400) * 2 - 1)
+    local max_level_for_rating = min(11, math.floor(math.max(0, players[i].rating) / 400) * 2 + 2)
+    if (players[i].level > max_level_for_rating) or (players[i].level < min_level_for_rating) then
+      reasons[#reasons + 1] = players[i].name .. " must play on a level between " .. min_level_for_rating .. " and " .. max_level_for_rating .. " for the match to be ranked."
     end
   end
 
