@@ -343,7 +343,7 @@ end
 
 function Server:adjust_starting_rating(level)
   -- Adjusts the player's starting rating based on the level of their first ranked game.
-  local adjusted_rating = {600, 600, 1000, 1000, 1400, 1400, 1800, 1800, 2200, 2200, 2200}
+  local adjusted_rating = {400, 600, 800, 1000, 1200, 1400, 1600, 1800, 1800, 1800, 1800}
   return adjusted_rating[level]
 end
 
