@@ -1143,6 +1143,16 @@ function Stack.shouldDropGarbage(self)
   end
 end
 
+function health_margin(clock)
+  local initial_period = 7200
+  if (clock or 0) < initial_period then
+    return 1
+  else
+    -- the player's maximum health is reduced by 10% every 18 seconds.
+    return 1 - (math.floor((clock - initial_period) / 1080) * 0.1)
+  end
+end
+
 -- One run of the engine routine.
 function Stack.simulate(self)
   prof.push("simulate 1")
@@ -1224,7 +1234,11 @@ function Stack.simulate(self)
 
   prof.push("reset stuff")
   if not self.panels_in_top_row and not self:has_falling_garbage() then
-    self.health = self.health
+    if self.match.stackInteraction == GameModes.StackInteractions.NONE then
+      self.health = self.health
+    else
+      self.health = math.max(1, math.min(self.levelData.maxHealth, self.levelData.maxHealth * health_margin(self.game_stopwatch)))
+    end
   end
 
   if self.displacement % 16 ~= 0 then
