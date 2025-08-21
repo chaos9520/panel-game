@@ -404,6 +404,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     local games_played = leaderboard.players[players[player_number].user_id].ranked_games_played
+    local games_won = leaderboard.players[players[player_number].user_id].ranked_games_won
     local deviation
     local p1_level = players[1].level
     local p2_level = players[2].level
@@ -522,8 +523,16 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local counter = math.max(0, (leaderboard.players[players[player_number].user_id].inactive_counter or 0) - 1)
       local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       local rd = Server:calculate_rd(games_played, counter)
+      local games_won
+      if players[player_number].player_number == winning_player_number then
+        games_won = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0) + 1
+      else
+        games_won = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0)
+      end
+      local win_percentage = games_won / games_played
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
       leaderboard.players[players[player_number].user_id].rd = rd
+      leaderboard.players[players[player_number].user_id].win_percentage = win_percentage
       logger.debug(player_number .. "'s new RD = " .. rd)
       logger.debug(player_number .. "'s new Relegation Counter = " .. counter)
       write_leaderboard_file()
