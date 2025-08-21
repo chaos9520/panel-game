@@ -2190,8 +2190,7 @@ function Stack.getActivePanelCount2(self)
         if panel.color ~= 0
         -- dimmed is implicitly filtered by only checking in row 1 and up
         and panel.state ~= "normal"
-        and panel.state ~= "swapping"
-        and panel.state ~= "landing" then
+        and panel.state ~= "swapping" then
           count = count + 1
         end
       end
