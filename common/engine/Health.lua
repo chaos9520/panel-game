@@ -9,7 +9,7 @@ Health =
     self.maxSecondsToppedOutToLose = framesToppedOutToLose -- Starting value of framesToppedOutToLose
     self.lineClearRate = lineClearGPM / 60 -- How many "lines" we clear per second. Essentially how fast we recover.
     self.currentLines = 0 -- The current number of "lines" simulated
-    self.line_threshold = 18 -- The size of the opponent's 'board'.
+    self.line_threshold = 15
     self.height = height -- How many "lines" need to be accumulated before we are "topped" out.
     self.lastWasFourCombo = false -- Tracks if the last combo was a +4. If two +4s hit in a row, it only counts as 1 "line"
     self.clock = 0 -- Current clock time, this should match the opponent
@@ -43,7 +43,7 @@ function Health:receiveGarbage(frameToReceive, garbage)
     if countGarbage then
       local damage = (garbage.height * garbage.width) / 6
       if garbage.isChain then
-        damage = damage
+        damage = math.min(12, damage)
       elseif garbage.isMetal then
         damage = 1.5
       else
