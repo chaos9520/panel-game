@@ -1249,7 +1249,7 @@ function Stack.simulate(self)
     if self.match.stackInteraction == GameModes.StackInteractions.NONE then
       self.health = self.health
     else
-      self.health = math.max(1, math.min(self.levelData.maxHealth, self.levelData.maxHealth * health_margin(self.game_stopwatch)))
+      self.health = math.max(1, math.min(self.health, self.levelData.maxHealth * health_margin(self.game_stopwatch)))
     end
   end
 
