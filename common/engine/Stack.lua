@@ -1342,7 +1342,7 @@ function Stack.simulate(self)
       if canSwap then
         -- the following conditions must be met to block a swap. This prevents wiggling.
         if self.panels_in_top_row
-          and self.health <= 2
+          and self.health <= 1
           and self.stop_time + self.pre_stop_time <= 0
           and self.shake_time <= 0
           and not self:hasActivePanels2()
@@ -2166,7 +2166,7 @@ function Stack.getActivePanelCount(self)
           count = count + 1
         end
       else
-        if self.health > 2 then
+        if self.health > 1 then
           if panel.color ~= 0 
           and panel.state ~= "normal"
           and panel.state ~= "swapping"
