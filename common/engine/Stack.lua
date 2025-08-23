@@ -1202,6 +1202,10 @@ function Stack.simulate(self)
     -- increase per interval
     if self.game_stopwatch == self.nextSpeedIncreaseClock then
       self.speed = min(self.speed + 1, 99)
+      -- decrease the player's remaining health by 25% if applicable
+    if self.game_stopwatch > 7200 and self.match.stackInteraction ~= GameModes.StackInteractions.NONE then
+      self.health = math.max(1, math.ceil(self.health * 0.75))
+    end
       self.nextSpeedIncreaseClock = self.nextSpeedIncreaseClock + DT_SPEED_INCREASE
     end
   elseif self.panels_to_speedup <= 0 then
@@ -1246,11 +1250,7 @@ function Stack.simulate(self)
 
   prof.push("reset stuff")
   if not self.panels_in_top_row and not self:has_falling_garbage() then
-    if self.match.stackInteraction == GameModes.StackInteractions.NONE then
-      self.health = self.health
-    else
-      self.health = math.max(1, math.min(self.health, self.levelData.maxHealth * health_margin(self.game_stopwatch)))
-    end
+    self.health = self.health
   end
 
   if self.displacement % 16 ~= 0 then
