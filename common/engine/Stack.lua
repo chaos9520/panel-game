@@ -218,8 +218,6 @@ Stack =
 
     s.n_active_panels = 0
     s.n_prev_active_panels = 0
-    s.n_active_panels2 = 0
-    s.n_prev_active_panels2 = 0
 
     s.rise_timer = consts.SPEED_TO_RISE_TIME[s.speed]
 
@@ -442,8 +440,6 @@ function Stack.rollbackCopy(source, other)
   other.chain_counter = source.chain_counter
   other.n_active_panels = source.n_active_panels
   other.n_prev_active_panels = source.n_prev_active_panels
-  other.n_active_panels2 = source.n_active_panels2
-  other.n_prev_active_panels2 = source.n_prev_active_panels2
   other.rise_timer = source.rise_timer
   other.manual_raise = source.manual_raise
   other.manual_raise_yet = source.manual_raise_yet
@@ -756,10 +752,6 @@ end
 
 function Stack.hasActivePanels(self)
   return self.n_active_panels > 0 or self.n_prev_active_panels > 0
-end
-
-function Stack.hasActivePanels2(self)
-  return self.n_active_panels2 > 0 or self.n_prev_active_panels2 > 0
 end
 
 function Stack.has_falling_garbage(self)
@@ -1202,7 +1194,7 @@ function Stack.simulate(self)
     -- increase per interval
     if self.game_stopwatch == self.nextSpeedIncreaseClock then
       self.speed = min(self.speed + 1, 99)
-      -- decrease the player's remaining health by 25% if applicable
+      -- decrease the player's remaining health by 25% if applicable in PvP
     if self.game_stopwatch > 7200 and self.match.stackInteraction ~= GameModes.StackInteractions.NONE then
       self.health = math.max(1, math.ceil(self.health * 0.75))
     end
@@ -1340,14 +1332,20 @@ function Stack.simulate(self)
     if (self.swap_1 or self.swap_2) and not swapped_this_frame then
       local canSwap = self:canSwap(self.cur_row, self.cur_col)
       if canSwap then
-        -- the following conditions must be met to block a swap. This prevents wiggling.
-        if self.panels_in_top_row
-          and self.health <= 1
-          and self.stop_time + self.pre_stop_time <= 0
+        if self.panels_in_top_row then
+          -- The following conditions must be met for anti-wiggling to kick in.
+          if self.stop_time + self.pre_stop_time <= 0
           and self.shake_time <= 0
-          and not self:hasActivePanels2()
           and not self:hasChainingPanels() then
-          -- do nothing, block the swap
+            if self.health > 1 then
+              self:setQueuedSwapPosition(self.cur_col, self.cur_row)
+              self.analytic:register_swap()
+              -- punish by subtracting 1 frame of health every time a swap is queued.
+              self.health = math.max(1, self.health - 1)
+            else
+              -- do nothing, the game will block the swap at 1 frame of health.
+            end
+          end
         else
           self:setQueuedSwapPosition(self.cur_col, self.cur_row)
           self.analytic:register_swap()
@@ -2150,45 +2148,7 @@ function Stack.updateActivePanels(self)
   self.n_active_panels = self:getActivePanelCount()
 end
 
-function Stack.updateActivePanels2(self)
-  self.n_prev_active_panels2 = self.n_active_panels2
-  self.n_active_panels2 = self:getActivePanelCount2()
-end
-
 function Stack.getActivePanelCount(self)
-  local count = 0
-
-  for row = 1, self.height do
-    for col = 1, self.width do
-      local panel = self.panels[row][col]
-      if panel.isGarbage then
-        if panel.state ~= "normal" then
-          count = count + 1
-        end
-      else
-        if self.health > 1 then
-          if panel.color ~= 0 
-          and panel.state ~= "normal"
-          and panel.state ~= "swapping"
-          and panel.state ~= "landing" then
-            count = count + 1
-          end
-        else
-          if panel.color ~= 0
-          -- dimmed is implicitly filtered by only checking in row 1 and up
-          and panel.state ~= "normal"
-          and panel.state ~= "landing" then
-            count = count + 1
-          end
-        end
-      end
-    end
-  end
-
-  return count
-end
-
-function Stack.getActivePanelCount2(self)
   local count = 0
 
   for row = 1, self.height do
@@ -2202,7 +2162,7 @@ function Stack.getActivePanelCount2(self)
         if panel.color ~= 0
         -- dimmed is implicitly filtered by only checking in row 1 and up
         and panel.state ~= "normal"
-        and panel.state ~= "swapping" then
+        and panel.state ~= "landing" then
           count = count + 1
         end
       end
