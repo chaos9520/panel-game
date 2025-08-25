@@ -130,7 +130,7 @@ function write_leaderboard_file()
       leaderboard_table[#leaderboard_table + 1] = {"user_id", "user_name", "rating", "rd",  "placement_done", "placement_rating", "ranked_games_played", "ranked_games_won", "win_percentage", "last_login_time", "rd", "inactive_counter"}
       public_leaderboard_table[#public_leaderboard_table + 1] = {"user_name", "rating", "rd", "ranked_games_played", "ranked_games_won", "win_percentage", "rd"} --excluding ranked_games_won for now because it doesn't track properly, and user_id because they are secret.
       for user_id, v in pairs(leaderboard.players) do
-        leaderboard_table[#leaderboard_table + 1] = {user_id, v.user_name, v.rating, tostring(v.placement_done or ""), v.placement_rating, v.rd, v.ranked_games_played, v.ranked_games_won, v.win_percentage, v.last_login_time, v.inactive_counter}
+        leaderboard_table[#leaderboard_table + 1] = {user_id, v.user_name, v.rating, v.rd, tostring(v.placement_done or ""), v.placement_rating, v.ranked_games_played, v.ranked_games_won, v.win_percentage, v.last_login_time, v.inactive_counter}
         public_leaderboard_table[#public_leaderboard_table + 1] = {v.user_name, v.rating, v.rd, v.ranked_games_played, v.ranked_games_won, v.win_percentage}
       end
       csvfile.write("." .. sep .. "leaderboard.csv", leaderboard_table)
