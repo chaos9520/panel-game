@@ -423,6 +423,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
 
     if players[player_number].player_number == winning_player_number then
       Oa = 1
+      leaderboard.players[players[player_number].user_id].ranked_games_won = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0) + 1
     else
       Oa = 0
     end
