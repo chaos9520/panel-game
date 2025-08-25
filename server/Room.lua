@@ -488,6 +488,26 @@ function Room:resolve_game_outcome()
   end
 end
 
+function Room:min_level_for_range(rating)
+  local min_end = math.max(1, rating - 960)
+  local min_level = math.max(1, math.ceil(min_end / 200) - 1)
+  if min_level >= 8 then
+    return 8
+  else
+    return min_level
+  end
+end
+
+function Room:max_level_for_range(rating)
+  local max_end = math.min(1800, rating + 960)
+  local max_level = math.min(8, math.floor(max_end / 200) - 1)
+  if max_level >= 8 then
+    return 11
+  else
+    return max_level
+  end
+end
+
 function Room:rating_adjustment_approved()
   --returns whether both players in the room have game states such that rating adjustment should be approved
   local players = {self.a, self.b}
@@ -527,7 +547,27 @@ function Room:rating_adjustment_approved()
     end
   end
   if (ratings[1] == -9999 and ratings[2] == -9999) or (ratings[1] == -9999 or ratings[2] == -9999) then
-    reasons[#reasons + 1] = "One or both players has been banned from playing ranked matches."
+    reasons[#reasons + 1] = "One or both players have been banned from playing ranked matches."
+  elseif ratings[1] == nil and ratings[2] == nil then
+    for i = 1, 2 do
+      if math.abs(players[1].level - players[2].level) > 4 then
+        reasons[#reasons + 1] = "Level differences for two new players cannot be greater than 4."
+      end
+    end
+  elseif ratings[1] == nil then
+    if ratings[2] > 2760 then
+      -- Player 1 will be out of range no matter what level they choose.
+      reasons[#reasons + 1] = "Players' ratings are too far apart"
+    elseif player[1].level < Room:min_level_for_range(ratings[2]) or player[1].level > Room:max_level_for_range(ratings[2]) then
+      reasons[#reasons + 1] = players[1].name .. " must play between levels " .. Room:min_level_for_range(ratings[2]) .. " and " .. Room:max_level_for_range(ratings[2]) .. " for the match to be ranked."
+    end
+  elseif ratings[2] == nil then
+    if ratings[1] > 2760 then
+      -- Player 2 will be out of range no matter what level they choose.
+      reasons[#reasons + 1] = "Players' ratings are too far apart"
+    elseif player[2].level < Room:min_level_for_range(ratings[1]) or player[2].level > Room:max_level_for_range(ratings[1]) then
+      reasons[#reasons + 1] = players[2].name .. " must play between levels " .. Room:min_level_for_range(ratings[1]) .. " and " .. Room:max_level_for_range(ratings[1]) .. " for the match to be ranked."
+    end
   elseif math.abs(ratings[1] - ratings[2]) > RATING_SPREAD_MODIFIER * ALLOWABLE_RATING_SPREAD_MULITPLIER then
     reasons[#reasons + 1] = "Players' ratings are too far apart"
   end
