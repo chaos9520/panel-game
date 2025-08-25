@@ -552,7 +552,7 @@ function Room:rating_adjustment_approved()
     reasons[#reasons + 1] = "Players' ratings are too far apart."
   elseif ratings[1] == DEFAULT_RATING and ratings[2] == DEFAULT_RATING then
     if math.abs(math.min(8, players[1].level) - math.min(8, players[2].level)) > 4 then
-      reasons[#reasons + 1] = "Level differences are too big."
+      reasons[#reasons + 1] = "Level differences are too large."
     end
   elseif ratings[1] == DEFAULT_RATING then
     if players[1].level < Room:min_level_for_range(ratings[2]) or players[1].level > Room:max_level_for_range(ratings[2]) then
