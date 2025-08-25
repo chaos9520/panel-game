@@ -1341,9 +1341,7 @@ function Stack.simulate(self)
               self:setQueuedSwapPosition(self.cur_col, self.cur_row)
               self.analytic:register_swap()
               -- punish by subtracting 1 frame of health every time a swap is queued.
-              self.health = math.max(1, self.health - 1)
-            else
-              -- do nothing, the game will block the swap at 1 frame of health.
+              self.health = self.health - 1
             end
           end
         else
@@ -1421,10 +1419,6 @@ function Stack.simulate(self)
   prof.push("updateActivePanels")
   self:updateActivePanels()
   prof.pop("updateActivePanels")
-
-  prof.push("updateActivePanels2")
-  self:updateActivePanels2()
-  prof.pop("updateActivePanels2")
 
   if self.puzzle and self.n_active_panels == 0 and self.n_prev_active_panels == 0 then
     if self:checkGameOver() then
