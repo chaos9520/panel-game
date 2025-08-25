@@ -551,6 +551,7 @@ function Room:rating_adjustment_approved()
   elseif ratings[1] == DEFAULT_RATING and ratings[2] == DEFAULT_RATING then
     if math.abs(math.min(8, players[1].level) - math.min(8, players[2].level)) > 4 then
       reasons[#reasons + 1] = "Level differences for two new players cannot be greater than 4."
+      reasons[#reasons + 1] = "If one player is playing on level 8 or higher, then the other player must play on level 4 or higher for the match to be ranked."
     end
   elseif ratings[1] == DEFAULT_RATING then
     if ratings[2] > 2760 then
