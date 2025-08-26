@@ -832,12 +832,20 @@ function GarbageMultiplier(clock, level)
 end
 
 function ClassicPieces(combo)
-  if combo < 4 then
+  if combo == nil or combo < 4 then
     return 0
   elseif combo == 4 then
     return 1
   else
     return 1 + math.floor((combo - 5) / 3)
+  end
+end
+
+function ChaosPieces(combo)
+  if combo == nil or combo < 4 then
+    return 0
+  else
+    return 1
   end
 end
 
@@ -869,7 +877,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
     -- Chaos Combo Garbage
     height = math.ceil((comboSize - 3) / 4)
     width = comboSize % 4 + 3
-    for i = 1, 1 * GarbageMultiplier(self.game_stopwatch, self.level) do
+    for i = 1, ChaosPieces(comboSize) * GarbageMultiplier(self.game_stopwatch, self.level) do
       -- The lookup tables are no longer used.
       self.outgoingGarbage:push({
         width = width,
