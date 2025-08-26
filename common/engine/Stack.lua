@@ -1130,20 +1130,6 @@ function Stack.shouldDropGarbage(self)
     if not self.panels_in_top_row and not self:has_falling_garbage() then
       if not self:hasActivePanels() then
         return true
-      elseif garbage.isChain then
-        -- drop chain garbage higher than 1 row immediately
-        return garbage.height > 1
-      else
-        -- attackengine garbage higher than 1 (aka chain garbage) is treated as combo garbage
-        -- that is to circumvent the garbage queue not allowing to send multiple chains simultaneously
-        -- and because of that hack, we need to do another hack here and allow n-height combo garbage
-        -- technically garbage should get fixed garbageQueue side though so we should not reach here
-        if garbage.height > 1 then
-          logger.debug("Reached the cursed path")
-          return true
-        else
-          return false
-        end
       end
     end
   else
