@@ -332,17 +332,14 @@ function Server:calculate_rd(games_played, counter)
   return deviation
 end
 
--- Adjusts the rating deviation for level differences and volatility.
-function Server:adjust_rd(dev, p1, p2, percent)
+-- Adjusts the rating deviation for level differences.
+function Server:adjust_rd(dev, p1, p2)
   local average = math.floor((p1 + p2) / 2)
   local adjust_for_speed = {7/10, 7/10, 7/9, 7/9, 7/8, 7/8, 1, 1, 1, 7/6, 7/6}
   local adjust_for_colors = {2/3, 5/6, 5/6, 1, 5/6, 1, 5/6, 1, 7/6, 5/6, 1}
   local adjusted_value = adjust_for_speed[average] * adjust_for_colors[average]
-  if percent == nil then
-    return dev * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
-  else
-    return (dev * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)) * (1 - math.abs(0.5 - percent))
-  end
+  
+  return dev * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
 end
 
 function Server:adjust_starting_rating(level)
@@ -408,7 +405,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     
     -- calculate Rd
     local deviation
-    local win_percentage = leaderboard.players[players[player_number].user_id].win_percentage
     local p1_level = players[1].level
     local p2_level = players[2].level
     if placement_done[players[player_number].user_id] == true then
