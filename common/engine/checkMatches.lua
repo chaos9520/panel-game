@@ -852,14 +852,15 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   local combo_pieces_classic = COMBO_GARBAGE_CLASSIC[comboSize]
   local pieces_sent = 1
   local lines_sent
-  local width = comboSize % 4 + 3
+  local width
   local height
 
   if (self.chain_counter and self.chain_counter < 3) and (self.level and self.level <= 11) then
     -- Chaos Combo Garbage
     height = math.ceil((comboSize - 3) / 4)
-    for i = 1, #combo_pieces * GarbageMultiplier(self.game_stopwatch, self.level) do
-      -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
+    width = comboSize % 4 + 3
+    for i = 1, 1 * GarbageMultiplier(self.game_stopwatch, self.level) do
+      -- The lookup tables are no longer used.
       self.outgoingGarbage:push({
         width = width,
         height = height,
@@ -876,8 +877,10 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   else
     -- Classic Combo Garbage
     height = 1
-    for i = 1, #combo_pieces_classic * GarbageMultiplier(self.game_stopwatch, self.level) do
-      -- Give out combo garbage based on the lookup table, even if we already made shock garbage,
+    local classic_pieces = 1 + math.floor((comboSize - 5) / 3)
+    for i = 1, classic_pieces * GarbageMultiplier(self.game_stopwatch, self.level) do
+      width = (comboSize - 1 + i) % 4 + 3
+      -- The lookup tables are no longer used. This doesn't queue in the correct order after some point, but meh.
       self.outgoingGarbage:push({
         width = width,
         height = height,
