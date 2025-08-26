@@ -831,6 +831,16 @@ function GarbageMultiplier(clock, level)
   end
 end
 
+function ClassicPieces(combo)
+  if combo < 4 then
+    return 0
+  elseif combo == 4 then
+    return 1
+  else
+    return 1 + math.floor((combo - 5) / 3)
+  end
+end
+
 function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   logger.debug("P" .. self.which .. "@" .. self.clock .. ": Pushing garbage for " .. (isChain and "chain" or "combo") .. " with " .. comboSize .. " panels")
   for i = 3, metalCount do
@@ -877,8 +887,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   else
     -- Classic Combo Garbage
     height = 1
-    local classic_pieces = 1 + math.floor((comboSize - 5) / 3)
-    for i = 1, classic_pieces * GarbageMultiplier(self.game_stopwatch, self.level) do
+    for i = 1, ClassicPieces(comboSize) * GarbageMultiplier(self.game_stopwatch, self.level) do
       width = (comboSize - 1 + i) % 4 + 3
       -- The lookup tables are no longer used. This doesn't queue in the correct order after some point, but meh.
       self.outgoingGarbage:push({
