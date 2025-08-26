@@ -301,9 +301,11 @@ function Player.createFromReplayPlayer(replayPlayer, playerNumber)
   if replayPlayer.settings.level then
     player:setStyle(GameModes.Styles.MODERN)
     player:setLevel(replayPlayer.settings.level)
+    score_mode = consts.SCOREMODE_TA
   else
     player:setStyle(GameModes.Styles.CLASSIC)
     player:setDifficulty(replayPlayer.settings.difficulty)
+    score_mode = consts.SCOREMODE_PDP64
   end
   -- no matter what style / level / difficulty is actually selected, levelData should have gotten preloaded correctly
   player:setLevelData(replayPlayer.settings.levelData)
