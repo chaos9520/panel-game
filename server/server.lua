@@ -338,8 +338,11 @@ function Server:adjust_rd(dev, p1, p2)
   local adjust_for_speed = {7/10, 7/10, 7/9, 7/9, 7/8, 7/8, 1, 1, 1, 7/6, 7/6}
   local adjust_for_colors = {2/3, 5/6, 5/6, 1, 5/6, 1, 5/6, 1, 7/6, 5/6, 1}
   local adjusted_value = adjust_for_speed[average] * adjust_for_colors[average]
-  
-  return dev * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
+  if dev == nil then
+    return DEVIATION_SPREAD * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
+  else
+    return dev * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
+  end
 end
 
 function Server:adjust_starting_rating(level)
@@ -404,20 +407,11 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     room.ratings[player_number] = {}
     
     -- calculate Rd
-    local deviation
+    local deviation = leaderboard.players[players[player_number].user_id].rd
     local p1_level = players[1].level
     local p2_level = players[2].level
-    if placement_done[players[player_number].user_id] == true then
-      if games_played == nil then 
-        deviation = DEVIATION_SPREAD
-      else
-        deviation = leaderboard.players[players[player_number].user_id].rd
-      end
-    else
-      deviation = DEVIATION_SPREAD
-    end
     
-    Rd = Server:adjust_rd(deviation, p1_level, p2_level, win_percentage)
+    Rd = Server:adjust_rd(deviation, p1_level, p2_level)
     logger.debug(players[player_number].name .. "'s adjusted RD for this game: " .. Rd)
 
     if players[player_number].player_number == winning_player_number then
