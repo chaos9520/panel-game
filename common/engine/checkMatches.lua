@@ -877,7 +877,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
   else
     -- Classic Combo Garbage
     height = 1
-    local classic_pieces = 1 + math.floor((comboSize - 5) / 3)
+    local classic_pieces = 1 + math.floor((comboSize - 4) / 3)
     for i = 1, classic_pieces * GarbageMultiplier(self.game_stopwatch, self.level) do
       width = (comboSize - 1 + i) % 4 + 3
       -- The lookup tables are no longer used. This doesn't queue in the correct order after some point, but meh.
