@@ -1864,7 +1864,7 @@ function Stack.dropGarbage(self, width, height, isMetal)
   self.garbageCreatedCount = self.garbageCreatedCount + 1
   local shakeTime
   if self.level and self.level > 11 then
-    shakeTime = math.min(82, 30 + (width * height * 2))
+    shakeTime = math.min(82, 18 + (width * height * 2))
   else
     shakeTime = math.min(82, math.floor(30 * 1.025 ^ (width * height)))
   end
