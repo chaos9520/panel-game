@@ -864,6 +864,7 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
     })
     self.analytic:registerShock()
     self.analytic:register_pieces_sent(metal_pieces)
+    self.analytic:register_lines_sent(1)
   end
 
   local combo_pieces = COMBO_GARBAGE[comboSize]

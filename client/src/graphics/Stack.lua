@@ -741,7 +741,7 @@ function Stack:drawAnalyticData()
   -- Garbage lines sent
   icon_width, icon_height = characters[self.character].images.face:getDimensions()
   GraphicsUtil.draw(characters[self.character].images.face, x, y, 0, iconSize / icon_width, iconSize / icon_height)
-  GraphicsUtil.printf(analytic.data.garbage_lines_sent, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
+  GraphicsUtil.printf(analytic.data.sent_garbage_lines, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
 
   y = y + nextIconIncrement
 
@@ -770,7 +770,7 @@ function Stack:drawAnalyticData()
 
   -- Garbage pieces per minute
   if analytic.lastPPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
-    if self.clock - 180 > 0 and (analytic.data.sent_garbage_lines > 0) then
+    if self.clock - 180 > 0 and (analytic.data.garbage_lines_sent > 0) then
       analytic.lastPPM = analytic:getRoundedPPM(self.clock - 180)
     end
   end
