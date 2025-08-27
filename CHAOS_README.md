@@ -34,7 +34,7 @@ I have recently ported over the Classic style levels over so that they are playa
 - A modified version of exploding lift has been implemented.
     - Stack raise cannot be stopped except with a clear that is not part of a chain.
     - The stack cannot be raised manually while a clear is taking place.
-- **A kill screen has also been implemented.** The game ends when the stack hits the top and you run out of health, even while actively chaining.
+- **A kill screen has also been implemented.** The game ends when the stack hits the top and the player runs out of health, even while actively chaining.
 ## Server Changes
 My custom ranking system has been implemented.
 - ** All games in which both players are within range of each other will be ranked.**
