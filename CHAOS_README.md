@@ -18,7 +18,7 @@ There are quite a number of changes in the modern levels. Some changes are globa
 - Health regeneration has been removed. That means if you take damage, then your health will not regenerate!
 - Queued garbage will fall if there is no active chain.
 #### Changes exclusive to Normal levels 1 to 11
-- **An overtime mechanic has been implemented.** At 2 minutes, combo garbage attacks will send more garbage. Attack sizes increase every minute, and it maxes out at 5 minutes *(if you manage to survive that long!)*. This does *not* affect garbage patterns in Training or Challenge modes.
+- **An overtime mechanic has been implemented.** At 2 minutes, combo garbage attacks will send more garbage. Attack sizes increase every minute, and it maxes out at 5 minutes *(if you manage to survive that long!)*. This does *not* affect garbage patterns in Training or Challenge modes. Health will also decrease by 25% every 15 seconds.
 - Shake time will always occur when down stacking with garbage, but the base shake time has been decreased from normal.
 - A player playing on these levels can send thicker combo garbage, but any 3-wides received from the opponent will cascade.
 - Queued garbage will fall all at once.
@@ -32,9 +32,9 @@ I have recently ported over the Classic style levels over so that they are playa
 - Stop time has been removed.
 - The amount of panels needed to rise the speed level has been adjusted.
 - A modified version of exploding lift has been implemented.
-    - Stack raise cannot be stopped.
+    - Stack raise cannot be stopped except with a clear that is not part of a chain.
     - The stack cannot be raised manually while a clear is taking place.
-    - **A natural kill screen has been implemented.** The game ends when the stack hits the top, even while panels are active.
+- **A kill screen has also been implemented.** The game ends when the stack hits the top and you run out of health, even while actively chaining.
 ## Server Changes
 My custom ranking system has been implemented.
 - ** All games in which both players are within range of each other will be ranked.**
@@ -45,7 +45,7 @@ My custom ranking system has been implemented.
 - A player's starting rating will be adjusted based on the game level of the first ranked game played.
 ## Other Changes
 - Challenge Mode has been completely revamped.
-- Training Mode: The frequency and amount of garbage now adjusts based on the garbage size chosen for basic training modes.
+- Training Mode: The frequency and amount of garbage per volley now adjusts based on the garbage size chosen for basic training modes.
 - Custom Training/Challenge Mode patterns: You can choose what style of garbage pattern the game sends by changing the value for `mergeMetalComboQueue`.
   False - 'Modern' garbage queue.
   True - 'Classic' garbage queue.
@@ -57,7 +57,7 @@ My custom ranking system has been implemented.
   - Garbage lines per minute (GPM)
   - ***Garbage pieces sent per minute*** - Shows how many pieces of garbage a player is sending per minute.
   - ***Garbage lines cleared per minute*** - Shows how fast a player is clearing garbage.
-  - ***Garbage pieces in queue*** - The number of garbage pieces in the player's queue.
+  - ***Garbage pieces in queue*** - The amount of garbage pieces in the player's queue.
   - Actions per Minute (APM)
 - The default panels have been changed.
 - The default telegraph and garbage images have been changed.
