@@ -741,7 +741,7 @@ function Stack:drawAnalyticData()
   -- Garbage lines sent
   icon_width, icon_height = characters[self.character].images.face:getDimensions()
   GraphicsUtil.draw(characters[self.character].images.face, x, y, 0, iconSize / icon_width, iconSize / icon_height)
-  GraphicsUtil.printf(analytic.data.sent_garbage_lines, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
+  GraphicsUtil.printf(analytic.data.garbage_lines_sent, x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
 
   y = y + nextIconIncrement
 
