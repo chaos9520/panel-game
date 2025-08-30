@@ -41,7 +41,7 @@ function Health:receiveGarbage(frameToReceive, garbage)
     local countGarbage = true
 
     if countGarbage then
-      local damage = (garbage.height * garbage.width) / 6
+      local damage = math.round(garbage.width * garbage.height / 6, 1)
       if garbage.isChain then
         damage = math.min(12, damage)
       elseif garbage.isMetal then
