@@ -33,7 +33,7 @@ local ChallengeMode =
   BattleRoom
 )
 
-ChallengeMode.numDifficulties = 14
+ChallengeMode.numDifficulties = 17
 
 function ChallengeMode:createStages(difficulty)
   local stages = {}
@@ -179,12 +179,42 @@ function ChallengeMode:createStages(difficulty)
     lineHeightToKillBase = 6
     lineHeightToKillIncrement = (2 / 7)
   elseif difficulty == 14 then
+    stageCount = 4
+    framesToppedOutToLoseBase = 1
+    framesToppedOutToLoseIncrement = 0
+    lineClearGPMBase = 0
+    lineClearGPMIncrement = 0
+    panelLevel = 12
+    panelLevelIncrement = 0
+    lineHeightToKillBase = 5
+    lineHeightToKillIncrement = 5
+  elseif difficulty == 15 then
+    stageCount = 6
+    framesToppedOutToLoseBase = 1
+    framesToppedOutToLoseIncrement = 0
+    lineClearGPMBase = 0
+    lineClearGPMIncrement = 0
+    panelLevel = 13
+    panelLevelIncrement = 0
+    lineHeightToKillBase = 10
+    lineHeightToKillIncrement = 10
+  elseif difficulty == 16 then
     stageCount = 8
     framesToppedOutToLoseBase = 1
     framesToppedOutToLoseIncrement = 0
     lineClearGPMBase = 0
     lineClearGPMIncrement = 0
     panelLevel = 14
+    panelLevelIncrement = 0
+    lineHeightToKillBase = 10
+    lineHeightToKillIncrement = 10
+  elseif difficulty == 17 then
+    stageCount = 8
+    framesToppedOutToLoseBase = 1
+    framesToppedOutToLoseIncrement = 0
+    lineClearGPMBase = 0
+    lineClearGPMIncrement = 0
+    panelLevel = 15
     panelLevelIncrement = 0
     lineHeightToKillBase = 10
     lineHeightToKillIncrement = 10

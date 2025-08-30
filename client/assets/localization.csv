@@ -535,7 +535,10 @@ challenge_difficulty_10,level 5,Intermediate Gauntlet,
 challenge_difficulty_11,level 7,Advanced Gauntlet,
 challenge_difficulty_12,level 8,Expert Gauntlet,
 challenge_difficulty_13,level 9,Master Gauntlet,
-challenge_difficulty_14,level 8,Line Clear,
+challenge_difficulty_14,level 12,Line Clear (Easy),
+challenge_difficulty_15,level 13,Line Clear (Normal),
+challenge_difficulty_16,level 14,Line Clear (Hard),
+challenge_difficulty_17,level 15,Line Clear (Chaos Mode),
 auto_updater_version_warning,Warning shown to users with an old autoupdater,"New updater available, please download from","Nouveau autoupdater disponible, veuillez installer à partir de","Novo autoupdater disponível, instale de",新しいautoupdaterを利用できます。からインストールしてください,"Nuevo autoupdater disponible, instale desde","Ein neuer Updater ist verfügbar, bitte lade ihn unter folgendem Link herunter:","Nuovo autoupdater disponibile, installa da",มีระบบอัพเดทอัตโนมัติเวอร์ชั่นใหม่ กรุณา Install โดยใช้ระบบนั้น
 username_blank_warning,shown in user name input when nothing is entered,Username cannot be blank,Le nom d'utilisateur ne peut pas être vide,O nome de usuário não pode ficar em branco,ユーザー名を空白にすることはできません,Nombre de usuario no puede estar en blanco,Benutzername darf nicht leer sein,Il nome utente non può essere vuoto,Username ไม่สามารถเป็นค่าว่างได้
 op_shakeIntensity,Option for the intensity of the shake animation,Shake Animation Intensity,,,,,Stärke der Aufprallanimation
