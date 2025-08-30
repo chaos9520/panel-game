@@ -33,7 +33,7 @@ local ChallengeMode =
   BattleRoom
 )
 
-ChallengeMode.numDifficulties = 13
+ChallengeMode.numDifficulties = 14
 
 function ChallengeMode:createStages(difficulty)
   local stages = {}
@@ -127,7 +127,7 @@ function ChallengeMode:createStages(difficulty)
     panelLevel = 1
     panelLevelIncrement = 0.5
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = (4 / 3)
+    lineHeightToKillIncrement = 0
   elseif difficulty == 9 then
     stageCount = 6
     framesToppedOutToLoseBase = 3600
@@ -137,7 +137,7 @@ function ChallengeMode:createStages(difficulty)
     panelLevel = 3
     panelLevelIncrement = (1 / 3)
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = 0.8
+    lineHeightToKillIncrement = 0
   elseif difficulty == 10 then
     stageCount = 8
     framesToppedOutToLoseBase = 3600
@@ -147,7 +147,7 @@ function ChallengeMode:createStages(difficulty)
     panelLevel = 5
     panelLevelIncrement = 0.25
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = (4 / 7)
+    lineHeightToKillIncrement = 0
   elseif difficulty == 11 then
     stageCount = 8
     framesToppedOutToLoseBase = 3600
@@ -157,17 +157,17 @@ function ChallengeMode:createStages(difficulty)
     panelLevel = 7
     panelLevelIncrement = 0.25
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = (4 / 7)
+    lineHeightToKillIncrement = 0
   elseif difficulty == 12 then
     stageCount = 9
     framesToppedOutToLoseBase = 3600
-    framesToppedOutToLoseIncrement = 360
+    framesToppedOutToLoseIncrement = 0
     lineClearGPMBase = 27
     lineClearGPMIncrement = 0
     panelLevel = 7
     panelLevelIncrement = (1 / 3)
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = 0.5
+    lineHeightToKillIncrement = 0
   elseif difficulty == 13 then
     stageCount = 9
     framesToppedOutToLoseBase = 3600
@@ -177,7 +177,17 @@ function ChallengeMode:createStages(difficulty)
     panelLevel = 9
     panelLevelIncrement = (1 / 3)
     lineHeightToKillBase = 6
-    lineHeightToKillIncrement = 0.625
+    lineHeightToKillIncrement = 0
+  elseif difficulty == 14 then
+    stageCount = 8
+    framesToppedOutToLoseBase = 1
+    framesToppedOutToLoseIncrement = 0
+    lineClearGPMBase = 0
+    lineClearGPMIncrement = 0
+    panelLevel = 14
+    panelLevelIncrement = 0
+    lineHeightToKillBase = 10
+    lineHeightToKillIncrement = 10
   else
     error("Invalid challenge mode difficulty level of " .. difficulty)
   end
