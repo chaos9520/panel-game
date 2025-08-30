@@ -186,8 +186,8 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMIncrement = 0
     panelLevel = 12
     panelLevelIncrement = 0
-    lineHeightToKillBase = 5
-    lineHeightToKillIncrement = 5
+    lineHeightToKillBase = 10
+    lineHeightToKillIncrement = 10
   elseif difficulty == 15 then
     stageCount = 6
     framesToppedOutToLoseBase = 1
