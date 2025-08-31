@@ -867,8 +867,8 @@ function Stack:pushGarbage(coordinate, isChain, comboSize, metalCount)
     self.analytic:register_lines_sent(1)
   end
 
-  local combo_pieces = COMBO_GARBAGE[comboSize]
-  local combo_pieces_classic = COMBO_GARBAGE_CLASSIC[comboSize]
+  local combo_pieces = COMBO_GARBAGE[comboSize] -- deprecated, but need to prevent other things from breaking.
+  local combo_pieces_classic = COMBO_GARBAGE_CLASSIC[comboSize] -- not needed, eventually delete.
   local pieces_sent = 1
   local lines_sent
   local width
