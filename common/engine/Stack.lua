@@ -1162,7 +1162,7 @@ function Stack.simulate(self)
 
   if self.pre_stop_time ~= 0 then
     self.pre_stop_time = self.pre_stop_time - 1
-  elseif self.stop_time ~= 0 and not self:hasActivePanels2() then
+  elseif self.stop_time ~= 0 then
     self.stop_time = self.stop_time - 1
   end
   prof.pop("simulate 1")

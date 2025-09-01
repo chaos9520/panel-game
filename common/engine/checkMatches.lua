@@ -957,7 +957,7 @@ function Stack:calculateStopTime(comboSize, toppedOut, isChain, chainCounter)
     if stop.formula == LevelData.STOP_FORMULAS.MODERN then
       garbageMargin = (self.levelData.garbage_margin - self.incomingGarbage:len()) / self.levelData.garbage_margin
       -- stopTime = math.max(0, math.ceil((((coefficient * (comboSize - 4)) + (coefficient * chainSize) + (stop.comboConstant * 1.2 ^ stackState)) * garbageMargin)))
-      stopTime = math.max(0, math.min(240, math.ceil(((stop.comboConstant * 1.05 ^ (comboSize - 4)) * 1.1 ^ (chainSize - 1)) * 1.2 ^ stackState)))
+      stopTime = math.max(0, math.min(240, math.ceil((((stop.comboConstant * 1.025 ^ math.max(0, comboSize - 4)) * 1.05 ^ chainSize) * 1.2 ^ stackState) * garbageMargin)))
     elseif stop.formula == LevelData.STOP_FORMULAS.CLASSIC then
       stopTime = math.max(0, math.ceil(stop.comboConstant * (1 - self.speed / 100)))
     end
