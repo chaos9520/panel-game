@@ -931,7 +931,6 @@ function Stack:calculateStopTime(comboSize, toppedOut, isChain, chainCounter)
   local garbageMargin
   local stackState
   local chainSize
-  local coefficient
 
   if not chainCounter then
     chainSize = 0
@@ -941,16 +940,12 @@ function Stack:calculateStopTime(comboSize, toppedOut, isChain, chainCounter)
 
   if toppedOut and isChain then
     stackState = 3
-    coefficient = stop.dangerCoefficient
   elseif toppedOut then
     stackState = 2
-    coefficient = stop.dangerCoefficient
   elseif isChain then
     stackState = 1
-    coefficient = stop.coefficient
   else
     stackState = 0
-    coefficient = stop.coefficient
   end
 
   if comboSize > 3 or isChain then
