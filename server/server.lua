@@ -335,8 +335,8 @@ end
 -- Adjusts the rating deviation for level differences.
 function Server:adjust_rd(dev, p1, p2)
   local average = math.floor((p1 + p2) / 2)
-  local adjust_for_speed = {7/10, 7/10, 7/9, 7/9, 7/8, 7/8, 1, 1, 1, 7/6, 7/6}
-  local adjust_for_colors = {2/3, 5/6, 5/6, 1, 5/6, 1, 5/6, 1, 7/6, 5/6, 1}
+  local adjust_for_speed = {7/10, 7/10, 7/9, 7/9, 7/8, 7/8, 1, 1, 7/6, 7/6, 7/6}
+  local adjust_for_colors = {2/3, 5/6, 5/6, 1, 5/6, 1, 5/6, 1, 5/6, 1, 7/6}
   local adjusted_value = adjust_for_speed[average] * adjust_for_colors[average]
   if dev == nil then
     return DEVIATION_SPREAD * adjusted_value * ((11 - math.abs(p1 - p2)) / 11)
@@ -347,7 +347,7 @@ end
 
 function Server:adjust_starting_rating(level)
   -- Adjusts the player's starting rating based on the level of their first ranked game.
-  local adjusted_rating = {400, 600, 800, 1000, 1200, 1400, 1600, 1800, 1800, 1800, 1800}
+  local adjusted_rating = {400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400}
   return adjusted_rating[level]
 end
 

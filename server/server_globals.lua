@@ -9,6 +9,8 @@ leagues = { {league="Unranked",     min_rating = -9999},
             {league="Master",     min_rating = 2200},
             {league="Grandmaster",     min_rating = 2400},
             {league="Super Grandmaster",     min_rating = 2600},
+            {league="Overlord",     min_rating = 2800},
+            {league="Supreme Overlord",     min_rating = 3000},
           }
 PLACEMENT_MATCH_COUNT_REQUIREMENT = 10
 DEFAULT_RATING = 1400
