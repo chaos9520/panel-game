@@ -826,7 +826,21 @@ function Stack.controls(self)
         if self.cur_col ~= 0 and self.cur_row ~= 0 and cursorColumn ~= self.cur_col and cursorRow ~= 0 then
           local swapColumn = math.min(self.cur_col, cursorColumn)
           if self:canSwap(cursorRow, swapColumn) then
-            self:setQueuedSwapPosition(swapColumn, cursorRow)
+            -- The following conditions must be met for anti-wiggling to kick in.
+            if self.panels_in_top_row
+            and self.stop_time + self.pre_stop_time <= 0
+            and self.shake_time <= 0
+            and not self:hasChainingPanels()
+            and not self:hasActivePanels2() then
+              if self.health > 1 then
+              self:setQueuedSwapPosition(swapColumn, cursorRow)
+              -- punish by subtracting 1 frame of health every time a swap is queued and there are no other active panels.
+              self.health = self.health - 1
+              end
+            -- The swap attempt will be blocked if there is 1 frame of health left.
+            else
+              self:setQueuedSwapPosition(swapColumn, cursorRow)
+            end
           end
         end
         self.cur_col = cursorColumn
