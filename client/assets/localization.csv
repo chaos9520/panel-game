@@ -527,14 +527,14 @@ challenge_difficulty_2,level 3,Normal,Normale,Normal,中くらい,Normal,Normal,
 challenge_difficulty_3,level 5,Hard,Difficile,Difícil,難しい,Difícil,Schwierig,Difficile,ยาก
 challenge_difficulty_4,level 5,Very Hard,Très difficile,Muito difícil,非常に難しい,Muy difícil,Sehr schwierig,Molto difficile,ยากมาก
 challenge_difficulty_5,level 7,Intense,Intense,Intenso,過激,Intenso,Intensiv,Intenso,เข้มข้น
-challenge_difficulty_6,level 8,Insane,Fou,Insano,無理だ,Loco,Verrückt,Pazzo,บ้า
-challenge_difficulty_7,level 10,Chaos Mode,Mode Chaos,Modo Caos,カオスモード,Modo caos,Chaosmodus,Modalità Caos,โหมดความโกลาหล
+challenge_difficulty_6,level 9,Insane,Fou,Insano,無理だ,Loco,Verrückt,Pazzo,บ้า
+challenge_difficulty_7,level 10,Impossible,Impossible,Impossível,不可能,Imposible,Unmöglich,Impossibile,เป็นไปไม่ได้
 challenge_difficulty_8,level 1,Beginner Gauntlet,
 challenge_difficulty_9,level 3,Novice Gauntlet,
 challenge_difficulty_10,level 5,Intermediate Gauntlet,
 challenge_difficulty_11,level 7,Advanced Gauntlet,
-challenge_difficulty_12,level 8,Expert Gauntlet,
-challenge_difficulty_13,level 9,Master Gauntlet,
+challenge_difficulty_12,level 9,Expert Gauntlet,
+challenge_difficulty_13,level 10,Master Gauntlet,
 challenge_difficulty_14,level 12,Line Clear (Easy),
 challenge_difficulty_15,level 13,Line Clear (Normal),
 challenge_difficulty_16,level 14,Line Clear (Hard),
