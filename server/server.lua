@@ -420,9 +420,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     local deviation = leaderboard.players[players[player_number].user_id].rd
     local p1_level = players[1].level
     local p2_level = players[2].level
-    local p1_rating = leaderboard.players[players[1].user_id].rating
-    local p2_rating = leaderboard.players[players[2].user_id].rating
-    local opponent = Server:player_strength(p1_rating, p2_rating)
     
     Rd = Server:adjust_rd(deviation, p1_level, p2_level)
     logger.debug(players[player_number].name .. "'s adjusted RD for this game: " .. Rd)
@@ -518,6 +515,19 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
   if continue then
     --now that both new room.ratings have been calculated properly, actually update the leaderboard
     for player_number = 1, 2 do
+      local p1_rating = leaderboard.players[players[1].user_id].rating
+      local p2_rating = leaderboard.players[players[2].user_id].rating
+      local opponent = Server:player_strength(p1_rating, p2_rating)
+      if opponent == 0 then
+        leaderboard.players[players[player_number].user_id].similar_strength = (leaderboard.players[players[player_number].user_id].similar_strength or 0) + 1
+      elseif opponent == 1 then
+        leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[1].user_id].stronger_opponent or 0) + 1
+        leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[2].user_id].weaker_opponent or 0) + 1
+      elseif opponent == -1 then
+        leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[2].user_id].stronger_opponent or 0) + 1
+        leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[1].user_id].weaker_opponent or 0) + 1
+      end
+
       logger.debug(self.playerbase.players[players[player_number].user_id])
       logger.debug("Old rating:" .. leaderboard.players[players[player_number].user_id].rating)
       room.ratings[player_number].old = leaderboard.players[players[player_number].user_id].rating
@@ -531,15 +541,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local win_percentage = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0) / (leaderboard.players[players[player_number].user_id].ranked_games_played or 0)
       local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       local rd = Server:calculate_rd(games_played, counter)
-      if opponent == 0 then
-        leaderboard.players[players[player_number].user_id].similar_strength = (leaderboard.players[players[player_number].user_id].similar_strength or 0) + 1
-      elseif opponent == 1 then
-        leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[1].user_id].stronger_opponent or 0) + 1
-        leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[2].user_id].weaker_opponent or 0) + 1
-      elseif opponent == -1 then
-        leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[2].user_id].stronger_opponent or 0) + 1
-        leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[1].user_id].weaker_opponent or 0) + 1
-      end
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
       leaderboard.players[players[player_number].user_id].rd = rd
       leaderboard.players[players[player_number].user_id].win_percentage = win_percentage
