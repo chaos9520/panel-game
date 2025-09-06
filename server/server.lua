@@ -358,6 +358,8 @@ function Server:player_strength(p1, p2)
     return 1
   else
     return -1
+  end
+end
 
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
   --[[ --Algorithm we are implementing, per community member Bbforky:
