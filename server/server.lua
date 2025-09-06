@@ -351,6 +351,14 @@ function Server:adjust_starting_rating(level)
   return adjusted_rating[level]
 end
 
+function Server:player_strength(p1, p2)
+  if math.abs(p1 - p2) <= 200 then
+    return 0
+  elseif math.abs(p1 - p2) > 200 and p1 < p2 then
+    return 1
+  else
+    return -1
+
 function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calculating expected outcome for") -- print(players[player_number].name.." Ranking: "..leaderboard.players[players[player_number].user_id].rating)
   --[[ --Algorithm we are implementing, per community member Bbforky:
       Formula for Calculating expected outcome:
@@ -518,6 +526,16 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local win_percentage = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0) / (leaderboard.players[players[player_number].user_id].ranked_games_played or 0)
       local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       local rd = Server:calculate_rd(games_played, counter)
+      local opponent = Server:player_strength(players[1].rating, players[2].rating)
+      if opponent == 0 then
+        leaderboard.players[players[player_number].user_id].similar_strength = (leaderboard.players[players[player_number].user_id].similar_strength or 0) + 1
+      elseif opponent == 1 then
+        leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[1].user_id].stronger_opponent or 0) + 1
+        leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[2].user_id].weaker_opponent or 0) + 1
+      elseif opponent == -1 then
+        leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[2].user_id].stronger_opponent or 0) + 1
+        leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[1].user_id].weaker_opponent or 0) + 1
+      end
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
       leaderboard.players[players[player_number].user_id].rd = rd
       leaderboard.players[players[player_number].user_id].win_percentage = win_percentage
