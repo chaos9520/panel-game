@@ -352,7 +352,7 @@ function Server:adjust_starting_rating(level)
 end
 
 function Server:player_strength(p1, p2)
-  if math.abs(p1 - p2) <= 200 then
+  if math.abs(p1 - p2) <= 400 then
     return 1
   else
     return 0
