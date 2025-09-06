@@ -352,12 +352,10 @@ function Server:adjust_starting_rating(level)
 end
 
 function Server:player_strength(p1, p2)
-  if math.abs(p1 - p2) <= 200 then
-    return 0
-  elseif math.abs(p1 - p2) > 200 and p1 < p2 then
+  if math.abs(p1 - p2) <= 400 then
     return 1
   else
-    return -1
+    return 0
   end
 end
 
@@ -513,22 +511,16 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     end
   end
   if continue then
-    -- adding this here so it doesn't count twice.
+    --now that both new room.ratings have been calculated properly, actually update the leaderboard
+    for player_number = 1, 2 do
+      -- adding this here so it doesn't count twice.
     local p1_rating = leaderboard.players[players[1].user_id].rating
     local p2_rating = leaderboard.players[players[2].user_id].rating
     local opponent = Server:player_strength(p1_rating, p2_rating)
-    if opponent == 0 then
-      leaderboard.players[players[1].user_id].similar_strength = (leaderboard.players[players[1].user_id].similar_strength or 0) + 1
-      leaderboard.players[players[2].user_id].similar_strength = (leaderboard.players[players[2].user_id].similar_strength or 0) + 1
-    elseif opponent == 1 then
-      leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[1].user_id].stronger_opponent or 0) + 1
-      leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[2].user_id].weaker_opponent or 0) + 1
-    elseif opponent == -1 then
-      leaderboard.players[players[1].user_id].stronger_opponent = (leaderboard.players[players[2].user_id].stronger_opponent or 0) + 1
-      leaderboard.players[players[2].user_id].weaker_opponent = (leaderboard.players[players[1].user_id].weaker_opponent or 0) + 1
+    if opponent == 1 then
+      leaderboard.players[players[player_number].user_id].similar_strength = (leaderboard.players[players[player_number].user_id].similar_strength or 0) + 1
     end
-    --now that both new room.ratings have been calculated properly, actually update the leaderboard
-    for player_number = 1, 2 do
+
       logger.debug(self.playerbase.players[players[player_number].user_id])
       logger.debug("Old rating:" .. leaderboard.players[players[player_number].user_id].rating)
       room.ratings[player_number].old = leaderboard.players[players[player_number].user_id].rating
