@@ -420,6 +420,9 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
     local deviation = leaderboard.players[players[player_number].user_id].rd
     local p1_level = players[1].level
     local p2_level = players[2].level
+    local p1_rating = leaderboard.players[players[1].user_id].rating
+    local p2_rating = leaderboard.players[players[2].user_id].rating
+    local opponent = Server:player_strength(p1_rating, p2_rating)
     
     Rd = Server:adjust_rd(deviation, p1_level, p2_level)
     logger.debug(players[player_number].name .. "'s adjusted RD for this game: " .. Rd)
@@ -528,7 +531,6 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local win_percentage = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0) / (leaderboard.players[players[player_number].user_id].ranked_games_played or 0)
       local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       local rd = Server:calculate_rd(games_played, counter)
-      local opponent = Server:player_strength(players[1].rating, players[2].rating)
       if opponent == 0 then
         leaderboard.players[players[player_number].user_id].similar_strength = (leaderboard.players[players[player_number].user_id].similar_strength or 0) + 1
       elseif opponent == 1 then
