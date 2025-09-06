@@ -541,7 +541,7 @@ function Room:rating_adjustment_approved()
   if (ratings[1] == -9999 and ratings[2] == -9999) or (ratings[1] == -9999 or ratings[2] == -9999) then
     reasons[#reasons + 1] = "One or both players have been banned from playing ranked matches."
   elseif ratings[1] == DEFAULT_RATING and ratings[2] == DEFAULT_RATING then
-    if math.abs(players[1].level - players[2].level) > 4 then
+    if (players[1].level <= 11 and players[2].level <= 11) and math.abs(players[1].level - players[2].level) > 4 then
       reasons[#reasons + 1] = "Level difference must be 4 or less."
     end
   elseif ratings[1] == DEFAULT_RATING then
