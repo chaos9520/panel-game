@@ -768,7 +768,7 @@ function Stack:drawAnalyticData()
 
   y = y + nextIconIncrement
 
-  -- Garbage pieces per minute
+  --[[ Garbage pieces per minute
   if analytic.lastPPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
     if self.clock - 180 > 0 and (analytic.data.garbage_lines_sent > 0) then
       analytic.lastPPM = analytic:getRoundedPPM(self.clock - 180)
@@ -789,7 +789,7 @@ function Stack:drawAnalyticData()
   GraphicsUtil.draw(characters[self.character].images.flash, x, y, 0, iconSize / icon_width, iconSize / icon_height)
   GraphicsUtil.printf(analytic.lastGCPM .. "/m", x + iconToTextSpacing, y - 2, consts.CANVAS_WIDTH, "left", nil, 1)
 
-  y = y + nextIconIncrement
+  y = y + nextIconIncrement ]]
 
   -- Garbage in queue
   analytic.garbage_in_queue = self.incomingGarbage:len()
