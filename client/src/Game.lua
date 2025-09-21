@@ -168,7 +168,7 @@ function Game:writeReleaseStreamDefinition()
           versioningType = "timestamp",
           serverEndPoint = {
             type = "filesystem",
-            url = "http://192.168.8.177/updates",
+            url = "https://panelattack.com/downloads/updates/stable",
             prefix = "panel-"
           }
         },
