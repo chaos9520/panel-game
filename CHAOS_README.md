@@ -13,18 +13,18 @@ As some of you know, I have been working on this build for awhile. The initial i
 There are quite a number of changes in the modern levels. Some changes are global, while others are exclusive to certain levels.
 #### Changes to All Levels
 - **Garbage Margin has been implemented.** The more garbage a player has queued up, the less stop *and* shake time they get!
-- **Death-raising has been removed.**
+- *Death-raising has been removed.* Accidental death raise are very annoying, so I removed it.
 - The formula for stop time has been changed.
 - Health regeneration has been removed. That means if you take damage, then your health will not regenerate!
 #### Changes exclusive to Normal levels 1 to 11
 - **An overtime mechanic has been implemented.** At 2 minutes, combo garbage attacks will send more garbage. Attack sizes increase every minute, and it maxes out at 5 minutes *(if you manage to survive that long!)*. This does *not* affect garbage patterns in Training or Challenge modes. Health will also decrease by 25% every 15 seconds.
 - Shake time will always occur when down stacking with garbage, but the base shake time has been decreased from normal.
 - A player playing on these levels can send thicker combo garbage, but any 3-wides received from the opponent will cascade.
-- - Queued garbage will fall if there is no active chain, and it will fall all at once.
+- Queued garbage will fall if there is no active chain, and it will fall all at once.
 #### Changes exclusive to Classic Levels 1 to 4
 I have recently ported over the Classic style levels over so that they are playable in Versus. At the select screen, they will show as levels 1 to 4, but the numbers will have a gray background instead of a colored one. There is no overtime mechanic for these levels.
 - Base shake time has been increased from normal for most garbage.
-- Shake time from garbage does not reset unless the next piece of garbage causes more shake time. However, shake time occurs only when falling onto the screen.
+- Shake time from garbage does not reset unless the next piece of garbage causes more shake time. However, shake time occurs only when falling onto the screen or part of the garbage is off-screen.
 - Any 3-wides received from the opponent will not cascade.
 - Queued garbage will fall if there are no active panels, but queued garbage will fall one by one.
 ### Classic Style Changes
@@ -52,10 +52,8 @@ My custom ranking system has been implemented.
   - Panels cleared
   - ***Efficiency*** - any +3 that are not shock panels, is not part of a chain, and does not clear garbage will hurt efficiency.
   - Garbage lines sent.
-  - ***Garbage lines cleared*** - counts only garbage panels that transforms into normal panels. 1 panel = 1/6 line.
+  - ***Garbage lines cleared*** - counts only garbage panels that transform into normal panels. 1 panel = 1/6 line.
   - Garbage lines per minute (GPM)
-  - ***Garbage pieces sent per minute*** - Shows how many pieces of garbage a player is sending per minute.
-  - ***Garbage lines cleared per minute*** - Shows how fast a player is clearing garbage.
   - ***Garbage pieces in queue*** - The amount of garbage pieces in the player's queue.
   - Actions per Minute (APM)
 - The default panels have been changed.
