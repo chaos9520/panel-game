@@ -165,7 +165,7 @@ function ChallengeMode:createStages(difficulty)
     lineClearGPMBase = 27
     lineClearGPMIncrement = 0
     panelLevel = 9
-    panelLevelIncrement = 0.52
+    panelLevelIncrement = 0.25
     lineHeightToKillBase = 6
     lineHeightToKillIncrement = (2 / 7)
   elseif difficulty == 13 then
