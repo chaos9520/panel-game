@@ -521,9 +521,9 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
         p1_rating = leaderboard.players[players[1].user_id].rating
       end
       if leaderboard.players[players[2].user_id].rating == nil then
-        p1_rating = Server:adjust_starting_rating(players[2].level)
+        p2_rating = Server:adjust_starting_rating(players[2].level)
       else
-        p1_rating = leaderboard.players[players[2].user_id].rating
+        p2_rating = leaderboard.players[players[2].user_id].rating
       end
       local opponent = Server:player_strength(p1_rating, p2_rating)
       if opponent == 1 and math.abs(players[player_number].level - (math.min(10, math.floor(players[player_number].rating / 200)) - 1)) <= 1 then
