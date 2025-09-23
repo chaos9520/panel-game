@@ -2217,7 +2217,7 @@ function Stack.updateRiseLock(self)
       self.rise_lock = true
     elseif self.shake_time > 0 then
       self.rise_lock = true
-    elseif self:hasActivePanels() and self.chain_counter > 0 then
+    elseif self:hasActivePanels() and self.chain_counter == 0 then
       self.manual_raise = false
       self.rise_lock = false
     elseif self:hasActivePanels() then
