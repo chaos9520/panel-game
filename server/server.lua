@@ -520,7 +520,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local opponent = Server:player_strength(p1_rating, p2_rating)
       logger.debug("Level check: " .. (math.min(10, math.floor(leaderboard.players[players[player_number].user_id].rating / 200)) - 1))
       logger.debug("Level difference: " .. math.abs(players[1].level - players[2].level))
-      if opponent == 1 and math.abs(players[player_number].level - (math.min(10, math.floor(leaderboard.players[players[player_number].user_id].rating / 200)) - 1)) <= 1 and math.abs(players[1].level - players[2].level) <= 2 then
+      if opponent == 1 and math.abs(players[player_number].level - (math.min(11, math.floor(leaderboard.players[players[player_number].user_id].rating / 200)) - 1)) <= 1 and math.abs(players[1].level - players[2].level) <= 2 then
         leaderboard.players[players[player_number].user_id].similar_strength = (leaderboard.players[players[player_number].user_id].similar_strength or 0) + 1
       end
     end
