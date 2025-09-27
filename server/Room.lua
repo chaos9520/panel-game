@@ -538,32 +538,28 @@ function Room:rating_adjustment_approved()
       ratings[k] = DEFAULT_RATING
     end
   end
-  if (ratings[1] == -9999 and ratings[2] == -9999) or (ratings[1] == -9999 or ratings[2] == -9999) then
+  if (ratings[1] < 0 and ratings[2] < 0) or (ratings[1] < 0 or ratings[2] < 0) then
     reasons[#reasons + 1] = "One or both players have been banned from playing ranked matches."
   elseif ratings[1] == DEFAULT_RATING and ratings[2] == DEFAULT_RATING then
     if (players[1].level <= 11 and players[2].level <= 11) and math.abs(players[1].level - players[2].level) > 4 then
       reasons[#reasons + 1] = "Level difference must be 4 or less."
     end
   elseif ratings[1] == DEFAULT_RATING then
-    if ratings[2] < -560 or ratings[2] > 3360 then
+    if ratings[2] > 3360 then
       reasons[#reasons + 1] = "Players' ratings are too far apart."
     elseif players[1].level < Room:min_level_for_range(ratings[2]) or players[1].level > Room:max_level_for_range(ratings[2]) then
       if Room:min_level_for_range(ratings[2]) == 11 and Room:max_level_for_range(ratings[2]) == 11 then
         reasons[#reasons + 1] = players[1].name .. " must play at level 11 for the game to be ranked."
-      elseif Room:min_level_for_range(ratings[2]) == 1 and Room:max_level_for_range(ratings[2]) == 1 then
-        reasons[#reasons + 1] = players[1].name .. " must play at level 1 for the game to be ranked."
       else
         reasons[#reasons + 1] = players[1].name .. " must play between levels " .. Room:min_level_for_range(ratings[2]) .. " and " .. Room:max_level_for_range(ratings[2]) .. " for the game to be ranked."
       end
     end
   elseif ratings[2] == DEFAULT_RATING then
-    if ratings[1] < -560 or ratings[1] > 3360 then
+    if ratings[1] > 3360 then
       reasons[#reasons + 1] = "Players' ratings are too far apart."
     elseif players[2].level < Room:min_level_for_range(ratings[1]) or players[2].level > Room:max_level_for_range(ratings[1]) then
       if Room:min_level_for_range(ratings[1]) == 11 and Room:max_level_for_range(ratings[1]) == 11 then
         reasons[#reasons + 1] = players[2].name .. " must play at level 11 for the game to be ranked."
-      elseif Room:min_level_for_range(ratings[2]) == 1 and Room:max_level_for_range(ratings[2]) == 1 then
-        reasons[#reasons + 1] = players[2].name .. " must play at level 1 for the game to be ranked."
       else
         reasons[#reasons + 1] = players[2].name .. " must play between levels " .. Room:min_level_for_range(ratings[1]) .. " and " .. Room:max_level_for_range(ratings[1]) .. " for the game to be ranked."
       end
