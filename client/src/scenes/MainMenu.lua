@@ -205,6 +205,10 @@ function MainMenu:draw()
       GraphicsUtil.printf(loc("auto_updater_version_warning") .. " https://panelattack.com", -5, infoYPosition, consts.CANVAS_WIDTH, "right")
       infoYPosition = infoYPosition - fontHeight
     end
+  else
+    local version = "PA Version: Chaos Build v.0.0.15_alpha"
+    GraphicsUtil.printf(version, -5, infoYPosition, consts.CANVAS_WIDTH, "right")
+    infoYPosition = infoYPosition - fontHeight
   end
 end
 
