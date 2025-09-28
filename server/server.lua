@@ -383,7 +383,7 @@ function Server:calculate_rating_adjustment(Rc, Ro, Oa, Rd) -- -- print("calcula
   Oe = 1 / (1 + 10 ^ ((Ro - Rc) / RATING_SPREAD_MODIFIER))
 
   -- print("expected outcome: "..Oe)
-  Rn = math.max(0, Rc + Rd * (Oa - Oe))
+  Rn = math.max(1, Rc + Rd * (Oa - Oe))
   return Rn
 end
 
