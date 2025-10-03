@@ -1236,7 +1236,11 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
+          if self.match.stackInteraction == GameModes.StackInteractions.NONE then
+            self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
+          else
+            self.rise_timer = math.max(3, math.ceil((179 - 179 * math.log(self.speed, 99)) + 1))
+          end
         end
       end
     end
