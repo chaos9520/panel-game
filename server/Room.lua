@@ -507,6 +507,10 @@ function Room:rating_adjustment_approved()
   local caveats = {}
   local both_players_are_placed = nil
 
+  if not ALLOW_RANKED_PLAY then
+    reasons[#reasons + 1] = "Ranked play has been turned off."
+  end
+
   if PLACEMENT_MATCHES_ENABLED then
     if leaderboard.players[players[1].user_id] and leaderboard.players[players[1].user_id].placement_done and leaderboard.players[players[2].user_id] and leaderboard.players[players[2].user_id].placement_done then
       --both players are placed on the leaderboard.
