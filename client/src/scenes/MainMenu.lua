@@ -206,7 +206,7 @@ function MainMenu:draw()
       infoYPosition = infoYPosition - fontHeight
     end
   else
-    local version = "PA Version: Chaos Build v.0.0.19_alpha"
+    local version = "PA Version: Chaos Build v.0.0.20_alpha"
     GraphicsUtil.printf(version, -5, infoYPosition, consts.CANVAS_WIDTH, "right")
     infoYPosition = infoYPosition - fontHeight
   end
