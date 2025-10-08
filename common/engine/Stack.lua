@@ -1376,7 +1376,6 @@ function Stack.simulate(self)
     if self.manual_raise then
       if not self.rise_lock then
         if self.panels_in_top_row then
-          self.prevent_manual_raise = true
           if self:checkGameOver() then
             self:setGameOver()
           end
