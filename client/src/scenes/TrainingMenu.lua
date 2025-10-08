@@ -29,8 +29,8 @@ end
 
 local function createBasicTrainingMode(name, width, height)
   local delayBeforeStart = 180
-  local attacksPerVolley = math.ceil(36 / (width * height))
-  local delayBeforeRepeat = ((40 * height) + (((height * (height + 1)) / 2) * (width * 7))) * attacksPerVolley + 91
+  local attacksPerVolley = math.ceil(54 / (width * height))
+  local delayBeforeRepeat = ((60 * height) + (((height * (height + 1)) / 2) * (width * 7))) * attacksPerVolley
   local attackPatterns = {}
 
   for i = 1, attacksPerVolley do
