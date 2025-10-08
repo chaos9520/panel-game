@@ -345,12 +345,6 @@ function Server:adjust_rd(dev, p1, p2)
   end
 end
 
-function Server:adjust_starting_rating(level)
-  -- Adjusts the player's starting rating based on the level of their first ranked game.
-  local adjusted_rating = {400, 600, 800, 1000, 1200, 1400, 1400, 1400, 1400, 1400, 1400}
-  return adjusted_rating[level]
-end
-
 function Server:player_strength(p1, p2)
   local difference = math.abs(p1 - p2)
   logger.debug("Difference: " .. difference)
@@ -397,9 +391,8 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
   for player_number = 1, 2 do
     --if they aren't on the leaderboard yet, give them the default rating and RD
     if not leaderboard.players[players[player_number].user_id] or not leaderboard.players[players[player_number].user_id].rating then
-      adjusted_rating = Server:adjust_starting_rating(players[player_number].level)
-      leaderboard.players[players[player_number].user_id] = {user_name = self.playerbase.players[players[player_number].user_id], rating = adjusted_rating}
-      logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " a new rating of " .. adjusted_rating)
+      leaderboard.players[players[player_number].user_id] = {user_name = self.playerbase.players[players[player_number].user_id], rating = DEFAULT_RATING}
+      logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " a new rating of " .. DEFAULT_RATING)
       if not PLACEMENT_MATCHES_ENABLED then
         leaderboard.players[players[player_number].user_id].placement_done = true
         self.database:insertPlayerELOChange(players[player_number].user_id, DEFAULT_RATING, gameID)
