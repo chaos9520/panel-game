@@ -542,10 +542,6 @@ function Room:rating_adjustment_approved()
     reasons[#reasons + 1] = "Ranked play has been turned off."
   elseif (ratings[1] <= 0 and ratings[2] <= 0) or (ratings[1] <= 0 or ratings[2] <= 0) then
     reasons[#reasons + 1] = "One or both players have been banned from playing ranked matches."
-  elseif ratings[1] == DEFAULT_RATING and ratings[2] == DEFAULT_RATING then
-    if (players[1].level <= 6 and players[2].level <= 6) and math.abs(players[1].level - players[2].level) > 4 then
-      reasons[#reasons + 1] = "Level difference must be 4 or less."
-    end
   elseif math.abs(ratings[1] - ratings[2]) > RATING_SPREAD_MODIFIER * ALLOWABLE_RATING_SPREAD_MULITPLIER then
     reasons[#reasons + 1] = "Players' ratings are too far apart."
   end
