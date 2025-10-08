@@ -880,7 +880,9 @@ function Stack.controls(self)
   end
 
   if raise then
-    if not self.prevent_manual_raise then
+    if self.panels_in_top_row then
+      self.manual_raise = false
+    elseif not self.prevent_manual_raise then
       self.manual_raise = true
       self.manual_raise_yet = false
     end
@@ -1375,9 +1377,6 @@ function Stack.simulate(self)
       if not self.rise_lock then
         if self.panels_in_top_row then
           self.prevent_manual_raise = true
-          if self.stop_time == 0 then
-            self.health = self.health - 1
-          end
           if self:checkGameOver() then
             self:setGameOver()
           end

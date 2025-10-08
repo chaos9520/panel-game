@@ -488,18 +488,6 @@ function Room:resolve_game_outcome()
   end
 end
 
-function Room:min_level_for_range(rating)
-  local min_end = math.max(1, rating - 960)
-  local min_level = math.max(1, math.min(6, math.ceil(min_end / 200) - 1))
-  return min_level
-end
-
-function Room:max_level_for_range(rating)
-  local max_end = rating + 960
-  local max_level = math.max(1, math.min(11, math.floor(max_end / 200) - 1))
-  return max_level
-end
-
 function Room:rating_adjustment_approved()
   --returns whether both players in the room have game states such that rating adjustment should be approved
   local players = {self.a, self.b}
