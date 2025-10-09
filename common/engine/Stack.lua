@@ -1208,11 +1208,7 @@ function Stack.simulate(self)
   elseif self.panels_to_speedup <= 0 then
     -- mode 2: increase speed based on cleared panels
     self.speed = min(self.speed + 1, 99)
-    if self.speed == 99 then
-      self.panels_to_speedup = math.huge
-    else
-      self.panels_to_speedup = 10 + math.floor((self.speed + 1) / 10) * 10
-    end
+    self.panels_to_speedup = self.panels_to_speedup + PANELS_TO_NEXT_SPEED[self.speed]
   end
   prof.pop("speed increase")
 
