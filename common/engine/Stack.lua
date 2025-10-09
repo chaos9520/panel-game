@@ -42,16 +42,16 @@ local DT_SPEED_INCREASE = 15 * 60 -- frames it takes to increase the speed level
 -- For example, to get from speed 1 to speed 2, you must
 -- clear 9 panels.
 local PANELS_TO_NEXT_SPEED =
-  {9, 12, 12, 12, 12, 12, 15, 15, 18, 18,
-  24, 24, 24, 24, 24, 24, 21, 18, 18, 18,
-  36, 36, 36, 36, 36, 36, 36, 36, 36, 36,
-  39, 39, 39, 39, 39, 39, 39, 39, 39, 39,
-  45, 45, 45, 45, 45, 45, 45, 45, 45, 45,
-  45, 45, 45, 45, 45, 45, 45, 45, 45, 45,
-  45, 45, 45, 45, 45, 45, 45, 45, 45, 45,
-  45, 45, 45, 45, 45, 45, 45, 45, 45, 45,
-  45, 45, 45, 45, 45, 45, 45, 45, 45, 45,
-  45, 45, 45, 45, 45, 45, 45, 45, math.huge}
+  {10, 10, 10, 10, 10, 10, 10, 10, 10, 20,
+   20, 20, 20, 20, 20, 20, 20, 20, 20, 30,
+   30, 30, 30, 30, 30, 30, 30, 30, 30, 40,
+   40, 40, 40, 40, 40, 40, 40, 40, 40, 50,
+   50, 50, 50, 50, 50, 50, 50, 50, 50, 60,
+   60, 60, 60, 60, 60, 60, 60, 60, 60, 70,
+   70, 70, 70, 70, 70, 70, 70, 70, 70, 80,
+   80, 80, 80, 80, 80, 80, 80, 80, 80, 90,
+   90, 90, 90, 90, 90, 90, 90, 90, 90, 100,
+  100,100,100,100,100,100,100,100,100, math.huge}
 
 -- Represents the full panel stack for one player
 Stack =
@@ -111,12 +111,7 @@ Stack =
       -- mode 1: increase speed based on fixed intervals
       s.nextSpeedIncreaseClock = DT_SPEED_INCREASE
     else
-      if s.speed == 99 then
-        s.panels_to_speedup = math.huge
-      else
-        s.panels_to_speedup = 10 + math.floor((s.speed + 1) / 10) * 10
-      end
-      -- s.panels_to_speedup = PANELS_TO_NEXT_SPEED[s.speed]
+      s.panels_to_speedup = PANELS_TO_NEXT_SPEED[s.speed]
     end
 
     s.health = s.levelData.maxHealth
@@ -1238,11 +1233,8 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          if self.match.stackInteraction == GameModes.StackInteractions.NONE then
-            self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
-          else
-            self.rise_timer = math.max(3, math.ceil((179 - 179 * math.log(self.speed, 99)) + 1))
-          end
+          -- self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
+          self.rise_timer = self.rise_timer + consts.SPEED_TO_RISE_TIME[self.speed]  
         end
       end
     end
