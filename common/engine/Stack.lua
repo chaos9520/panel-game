@@ -757,10 +757,6 @@ function Stack.hasActivePanels(self)
   return self.n_active_panels > 0 or self.n_prev_active_panels > 0
 end
 
-function Stack.hasActivePanels2(self)
-  return self.n_active_panels2 > 0 or self.n_prev_active_panels2 > 0
-end
-
 function Stack.has_falling_garbage(self)
   for i = 1, self.height + 3 do --we shouldn't have to check quite 3 rows above height, but just to make sure...
     local panelRow = self.panels[i]
@@ -829,8 +825,7 @@ function Stack.controls(self)
             if self.panels_in_top_row
             and self.stop_time + self.pre_stop_time <= 0
             and self.shake_time <= 0
-            and not self:hasChainingPanels()
-            and not self:hasActivePanels2() then
+            and not self:hasChainingPanels() then
               if self.health > 1 then
               self:setQueuedSwapPosition(swapColumn, cursorRow)
               -- punish by subtracting 1 frame of health every time a swap is queued and there are no other active panels.
@@ -1349,8 +1344,7 @@ function Stack.simulate(self)
         if self.panels_in_top_row
         and self.stop_time + self.pre_stop_time <= 0
         and self.shake_time <= 0
-        and not self:hasChainingPanels()
-        and not self:hasActivePanels2() then
+        and not self:hasChainingPanels() then
           if self.health > 1 then
             self:setQueuedSwapPosition(self.cur_col, self.cur_row)
             self.analytic:register_swap()
@@ -1429,10 +1423,6 @@ function Stack.simulate(self)
   prof.push("updateActivePanels")
   self:updateActivePanels()
   prof.pop("updateActivePanels")
-
-  prof.push("updateActivePanels2")
-  self:updateActivePanels2()
-  prof.pop("updateActivePanels2")
 
   if self.puzzle and self.n_active_panels == 0 and self.n_prev_active_panels == 0 then
     if self:checkGameOver() then
@@ -2154,11 +2144,6 @@ end
 function Stack.updateActivePanels(self)
   self.n_prev_active_panels = self.n_active_panels
   self.n_active_panels = self:getActivePanelCount()
-end
-
-function Stack.updateActivePanels2(self)
-  self.n_prev_active_panels2 = self.n_active_panels2
-  self.n_active_panels2 = self:getActivePanelCount2()
 end
 
 function Stack.getActivePanelCount(self)
