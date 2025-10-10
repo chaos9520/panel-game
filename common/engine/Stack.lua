@@ -2170,9 +2170,6 @@ function Stack.getActivePanelCount(self)
   return count
 end
 
-  return count
-end
-
 function Stack.updateRiseLock(self)
   if self.match.stackInteraction == GameModes.StackInteractions.NONE then
     -- Rise lock arguments for Endless and Time Attack
