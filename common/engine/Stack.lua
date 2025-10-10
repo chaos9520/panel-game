@@ -111,7 +111,11 @@ Stack =
       -- mode 1: increase speed based on fixed intervals
       s.nextSpeedIncreaseClock = DT_SPEED_INCREASE
     else
-      s.panels_to_speedup = PANELS_TO_NEXT_SPEED[s.speed]
+      if s.speed == 99 then
+        s.panels_to_speedup = math.huge
+      else
+        s.panels_to_speedup = 10 + math.floor((s.speed + 1) / 10) * 10
+      end
     end
 
     s.health = s.levelData.maxHealth
@@ -1208,7 +1212,11 @@ function Stack.simulate(self)
   elseif self.panels_to_speedup <= 0 then
     -- mode 2: increase speed based on cleared panels
     self.speed = min(self.speed + 1, 99)
-    self.panels_to_speedup = self.panels_to_speedup + PANELS_TO_NEXT_SPEED[self.speed]
+    if self.speed == 99 then
+      self.panels_to_speedup = math.huge
+    else
+      self.panels_to_speedup = 10 + math.floor((self.speed + 1) / 10) * 10
+    end
   end
   prof.pop("speed increase")
 
@@ -1229,8 +1237,11 @@ function Stack.simulate(self)
             self.top_cur_row = self.height
             self:new_row()
           end
-          -- self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
-          self.rise_timer = self.rise_timer + consts.SPEED_TO_RISE_TIME[self.speed]  
+          if self.match.stackInteraction == GameModes.StackInteractions.NONE then
+            self.rise_timer = math.ceil((179 - 179 * math.log(self.speed, 99)) + 1)
+          else
+            self.rise_timer = math.max(3, math.ceil((179 - 179 * math.log(self.speed, 99)) + 1))
+          end  
         end
       end
     end
