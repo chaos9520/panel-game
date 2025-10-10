@@ -754,9 +754,9 @@ function Stack:drawAnalyticData()
   y = y + nextIconIncrement
 
   -- Garbage lines per minute
-  if analytic.lastGPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
-    if self.clock - 180 > 0 and (analytic.data.garbage_lines_sent > 0) then
-      analytic.lastGPM = analytic:getRoundedGPM(self.clock - 180)
+  if analytic.lastGPM == 0 or math.fmod(self.game_stopwatch, 60) < self.max_runs_per_frame then
+    if self.clock > 0 and (analytic.data.garbage_lines_sent > 0) then
+      analytic.lastGPM = analytic:getRoundedGPM(self.game_stopwatch)
     end
   end
   icon_width, icon_height = self.theme.images.IMG_gpm:getDimensions()
@@ -813,9 +813,9 @@ function Stack:drawAnalyticData()
   y = y + nextIconIncrement ]]
 
   -- APM
-  if analytic.lastAPM == 0 or math.fmod(self.clock - 180, 60) < self.max_runs_per_frame then
-    if self.clock - 180 > 0 and (analytic.data.swap_count + analytic.data.move_count > 0) then
-      local actionsPerMinute = (analytic.data.swap_count + analytic.data.move_count) / ((self.clock - 180) / 60 / 60)
+  if analytic.lastAPM == 0 or math.fmod(self.game_stopwatch, 60) < self.max_runs_per_frame then
+    if self.clock > 0 and (analytic.data.swap_count + analytic.data.move_count > 0) then
+      local actionsPerMinute = (analytic.data.swap_count + analytic.data.move_count) / ((self.game_stopwatch) / 60 / 60)
       analytic.lastAPM = string.format("%0.0f", math.round(actionsPerMinute, 0))
     end
   end
