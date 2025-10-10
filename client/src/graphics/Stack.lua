@@ -443,7 +443,7 @@ function Stack:drawDebug()
       GraphicsUtil.printf("has active panels " .. tostring(self:hasActivePanels()), drawX, drawY)
 
     drawY = drawY + padding
-      GraphicsUtil.printf("has active panels2 " .. tostring(self:hasActivePanels()), drawX, drawY)
+      GraphicsUtil.printf("has active panels2 " .. tostring(self:hasActivePanels2()), drawX, drawY)
 
     drawY = drawY + padding
     GraphicsUtil.printf("riselock " .. tostring(self.rise_lock), drawX, drawY)

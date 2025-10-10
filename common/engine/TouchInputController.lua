@@ -4,7 +4,7 @@ local util = require("common.lib.util")
 local consts = require("common.engine.consts")
 local class = require("common.lib.class")
 
-local TOUCH_SWAP_COOLDOWN = 0  -- default number of cooldown frames between touch-input swaps, applied after the first 2 swaps after a touch is initiated, to prevent excessive or accidental stealths
+local TOUCH_SWAP_COOLDOWN = 5  -- default number of cooldown frames between touch-input swaps, applied after the first 2 swaps after a touch is initiated, to prevent excessive or accidental stealths
 
 -- An object that manages touches on the screen and translates them to swaps on a stack
 TouchInputController =
