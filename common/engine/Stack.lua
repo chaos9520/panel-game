@@ -2170,28 +2170,6 @@ function Stack.getActivePanelCount(self)
   return count
 end
 
-function Stack.getActivePanelCount2(self)
-  local count = 0
-
-  for row = 1, self.height do
-    for col = 1, self.width do
-      local panel = self.panels[row][col]
-      if panel.isGarbage then
-        if panel.state ~= "normal" then
-          count = count + 1
-        end
-      else
-        if panel.color ~= 0
-        -- dimmed is implicitly filtered by only checking in row 1 and up
-        and panel.state ~= "normal"
-        and panel.state ~= "swapping"
-        and panel.state ~= "landing" then
-          count = count + 1
-        end
-      end
-    end
-  end
-
   return count
 end
 
