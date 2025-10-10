@@ -395,6 +395,7 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " a new rating of " .. DEFAULT_RATING)
       if not PLACEMENT_MATCHES_ENABLED then
         leaderboard.players[players[player_number].user_id].placement_done = true
+        leaderboard.players[players[player_number].user_id].verified = false
         self.database:insertPlayerELOChange(players[player_number].user_id, DEFAULT_RATING, gameID)
       end
       logger.debug("Gave " .. self.playerbase.players[players[player_number].user_id] .. " the starting RD of " .. DEVIATION_SPREAD)
@@ -530,9 +531,12 @@ function Server:adjust_ratings(room, winning_player_number, gameID)
       local win_percentage = (leaderboard.players[players[player_number].user_id].ranked_games_won or 0) / (leaderboard.players[players[player_number].user_id].ranked_games_played or 0)
       local games_played = (leaderboard.players[players[player_number].user_id].ranked_games_played or 0) + 1
       local rd = Server:calculate_rd(games_played, counter)
+      local sim_strength = leaderboard.players[players[player_number].user_id].similar_strength
+      local verify = Server:verification_check(games_played, sim_strength)
       leaderboard.players[players[player_number].user_id].inactive_counter = counter
       leaderboard.players[players[player_number].user_id].rd = rd
       leaderboard.players[players[player_number].user_id].win_percentage = win_percentage
+      leaderboard.players[players[player_number].user_id].win_percentage = verify
       logger.debug(player_number .. "'s new RD = " .. rd)
       logger.debug(player_number .. "'s new Relegation Counter = " .. counter)
       write_leaderboard_file()
@@ -596,6 +600,14 @@ function Server:qualifies_for_placement(user_id)
   -- end
   end
   return true
+end
+
+function Server:verification_check(games_played, similar_strength)
+  if games_played >= 100 and similar_strength >= 50 then
+    return true
+  else
+    return false
+  end
 end
 
 function Server:process_placement_matches(user_id)
