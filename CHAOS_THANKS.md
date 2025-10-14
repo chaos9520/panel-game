@@ -7,4 +7,4 @@ JamBox: Created the script for the custom color schemes. Most people do not know
 
 All of the users who helped test this build: You know who you are. :smirk:
 
-Last but not least, everyone over at PA that has brought Panel Attack to where it is: This really goes without saying.
+Last but not least, everyone over at PA that has brought Panel Attack to where it currently is: This really goes without saying.
