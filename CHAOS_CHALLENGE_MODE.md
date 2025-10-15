@@ -3,7 +3,7 @@
 - Easy: This one is for Beginners. 8 stages, played on levels 1 and 2.
 - Normal: This one is for Novices. 10 stages, played on levels 3 and 4.
 - Hard: This one is for Intermediate players. 12 stages, played on levels 5 and 6.
-- Very Hard: This is also for Intermediate players, but is more difficult. 12 stages, played on levels 5 and 6.
+- Very Hard: This is also for Intermediate players, but it is more difficult. 12 stages, played on levels 5 and 6.
 - Intense: This one is for Advanced players. 12 stages, played on levels 7 and 8.
 - Insane: This one is for Expert players. 12 stages, played on levels 9 and 10.
 - Impossible: This one is for the Master players. 8 stages, played on levels 10 and 11.
