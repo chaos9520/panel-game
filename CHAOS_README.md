@@ -5,7 +5,7 @@ As some of you know, I have been working on this build for awhile. The initial i
 ## Level Data Changes
 - The level data for both Modern and Classic levels have been redesigned so they scale in difficulty properly. The Classic levels also scale differently from the Modern levels. *Level 8 is the closest to level 10 on the normal build, so I take it that will be the 'gold standard'.*
 
-You can view the changes here: https://github.com/chaos9520/panel-game/blob/chaos_build/LEVEL_DATA.md
+You can view the changes here: https://github.com/chaos9520/panel-game/blob/chaos_build/GAME_DATA.md
 ## Gameplay Changes
 ### Global Changes
 - There are now two scoring systems; one for Modern, and the other for Classic.
