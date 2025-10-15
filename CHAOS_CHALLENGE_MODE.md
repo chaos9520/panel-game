@@ -17,7 +17,6 @@ These are far far more difficult relative to the equivalent skill level.
 - Master Gauntlet: Levels 10 and 11
 ### Line Clears
 This is something new. You have 2 minutes to send the required amount lines in order to clear each stage. Stage 1 starts at 10 lines, and it increases by 10 each stage.
-
 - Easy: Level 3
 - Normal: Level 5
 - Hard: Level 8
