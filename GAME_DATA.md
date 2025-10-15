@@ -192,3 +192,16 @@ Flash: 22 frames (+6)
 Face: 8 frames (-2)
 Pop Speed: 7 frames (+1)
 Hover: 6 frames (+3)
+# Base Shake Times for Common Garbage
+These are the base shake times for the most common garbage when there is 0 garbage in their queue
+- 3x1: 32 frames
+- 4x1 and 5x1: 33 frames
+- 6x1 and 3x2: 34 frames
+- 4x2: 36 frames
+- 5x2: 38 frames
+- x3: 40 frames
+- x4: 46 frames
+- x5: 54 frames
+- 6x5: 62 frames
+- 6x6: 72 frames
+- 6x7 and larger: 82 frames
