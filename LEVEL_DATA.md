@@ -8,7 +8,7 @@ A few things to point out:
 ## Modern Style Levels
 ### Level 1
 - Starting Speed: 5
-- Number of Colors: 4 (-1)
+- Number of Colors: **4 (-1)**
 - Maximum Health: 143 frames (+22)
 - Base Stop Time: 117 frames
 - Garbage Margin: 16 pieces
@@ -104,7 +104,7 @@ A few things to point out:
 - Garbage Hover: 9 frames (-4)
 - Shock Frequency: 34 panels (+5)
 - Queued Shock Panel Cap: 8 shocks (-1)
-### Level 8
+### Level 8: (The 'Gold Standard')
 - Starting Speed: 83
 - Number of Colors: 6 (+1)
 - Maximum Health: 30 frames (+9)
@@ -118,7 +118,7 @@ A few things to point out:
 - Garbage Hover: 7 frames
 - Shock Frequency: 40 panels (+7)
 - Queued Shock Panel Cap: 8 shocks (+2)
-### Level 9
+### Level 9 (Chaos Mode - 5 Colors)
 - Starting Speed: 90
 - Number of Colors: 5 (-1)
 - Maximum Health: 24 frames (+13)
@@ -132,7 +132,7 @@ A few things to point out:
 - Garbage Hover: 6 frames (-1)
 - Shock Frequency: 38 panels (+1)
 - Queued Shock Panel Cap: 7 shocks (+1)
-### Level 10
+### Level 10 (Chaos Mode - 6 Colors)
 - Starting Speed: 92
 - Number of Colors: 6
 - Maximum Health: 19 frames (+18)
@@ -146,7 +146,7 @@ A few things to point out:
 - Garbage Hover: 3 frames (-1)
 - Shock Frequency: 45 panels (+4)
 - Queued Shock Panel Cap: 6 shocks (+3)
-### Level 11
+### Level 11 (Chaos Mode - 7 Colors)
 - Starting Speed: 95
 - Number of Colors: 7 (+1)
 - Maximum Health: 15 frames (+14)
