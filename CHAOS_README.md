@@ -46,7 +46,7 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 - The default telegraph and garbage images have been changed.
 - APM and GPM are now measured accurately, and moves during countdown no longer count towards APM.
 ## What else needs to be implemented or changed?
-### Port over from v048
+### Features To Port Over From v048
 - The Endless/Time Attack kill screen.
 - Garbage Lines Cleared analytic.
 - My ranking system for the server. *(this one will take awhile)*
