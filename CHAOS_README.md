@@ -25,12 +25,12 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 - Stop time has been removed.
 - The amount of panels needed to raise the speed level has been adjusted.
 ## Server Changes
-- The ELO rating system has been modified to allow more points to go around.
+- The ELO rating system on this build has been modified to allow more points to go around.
 ## Other Changes
 - Challenge Mode has been completely revamped. You can read about the changes and difficulties here: https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_CHALLENGE_MODE.md
 - Training Mode: The frequency and amount of garbage per volley now adjusts based on the garbage size chosen for basic training modes.
 - Death-raising has been removed. Accidental death raises are very annoying, so I removed it.
-- Custom Training/Challenge Mode patterns: You can choose what style of garbage pattern the game sends by changing the value for `mergeMetalComboQueue`:
+- Custom Training Mode patterns: You can choose which garbage queue a training pettern uses by changing the value for `mergeMetalComboQueue`:
   - False - 'Modern' garbage queue.
   - True - 'Classic' garbage queue.
 - Analytics: Two analytics have been added to the display. Here are the analytics from top to bottom:
