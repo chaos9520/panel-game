@@ -1,6 +1,6 @@
 # ***The Chaos Build***
 ## Introduction
-As some of you know, I have been working on this build for awhile. The initial idea behind this build was to scale out level difficulties properly and to cut down on game length. Funny thing is with all the changes I've implemented, this build has now transformed into something of it's own: a more 'modern' and competitive version of the game we all know and have a love/hate relationship with. :stuck_out_tongue_winking_eye:
+As some of you know, I have been working on this build for awhile. The initial idea behind this build was to scale out level difficulties properly and to cut down on game length. Funny thing is with all the changes I've implemented, this build has now metamorphosed into something of its own: a more 'modern' and competitive version of the game we all know and have a love/hate relationship with. :stuck_out_tongue_winking_eye:
 # The Laundry List of Changes
 ## Level Data Changes
 - The level data for both Modern and Classic levels have been redesigned so they scale in difficulty properly. The Classic levels also scale differently from the Modern levels. *Level 8 is the closest to level 10 on the normal build, so I take it that will be the 'gold standard'.*

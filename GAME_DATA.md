@@ -6,7 +6,7 @@ A few things to point out:
 - **Shock Frequency:** The number of panels a player has to clear to earn a shock panel.
 - **Shock Cap:** The maximum amount of shock panels a player can have queued up.
 ## Modern Style Levels
-### Level 1
+### Level 1 - Newbie
 - Starting Speed: 5
 - Number of Colors: **4 (-1)**
 - Maximum Health: 143 frames (+22)
@@ -20,7 +20,7 @@ A few things to point out:
 - Garbage Hover: 46 frames (+5)
 - Shock Frequency: 22 panels (+10)
 - Queued Shock Panel Cap: 14 shocks (-7)
-### Level 2
+### Level 2 - Beginner
 - Starting Speed: 14
 - Number of Colors: 5
 - Maximum Health: 114 frames (+13)
@@ -34,7 +34,7 @@ A few things to point out:
 - Garbage Hover: 35 frames (-1)
 - Shock Frequency: 25 panels (+11)
 - Queued Shock Panel Cap: 13 shocks (-5)
-### Level 3
+### Level 3 - Novice I
 - Starting Speed: 26
 - Number of Colors: 5
 - Maximum Health: 92 frames (+12)
@@ -48,7 +48,7 @@ A few things to point out:
 - Garbage Hover: 27 frames (-4)
 - Shock Frequency: 28 panels (+12)
 - Queued Shock Panel Cap: 12 shocks (-6)
-### Level 4
+### Level 4 - Novice II
 - Starting Speed: 41
 - Number of Colors: 6 (+1)
 - Maximum Health: 73 frames (+7)
@@ -62,7 +62,7 @@ A few things to point out:
 - Garbage Hover: 21 frames (-5)
 - Shock Frequency: 33 panels (+14)
 - Queued Shock Panel Cap: 11 shocks (-4)
-### Level 5
+### Level 5 - Intermediate I
 - Starting Speed: 55
 - Number of Colors: 5
 - Maximum Health: 59 frames (-7)
@@ -76,7 +76,7 @@ A few things to point out:
 - Garbage Hover: 16 frames (-10)
 - Shock Frequency: 31 panels (+12)
 - Queued Shock Panel Cap: 10 shocks (-5)
-### Level 6
+### Level 6 - Intermediate II
 - Starting Speed: 68
 - Number of Colors: 6 (+1)
 - Maximum Health: 47 (+6)
@@ -90,7 +90,7 @@ A few things to point out:
 - Garbage Hover: 12 frames (-9)
 - Shock Frequency: 36 panels (+17)
 - Queued Shock Panel Cap: 9 shocks (-3)
-### Level 7
+### Level 7 - Advanced I
 - Starting Speed: 77
 - Number of Colors: 5
 - Maximum Health: 38 frames (+7)
@@ -104,7 +104,7 @@ A few things to point out:
 - Garbage Hover: 9 frames (-4)
 - Shock Frequency: 34 panels (+5)
 - Queued Shock Panel Cap: 8 shocks (-1)
-### Level 8: (The 'Gold Standard')
+### Level 8: Advanced II (The 'Gold Standard')
 - Starting Speed: 83
 - Number of Colors: 6 (+1)
 - Maximum Health: 30 frames (+9)
@@ -118,7 +118,7 @@ A few things to point out:
 - Garbage Hover: 7 frames
 - Shock Frequency: 40 panels (+7)
 - Queued Shock Panel Cap: 8 shocks (+2)
-### Level 9 (Chaos Mode - 5 Colors)
+### Level 9: Expert I (Chaos Mode - 5 Colors)
 - Starting Speed: 90
 - Number of Colors: 5 (-1)
 - Maximum Health: 24 frames (+13)
@@ -132,7 +132,7 @@ A few things to point out:
 - Garbage Hover: 6 frames (-1)
 - Shock Frequency: 38 panels (+1)
 - Queued Shock Panel Cap: 7 shocks (+1)
-### Level 10 (Chaos Mode - 6 Colors)
+### Level 10: Expert II (Chaos Mode - 6 Colors)
 - Starting Speed: 92
 - Number of Colors: 6
 - Maximum Health: 19 frames (+18)
@@ -146,7 +146,7 @@ A few things to point out:
 - Garbage Hover: 3 frames (-1)
 - Shock Frequency: 45 panels (+4)
 - Queued Shock Panel Cap: 6 shocks (+3)
-### Level 11 (Chaos Mode - 7 Colors)
+### Level 11: Master (Chaos Mode - 7 Colors)
 - Starting Speed: 95
 - Number of Colors: 7 (+1)
 - Maximum Health: 15 frames (+14)
@@ -160,6 +160,7 @@ A few things to point out:
 - Garbage Hover: 3 frames
 - Shock Frequency: 53 panels (+35)
 - Queued Shock Panel Cap: 6 shocks (+3)
+## Classic Levels
 ### Classic Easy
 Number of Colors: 5 (-1)
 Maximum Health: 1 frame
@@ -192,16 +193,16 @@ Flash: 22 frames (+6)
 Face: 8 frames (-2)
 Pop Speed: 7 frames (+1)
 Hover: 6 frames (+3)
-# Base Shake Times for Common Garbage
+## Base Shake Times for Common Garbage
 These are the base shake times for the most common garbage when there is 0 garbage in their queue
 - 3x1: 32 frames
 - 4x1 and 5x1: 33 frames
 - 6x1 and 3x2: 34 frames
 - 4x2: 36 frames
 - 5x2: 38 frames
-- x3: 40 frames
-- x4: 46 frames
-- x5: 54 frames
+- 6x2: 40 frames
+- 6x3: 46 frames
+- 6x4: 54 frames
 - 6x5: 62 frames
 - 6x6: 72 frames
 - 6x7 and larger: 82 frames
