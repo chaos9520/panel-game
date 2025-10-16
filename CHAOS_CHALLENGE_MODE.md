@@ -1,5 +1,7 @@
 # Challenge Mode
-Challenge Mode has been completely revamped in this build
+Challenge Mode has been completely revamped in this build. The difficulties have been changed considerably, and the damage formula has been changed.
+## How Damage Works
+The number of lines a garbage block would send is equal to the amount of damage it does. all +4s do damage on this build, and chain garbage is capped at 12 damage. Shocks do 1.5 lines of damage.
 ## Challenge Mode Difficulties
 ### Speedrun Friendly
 - Easy: This one is for Beginner players. 8 stages, played on levels 1 and 2.
