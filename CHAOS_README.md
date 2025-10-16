@@ -5,7 +5,7 @@ As some of you know, I have been working on this build for awhile. The initial i
 ## Level Data Changes
 - The level data for both Modern and Classic levels have been redesigned so they scale in difficulty properly. The Classic levels also scale differently from the Modern levels. *Level 8 is the closest to level 10 on the normal build, so I take it that will be the 'gold standard'.*
 
-You can view the changes here: https://github.com/chaos9520/panel-game/blob/chaos_build/GAME_DATA.md
+You can view the changes here: https://github.com/chaos9520/panel-game/blob/chaos_build/LEVEL_DATA.md
 ## Gameplay Changes
 ### Global Changes
 - There are now two scoring systems; one for Modern, and the other for Classic.
@@ -27,7 +27,7 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 ## Server Changes
 - The ELO rating system has been modified to allow more points to go around.
 ## Other Changes
-- Challenge Mode has been completely revamped. All +4s do damage, and chain garbage is capped at 12 damage. View the difficulties here: https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_CHALLENGE_MODE.md
+- Challenge Mode has been completely revamped. You can read about the changes and difficulties here: https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_CHALLENGE_MODE.md
 - Training Mode: The frequency and amount of garbage per volley now adjusts based on the garbage size chosen for basic training modes.
 - Death-raising has been removed. Accidental death raises are very annoying, so I removed it.
 - Custom Training/Challenge Mode patterns: You can choose what style of garbage pattern the game sends by changing the value for `mergeMetalComboQueue`:
