@@ -49,7 +49,7 @@ Level 11 is the pinnacle of top-tier gameplay.
 - *Starting Speed: 19 (+5)*
 - Number of Colors: 5
 - Maximum Health: 114 frames
-- Base Stop Time: 107 frames (+1)
+- *Base Stop Time: 107 frames (+1)*
 - Garbage Margin: 20 pieces
 - Flash: 52 frames (-2)
 - Face: 18 frames (-1)
@@ -57,135 +57,135 @@ Level 11 is the pinnacle of top-tier gameplay.
 - Garbage Pop Speed: 10 frames
 - Hover: 12 frames
 - Garbage Hover: 35 frames
-- Shock Frequency: 22 panels (-3)
-- Queued Shock Panel Cap: 16 shocks (+3)
+- *Shock Frequency: 22 panels (-3)*
+- *Queued Shock Panel Cap: 16 shocks (+3)*
 ### Level 3
 - *Starting Speed: 34 (+8)*
 - Number of Colors: 5
 - Maximum Health: 92 frames
 - Base Stop Time: 97 frames
-- Garbage Margin: 20 pieces (-1)
-- Flash: 48 frames (-1)
-- Face: 16 frames (-1)
+- *Garbage Margin: 20 pieces (-1)*
+- *Flash: 48 frames (-1)*
+- *Face: 16 frames (-1)*
 - Pop Speed: 9 frames
 - Garbage Pop Speed: 9 frames
 - Hover: 11 frames
 - Garbage Hover: 27 frames
-- Shock Frequency: 33 panels (+5)
-- Queued Shock Panel Cap: 15 shocks (+3)
+- *Shock Frequency: 33 panels (+5)*
+- *Queued Shock Panel Cap: 15 shocks (+3)*
 ### Level 4
 This 
-- Starting Speed: 49 (+8)
+- *Starting Speed: 49 (+8)*
 - Number of Colors: 6
 - Maximum Health: 73 frames
 - Base Stop Time: 88 frames
-- Garbage Margin: 20 pieces (-5)
-- Flash: 43 frames (+2)
+- *Garbage Margin: 20 pieces (-5)*
+- *Flash: 43 frames (+2)*
 - Face: 15 frames
 - Pop Speed: 9 frames
 - Garbage Pop Speed: 9 frames
 - Hover: 9 frames
 - Garbage Hover: 21 frames
-- Shock Frequency: 28 panels (-5)
-- Queued Shock Panel Cap: 14 shocks (+3)
+- *Shock Frequency: 28 panels (-5)*
+- *Queued Shock Panel Cap: 14 shocks (+3)*
 ### Level 5
-- Starting Speed: 60 (+5)
+- *Starting Speed: 60 (+5)*
 - Number of Colors: 5
-- Maximum Health: 59 frames (-7)
+- *Maximum Health: 59 frames*
 - Base Stop Time: 80 frames
-- Garbage Margin: 20 pieces (-3)
-- Flash: 39 frames (-2)
+- *Garbage Margin: 20 pieces (-3)*
+- *Flash: 39 frames (-2)*
 - Face: 14 frames
 - Pop Speed: 8 frames
 - Garbage Pop Speed: 8 frames
 - Hover: 8 frames
 - Garbage Hover: 16 frames
-- Shock Frequency: 36 panels (+5)
-- Queued Shock Panel Cap: 12 shocks (+2)
+- *Shock Frequency: 36 panels (+5)*
+- *Queued Shock Panel Cap: 12 shocks (+2)*
 ### Level 6
-- Starting Speed: 71 (+3)
+- *Starting Speed: 71 (+3)*
 - Number of Colors: 6
 - Maximum Health: 47 frames
 - Base Stop Time: 73 frames
-- Garbage Margin: 20 pieces (-7)
-- Flash: 36 frames (-1)
-- Face: 12 frames (-1)
+- *Garbage Margin: 20 pieces (-7)*
+- *Flash: 36 frames (-1)*
+- *Face: 12 frames (-1)*
 - Pop Speed: 8 frames
 - Garbage Pop Speed: 8 frames
 - Hover: 7 frames
 - Garbage Hover: 12 frames
-- Shock Frequency: 31 panels (-5)
-- Queued Shock Panel Cap: 11 shocks (+2)
+- *Shock Frequency: 31 panels (-5)*
+- *Queued Shock Panel Cap: 11 shocks (+2)*
 ### Level 7
-- Starting Speed: 79 (+2)
+- *Starting Speed: 79 (+2)*
 - Number of Colors: 5
 - Maximum Health: 38 frames
 - Base Stop Time: 66 frames
-- Garbage Margin: 20 pieces (-6)
+- *Garbage Margin: 20 pieces (-6)*
 - Flash: 33 frames
-- Face: 11 frames (-1)
+- *Face: 11 frames (-1)*
 - Pop Speed: 7 frames
 - Garbage Pop Speed: 7 frames
 - Hover: 6 frames
 - Garbage Hover: 9 frames
-- Shock Frequency: 48 panels (+14)
-- Queued Shock Panel Cap: 10 shocks (+2)
+- *Shock Frequency: 48 panels (+14)*
+- *Queued Shock Panel Cap: 10 shocks (+2)*
 ### Level 8
-- Starting Speed: 84 (+1)
+- *Starting Speed: 84 (+1)*
 - Number of Colors: 6
 - Maximum Health: 30 frames
 - Base Stop Time: 60 frames
-- Garbage Margin: 20 pieces (-10)
+- *Garbage Margin: 20 pieces (-10)*
 - Flash: 30 frames
-- Face: 10 frames (-1)
+- *Face: 10 frames (-1)*
 - Pop Speed: 7 frames
 - Garbage Pop Speed: 7 frames
 - Hover: 6 frames
 - Garbage Hover: 7 frames
 - Shock Frequency: 40 panels
-- Queued Shock Panel Cap: 9 shocks (+1)
+- *Queued Shock Panel Cap: 9 shocks (+1)*
 ### Level 9
-- Starting Speed: 88 (-2)
-- Number of Colors: 7 (+2)
+- *Starting Speed: 88 (-2)*
+- *Number of Colors: 7 (+2)*
 - Maximum Health: 24 frames
 - Base Stop Time: 55 frames
-- Garbage Margin: 20 pieces (-9)
+- *Garbage Margin: 20 pieces (-9)*
 - Flash: 27 frames
-- Face: 9 frames (-1)
+- *Face: 9 frames (-1)*
 - Pop Speed: 7 frames
 - Garbage Pop Speed: 6 frames
 - Hover: 6 frames
 - Garbage Hover: 6 frames
-- Shock Frequency: 34 panels (-4)
-- Queued Shock Panel Cap: 9 shocks (+2)
+- *Shock Frequency: 34 panels (-4)*
+- *Queued Shock Panel Cap: 9 shocks (+2)*
 ### Level 10 (Chaos Mode - 5 Colors)
-- Starting Speed: 95 (+3)
-- Number of Colors: 5 (-1)
-- Maximum Health: 15 frames (-4)
-- Base Stop Time: 45 frames (-5)
-- Garbage Margin: 20 pieces (-14)
-- Flash: 22 frames (-3)
-- Face: 8 frames (-1)
+- *Starting Speed: 95 (+3)*
+- *Number of Colors: 5 (-1)*
+- *Maximum Health: 15 frames (-4)*
+- *Base Stop Time: 45 frames (-5)*
+- *Garbage Margin: 20 pieces (-14)*
+- *Flash: 22 frames (-3)*
+- *Face: 8 frames (-1)*
 - Pop Speed: 7 frames
 - Garbage Pop Speed: 6 frames
 - Hover: 6 frames
 - Garbage Hover: 3 frames
-- Shock Frequency: 53 panels (+8)
-- Queued Shock Panel Cap: 8 shocks (+2)
+- *Shock Frequency: 53 panels (+8)*
+- *Queued Shock Panel Cap: 8 shocks (+2)*
 ### Level 11 (Chaos Mode - 6 Colors)
 - Starting Speed: 95
-- Number of Colors: 6 (-1)
+- *Number of Colors: 6 (-1)*
 - Maximum Health: 15 frames
 - Base Stop Time: 45 frames
-- Garbage Margin: 20 pieces (-20)
-- Flash: 22 frames (-1)
+- *Garbage Margin: 20 pieces (-20)*
+- *Flash: 22 frames (-1)*
 - Face: 8 frames
 - Pop Speed: 7 frames
 - Garbage Pop Speed: 6 frames
 - Hover: 6 frames
 - Garbage Hover: 3 frames
-- Shock Frequency: 45 panels (-8)
-- Queued Shock Panel Cap: 7 shocks (+1)
+- *Shock Frequency: 45 panels (-8)*
+- *Queued Shock Panel Cap: 7 shocks (+1)*
 ### Level 12 (Chaos Mode - 7 Colors)
 - Starting Speed: 95
 - Number of Colors: 7
@@ -216,37 +216,37 @@ This
 - Queued Shock Panel Cap: 0 shocks
 ## Classic Levels
 ### Classic Easy
-Number of Colors: 5 (-1)
-Maximum Health: 1 frame
+Number of Colors: 5
+*Maximum Health: 60 frames (+59)*
 Base Stop Time: 0 frames
-Flash: 53 frames (+9)
-Face: 18 frames (+1)
+Flash: 53 frames
+Face: 18 frames
 Pop Speed: 9 frames
-Hover: 11 frames (-1)
+Hover: 11 frames
 ### Classic Normal
 Number of Colors: 5
-Maximum Health: 1 frame
+*Maximum Health: 45 frames (+44)*
 Base Stop Time: 0 frames
-Flash: 40 frames (+4)
-Face: 14 frames (+1)
+Flash: 40 frames
+Face: 14 frames
 Pop Speed: 8 frames
-Hover: 8 frames (-1)
+Hover: 8 frames
 ### Classic Hard
-Number of Colors: 6 (-1)
-Maximum Health: 1 frame
+Number of Colors: 6
+*Maximum Health: 30 frames (+29)*
 Base Stop Time: 60 frames
-Flash: 30 frames (+8)
-Face: 10 frames (-5)
+Flash: 30 frames
+Face: 10 frames
 Pop Speed: 7 frames
 Hover: 6 frames
 ### Classic Chaos Mode
 Number of Colors: 7 (+1)
-Maximum Health: 1 frame
+*Maximum Health: 15 frames (+14)*
 Base Stop Time: 45 frames
-Flash: 22 frames (+6)
-Face: 8 frames (-2)
-Pop Speed: 7 frames (+1)
-Hover: 6 frames (+3)
+Flash: 22 frames
+Face: 8 frames
+Pop Speed: 7 frames
+Hover: 6 frames
 ## Base Shake Times for Common Garbage
 These are the base shake times for the most common garbage when there is 0 garbage in their queue
 - 3x1: 32 frames
