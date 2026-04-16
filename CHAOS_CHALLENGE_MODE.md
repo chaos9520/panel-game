@@ -20,8 +20,8 @@ These are desigend to be tests of endurance, and they are far more difficult rel
 - Expert Gauntlet: Levels 10 and 11
 - Master Gauntlet: Levels 11 and 12
 ### Line Clears
-This is something new. You have 2 minutes to send the required amount of damage in order to clear each stage. Stage 1 requires 10 lines of damage, and it increases by 10 each stage.
+This is something new. You have 2 minutes to send the required amount of damage in order to clear each stage.
 - Easy: Level 3, 4 stages
 - Normal: Level 5, 6 stages
-- Hard: Level 8, 8 stages
-- Chaos Mode: Level 11, 8 stages
+- Hard: Level 8, 6 stages
+- Chaos Mode: Level 9, 6 stages
