@@ -1,7 +1,6 @@
 # Level Data
 There are a few things to point out:
 - Base Stop Time: The amount of stop time a player gets when they make a +4 and they have no garbage queued, and the the stack is not in danger.
-- Garbage Margin: When a player has accumulated or exceeded the amount in garbage pieces, then the player will have 0 stop time.
 - Shock Frequency: The number of panels a player has to clear to earn a shock panel.
 - Shock Cap: The maximum amount of shock panels a player can have queued up.
 ## The Levels by Skill
@@ -23,20 +22,18 @@ The Intermediate levels are the perfect starting point for players that have no 
 - Players with a rating between 1600 and 1999 on this build are considered Advanced players.
 ### Expert
 The Expert levels provide an even greater challenge compared to the Advanced levels.
-- Level 9 has 5 colors, and Level 10 has 6 colors.
+- Level 10 has 5 colors, and Level 11 has 6 colors.
 - Players with a rating between 2000 and 2399 on this build are considered Expert players.
 ### Master
-Level 11 is the pinnacle of top-tier gameplay.
-- Level 11 is similar to level 10, but has 7 colors instead of 6.
+Level 12 is the pinnacle of top-tier gameplay.
+- Level 12 is similar to levels 10 and 11, but has 7 colors instead of 6.
 - Players with a rating of 2400 or higher on this build are considered Master players.
 ## Modern Style Levels
-**Garbage Margin has been changed to be 20 pieces for all levels.**
 ### Level 1
 - *Starting Speed: 7 (+2)*
 - Number of Colors: 4
 - Maximum Health: 143 frames
 - Base Stop Time: 117 frames
-- *Garbage Margin: 20 pieces (+4)*
 - *Flash: 57 frames (-3)*
 - Face: 20 frames
 - Pop Speed: 10 frames
@@ -50,7 +47,6 @@ Level 11 is the pinnacle of top-tier gameplay.
 - Number of Colors: 5
 - Maximum Health: 114 frames
 - *Base Stop Time: 107 frames (+1)*
-- Garbage Margin: 20 pieces
 - Flash: 52 frames (-2)
 - Face: 18 frames (-1)
 - Pop Speed: 10 frames
@@ -64,7 +60,6 @@ Level 11 is the pinnacle of top-tier gameplay.
 - Number of Colors: 5
 - Maximum Health: 92 frames
 - Base Stop Time: 97 frames
-- *Garbage Margin: 20 pieces (-1)*
 - *Flash: 48 frames (-1)*
 - *Face: 16 frames (-1)*
 - Pop Speed: 9 frames
@@ -79,7 +74,6 @@ This
 - Number of Colors: 6
 - Maximum Health: 73 frames
 - Base Stop Time: 88 frames
-- *Garbage Margin: 20 pieces (-5)*
 - *Flash: 43 frames (+2)*
 - Face: 15 frames
 - Pop Speed: 9 frames
@@ -93,7 +87,6 @@ This
 - Number of Colors: 5
 - *Maximum Health: 59 frames*
 - Base Stop Time: 80 frames
-- *Garbage Margin: 20 pieces (-3)*
 - *Flash: 39 frames (-2)*
 - Face: 14 frames
 - Pop Speed: 8 frames
@@ -107,7 +100,6 @@ This
 - Number of Colors: 6
 - Maximum Health: 47 frames
 - Base Stop Time: 73 frames
-- *Garbage Margin: 20 pieces (-7)*
 - *Flash: 36 frames (-1)*
 - *Face: 12 frames (-1)*
 - Pop Speed: 8 frames
@@ -121,7 +113,6 @@ This
 - Number of Colors: 5
 - Maximum Health: 38 frames
 - Base Stop Time: 66 frames
-- *Garbage Margin: 20 pieces (-6)*
 - Flash: 33 frames
 - *Face: 11 frames (-1)*
 - Pop Speed: 7 frames
@@ -135,7 +126,6 @@ This
 - Number of Colors: 6
 - Maximum Health: 30 frames
 - Base Stop Time: 60 frames
-- *Garbage Margin: 20 pieces (-10)*
 - Flash: 30 frames
 - *Face: 10 frames (-1)*
 - Pop Speed: 7 frames
@@ -149,7 +139,6 @@ This
 - *Number of Colors: 7 (+2)*
 - Maximum Health: 24 frames
 - Base Stop Time: 55 frames
-- *Garbage Margin: 20 pieces (-9)*
 - Flash: 27 frames
 - *Face: 9 frames (-1)*
 - Pop Speed: 7 frames
@@ -163,7 +152,6 @@ This
 - *Number of Colors: 5 (-1)*
 - *Maximum Health: 15 frames (-4)*
 - *Base Stop Time: 45 frames (-5)*
-- *Garbage Margin: 20 pieces (-14)*
 - *Flash: 22 frames (-3)*
 - *Face: 8 frames (-1)*
 - Pop Speed: 7 frames
@@ -177,7 +165,6 @@ This
 - *Number of Colors: 6 (-1)*
 - Maximum Health: 15 frames
 - Base Stop Time: 45 frames
-- *Garbage Margin: 20 pieces (-20)*
 - *Flash: 22 frames (-1)*
 - Face: 8 frames
 - Pop Speed: 7 frames
@@ -191,7 +178,6 @@ This
 - Number of Colors: 7
 - Maximum Health: 15 frames
 - Base Stop Time: 45 frames
-- Garbage Margin: 20 pieces
 - Flash: 22 frames
 - Face: 8 frames
 - Pop Speed: 7 frames
@@ -205,7 +191,6 @@ This
 - Number of Colors: 8
 - Maximum Health: 15 frames
 - Base Stop Time: 45 frames
-- Garbage Margin: 20 pieces
 - Flash: 22 frames
 - Face: 8 frames
 - Pop Speed: 7 frames
@@ -248,7 +233,7 @@ Face: 8 frames
 Pop Speed: 7 frames
 Hover: 6 frames
 ## Base Shake Times for Common Garbage
-These are the base shake times for the most common garbage when there is 0 garbage in their queue
+These are the base shake times for the most common garbage when there is 0 garbage in their queue:
 - 3x1: 32 frames
 - 4x1 and 5x1: 33 frames
 - 6x1 and 3x2: 34 frames
