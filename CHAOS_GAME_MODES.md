@@ -1,11 +1,11 @@
 # The Game Modes
-There will be 6 game modes players can play on. The attributes listed below affect only the player that is playing on the selected mode.
+There will be 7 game modes players can play on. The attributes listed below affect only the player that is playing on the selected mode.
 
 Both players must select the same game mode for a match to be ranked, and ranked play is not allowed on the Newbie or Insane game modes.
 ## Newbie Mode
-This mode is Classic Mode, but it is specifically designed to give a handicap to new players.
+This mode is similar to Classic Mode (next listed), but it is specifically designed to give a handicap to new players.
 - Starting health is doubled.
-- The player's +3s will send garbage if it's part of a chain. This will send 2x1s, and  will not affect GPM.
+- The player's +3s will send garbage if it's part of a chain. This will send 2x1s, and will not affect GPM.
 - The player's combo garbage output is doubled. This also will not affect GPM.
 - Awarded stop time is doubled.
 - Shake time is doubled for all garbage.
@@ -21,7 +21,7 @@ This is for players that like their super-long games. Here you go. :stuck_out_to
 - Shake time will feel closer to the normal build compared to Modern's shake time, but garbage that is completely on-screen will not shake again.
 - Shake margin is far more forgiving than normal.
 ## __Classic Plus Mode__
-This is the same as Classic, but all combo garbage will cascade.
+This is the same as Classic, except all combo garbage will cascade.
 ## __Modern Mode__
 The default game mode.
 - Queued garbage falls all at once.
@@ -43,7 +43,7 @@ Hard Mode doesn't challenge you enough? This may suit your taste. :stuck_out_ton
 - There will be no stop time for combos or chains.
 - Starting health is set to 1 frame.
 - Queued garbage falls one-by-one... at first...
-  - At 2 minutes, garbage will change to falling all at once whenever the player is not chaining.
+  - At 2 minutes, queued garbage will change to fall all at once.
 - All combo garbage will cascade.
 - Garbage shake time and shake margin will be far less forgiving.
 - At 2 minutes, the player's +3s will send garbage if it is part of a chain. *(This will send 2x1s, and they will not count towards overall GPM.)*
