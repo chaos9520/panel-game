@@ -1,17 +1,7 @@
 # The Game Modes
-There will be 7 game modes players can play on. The attributes listed below affect only the player that is playing on the selected mode.
+There will be 6 game modes players can play on. The attributes listed below affect only the player that is playing on the selected mode.
 
-Both players must select the same game mode for a match to be ranked, and ranked play is not allowed on the Newbie or Insane game modes.
-## Newbie Mode
-This mode is similar to Classic Mode (next listed), but it is specifically designed to give a handicap to new players.
-- Starting health is doubled.
-- The player's +3s will send garbage if it's part of a chain. This will send 2x1s, and will not affect GPM.
-- The player's combo garbage output is doubled. This also will not affect GPM.
-- Awarded stop time is doubled.
-- Shake time is doubled for all garbage.
-- Garbage margin will be 100 pieces.
-- Margin time for queued garbage will be stretched across 20 minutes.
-- Shake margin is even more forgiving than normal.
+Both players must select the same game mode for a match to be ranked, and ranked play is not allowed on the Insane game mode.
 ## __Classic Mode__
 This is for players that like their super-long games. Here you go. :stuck_out_tongue:
 - Margin time for queued garbage will be stretched across 10 minutes.
