@@ -11,27 +11,25 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 - There are now two scoring systems; one for Modern, and the other for Classic.
 - The score cap has been raised to 999,999 as scoring paces will naturally be faster on this build. Yes, 100k+ Time Attack runs are now possible on both Modern and Classic styles.
 - The formulas for stop time and stack rise speed have been changed. Fair warning: 92 speed is where the fun begins. :smirk:
-
+- Three extra settings have been added to 1p Vs Self, 1p Training,and 2p Vs modes:
+  - Game Mode: <https://discord.com/channels/1323452188055437312/1326238852884594708/1504875454707007551>
+  - Queue Type: <https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_QUEUE_TYPES.md>
+  - Chaos Mode: When this is enabled, the player can send unconventional garbage, but all combo garbage the player receives will cascade.
 ### PvP Changes
-- Players can select different game modes and garbage queue types. More on that at https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_GAME_MODES.md and You can view the changes here: https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_QUEUE_TYPES.md
 - Combo garbage attacks from +7 and higher send different garbage.
 - **Three overtime mechanics have been implemented:**
   - Garbage Margin: The more garbage a player has queued up, the less stop *and* shake time they get.
   - Health Margin: A player's remaining health will be reduced by 10% every 15 seconds. Health regeneration has also been removed.
-  - Shake Margin: Players will get less shake time as a match progresses. Shake time is also affected by the amount of garbage in a player's queue.
-- Shake time will always occur when down stacking garbage, but the base shake time has been changed for all garbage.
+  - Shake Margin: Players will get less shake time as a match progresses. Shake time is affected by the amount of garbage in a player's queue.
 ### Classic Endless and Time Attack Changes
 - The amount of panels needed to raise the speed level has been adjusted.
+- Certain analytics will be hidden.
 ## Server Changes
 - My Chaos ranking system has been implemented. It's basically a hybrid of ELO and glicko/glicko2, but the math is not nearly as complicated as glicko/glicko2.
 ## Other Changes
 - Challenge Mode has been completely revamped. You can read about the changes and difficulties here: https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_CHALLENGE_MODE.md
 - Training Mode: The frequency and amount of garbage per volley now adjusts based on the garbage size chosen for basic training modes.
 - Death-raising has been removed. Accidental death raises are very annoying, so I removed it.
-- Custom Training Mode patterns: You can choose which garbage queue a training pettern uses by changing the value for `GarbageQueueType`, shown below:
-  - 1 - 'Modern' garbage queue.
-  - 2 - 'Classic' garbage queue.
-  - 3 - 'Chaos' garbage queue.  
 - Analytics: Moves and Swaps have been removed from the display, and three analytics have been added in their place. Here are the analytics from top to bottom:
   - Panels cleared
   - **Efficiency:** any +3 that are not shock panels, is not part of a chain, and does not clear garbage will hurt efficiency.
