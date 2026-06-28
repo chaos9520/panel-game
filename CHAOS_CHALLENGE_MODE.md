@@ -5,7 +5,6 @@ The number of lines a garbage block would send is equal to the amount of damage 
 ## The Challenges
 ### Chaos League Challenges
 The Chaos League challenges use the Modern game mode and Modern queue style.
-Players will encounter unconventional garbage sizes as well.
 - Beginner: Levels 1 and 2
 - Novice: Levels 3 and 4
 - Intermediate: Levels 5 and 6
@@ -23,16 +22,16 @@ The Meijin Series challenges use the Classic game mode and Classic queue style.
 Here is the path I would recommend players to take when it comes to overall progression:
 1. Chaos Beginner
 2. Chaos Novice
-3. Meijin Bronze
-4. Meijin Silver
-5. Chaos Intermediate
-6. Meijin Gold
-7. Meijin Platinum
-8. Chaos Advanced
-9. Meijin Diamond
-10. Meijin Master League
-11. Meijin Title Match
-12. Chaos Expert
+3. Chaos Intermediate
+4. Meijin Bronze
+5. Meijin Silver
+6. Chaos Advanced
+7. Meijin Gold
+8. Meijin Platinum
+9. Chaos Expert
+10. Meijin Diamond
+11. Meijin Master League
+12. Meijin Title Match
 13. Chaos Master
 ### Line Clears
 You have 2 minutes to send the required amount of damage in order to clear each stage.

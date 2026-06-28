@@ -11,10 +11,7 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 - There are now two scoring systems; one for Modern, and the other for Classic.
 - The score cap has been raised to 999,999 as scoring paces will naturally be faster on this build. Yes, 100k+ Time Attack runs are now possible on both Modern and Classic styles.
 - The formulas for stop time and stack rise speed have been changed. Fair warning: 92 speed is where the fun begins. :smirk:
-- Three extra settings have been added to 1p Vs Self, 1p Training,and 2p Vs modes:
-  - Game Mode: <https://discord.com/channels/1323452188055437312/1326238852884594708/1504875454707007551>
-  - Queue Type: <https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_QUEUE_TYPES.md>
-  - Chaos Mode: When this is enabled, the player can send unconventional garbage, but all combo garbage the player receives will cascade.
+- Four extra settings have been added to 1p Vs Self, 1p Training,and 2p Vs modes. More on that here: <https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_EXTRA_SETTINGS.md>
 ### PvP Changes
 - Combo garbage attacks from +7 and higher send different garbage.
 - **Three overtime mechanics have been implemented:**

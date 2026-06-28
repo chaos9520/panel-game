@@ -32,7 +32,7 @@ This change obviously will break old replays, but it also will break compatibili
 ```
 This also means the Queue Type setting at the select screen has no effect.
 # Margin Time
-Players will have the ability to turn off margin time if they choose to do so.
+Players will have the ability to turn off margin time if they choose to do so. Health will still deplete even when margin time is disabled.
 
 Margin Time must be enabled in order to play ranked games.
 # Chaos Mode
