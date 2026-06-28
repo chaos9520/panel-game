@@ -1,9 +1,9 @@
 # Extra Settings
-There are 4 extra settings that have been added to the 1p Vs Self/Training and 2p V2 select screens. Both players' settings must match in order
+There are 4 extra settings that have been added to the 1p Vs Self/Training and 2p Vs select screens. Both players' settings must match in order for a game to be ranked.
 # The Game Modes
 There will be 3 game modes players can play on. The attributes listed below affect only the player that is playing on the selected mode.
 ## __Classic Mode__
-- Queued garbage will fall one-by-one for the most part.
+Queued garbage will fall one-by-one for the most part.
 ## __Modern Mode__
 The default game mode. Queued garbage falls all at once.
 ## __Tournament Mode__
@@ -32,8 +32,8 @@ This change obviously will break old replays, but it also will break compatibili
 ```
 This also means the Queue Type setting at the select screen has no effect.
 # Margin Time
-Players will have the ability to turn off margin time if they choose to do so. Health will still deplete even when margin time is disabled.
+Players will have the ability to turn off margin time if they choose to do so. 
 
-Margin Time must be enabled in order to play ranked games.
+Both players must have Margin Time enabled in order to play ranked games.
 # Chaos Mode
 When Chaos Mode is enabled, the player can send unconventional garbage. However, all combo garbage the player receives will cascade.

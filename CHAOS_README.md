@@ -14,7 +14,7 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 - Four extra settings have been added to 1p Vs Self, 1p Training,and 2p Vs modes. More on that here: <https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_EXTRA_SETTINGS.md>
 ### PvP Changes
 - Combo garbage attacks from +7 and higher send different garbage.
-- **Three overtime mechanics have been implemented:**
+- **Margin Time has been implemented:**
   - Garbage Margin: The more garbage a player has queued up, the less stop *and* shake time they get.
   - Health Margin: A player's remaining health will be reduced by 10% every 15 seconds. Health regeneration has also been removed.
   - Shake Margin: Players will get less shake time as a match progresses. Shake time is affected by the amount of garbage in a player's queue.
@@ -28,6 +28,8 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
 - Training Mode: The frequency and amount of garbage per volley now adjusts based on the garbage size chosen for basic training modes.
 - Death-raising has been removed. Accidental death raises are very annoying, so I removed it.
 - Analytics: Moves and Swaps have been removed from the display, and three analytics have been added in their place. Here are the analytics from top to bottom:
+  - Game Mode
+  - Queue Type
   - Panels cleared
   - **Efficiency:** any +3 that are not shock panels, is not part of a chain, and does not clear garbage will hurt efficiency.
   - Garbage lines sent.
