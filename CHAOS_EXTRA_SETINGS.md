@@ -3,7 +3,7 @@ There are 4 extra settings that have been added to the 1p Vs Self/Training and 2
 # The Game Modes
 There will be 3 game modes players can play on. The attributes listed below affect only the player that is playing on the selected mode.
 ## __Classic Mode__
-Queued garbage will fall one-by-one for the most part.
+Queued garbage will fall one-by-one for the most part, and shake time will feel fairly similar to the vanilla build.
 ## __Modern Mode__
 The default game mode. Queued garbage falls all at once.
 ## __Tournament Mode__
