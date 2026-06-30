@@ -18,6 +18,7 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
   - Garbage Margin: The more garbage a player has queued up, the less stop *and* shake time they get.
   - Health Margin: A player's remaining health will be reduced by 10% every 15 seconds. Health regeneration has also been removed.
   - Shake Margin: Players will get less shake time as a match progresses. Shake time is affected by the amount of garbage in a player's queue.
+  - A hard garbage queue limit of 50 pieces has been implemented.
 ### Classic Endless and Time Attack Changes
 - The amount of panels needed to raise the speed level has been adjusted.
 - Certain analytics will be hidden.
