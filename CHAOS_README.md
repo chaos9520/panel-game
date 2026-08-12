@@ -3,12 +3,12 @@
 As some of you know, I have been working on this build for awhile. The initial ideas behind this build was to balance out the metagame, scale out level difficulties properly and to cut down on game length. Funny thing is with all the changes I've implemented, this build has now metamorphosed into something of its own: a more 'modern' and competitive version of the game we all know and have a love/hate relationship with. :stuck_out_tongue_winking_eye:
 # The Laundry List of Changes
 ## Level Data Changes
-- Colors and Level Data have been de-coupled. That means players can now choose the amount of colors independent of the difficulty. *'Hard' is the closest to level 10 on the vanilla build, so I take it that will be the 'gold standard'.*
+- Colors and Level Data have been de-coupled. That means players can now choose the amount of colors independent of the difficulty. *Level 7 is the closest to level 10 on the vanilla build, so I take it that will be the 'gold standard'.*
 
 You can view the changes here: https://github.com/chaos9520/panel-game/blob/chaos_build/LEVEL_DATA.md
 ## Gameplay Changes
 ### Global Changes
-- There are now three scoring systems; one for each mode.
+- The scoring system has been changed. There is only one scoring system now.
 - The score cap has been raised to 999,999 as scoring paces will naturally be faster on this build.
 - The formulas for stop time and stack rise speed have been changed. Fair warning: 92 speed is where the fun begins. :smirk:
 - Four extra settings have been added to most select screens. More on that here: <https://github.com/chaos9520/panel-game/blob/chaos_build/CHAOS_EXTRA_SETTINGS.md>
@@ -18,9 +18,9 @@ You can view the changes here: https://github.com/chaos9520/panel-game/blob/chao
   - Garbage Margin: The more garbage a player has queued up, the less stop *and* shake time they get.
   - Health Margin: A player's remaining health will be reduced by 10% every 15 seconds. Health regeneration has also been removed.
   - Shake Margin: Players will get less shake time as a match progresses. Shake time is affected by the amount of garbage in a player's queue.
-  - A hard garbage queue limit of 50 pieces has been implemented.
+  - A hard garbage queue limit of 50 pieces has been implemented globally.
 ### Classic Endless and Time Attack Changes
-- Classic Endless and Time Attack have been [temporarily] removed.
+- Classic Endless and Time Attack have been removed.
 ## Server Changes
 - My Chaos ranking system has been implemented. It's basically a hybrid of ELO and glicko/glicko2, but the math is not nearly as complicated as glicko/glicko2.
 ## Other Changes
