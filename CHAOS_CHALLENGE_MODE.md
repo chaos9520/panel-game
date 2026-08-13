@@ -11,7 +11,7 @@ These challenges are designed to help players learn the fundamentals. Players wi
 3. Very Easy - 5 colors.
 4. Easy - 5 colors.
 ## The Tough Challenges
-You will start to see unconventional garbage in certain stages, as if Chaos Mode was turned on against you. The patterns in these challenges are meant to simulate gameplay against various players. Fair warning: there is a noticeable spike in difficulty going from Easy to Normal, which is by design. Good luck!
+You will start to see unconventional garbage in certain stages, as if Chaos Mode was turned on against you. The patterns in these challenges are also meant to simulate gameplay against various players, so the order is random. Fair warning: there is a noticeable spike in difficulty going from Easy to Normal, which is by design. Good luck... :smirk:
 5. Normal - 5 colors.
 6. Hard - 5 and 6 colors.
 7. Very Hard - 6 colors.
