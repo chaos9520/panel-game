@@ -41,7 +41,11 @@ Training patterns from this build have their own folder: `training_chaos`. All t
 
 This change also means the Garbage setting at the select screen has no effect.
 # Margin Time
-Players will have the ability to turn off margin time if they choose to do so. When Margin Time is disabled, there is a hard garbage queue limit of 50 pieces to prevent games from going indefinitely.
+There are now four different options for Margin Time. Keep in mind that health always deteriorates when an option other than Off is selected.
+- Off: Just as it says, there is no margin time. However, there is a garbage limit of 50 pieces.
+- Colors: The player's color count will increase by 1 every 2 minutes 30 seconds. This does not take effect immediately at each interval; the game has to use up the current panel buffer before it refills it with the new color count.
+- Modoki: Margin time affects stop time only. Awarded stop time is reduced by 5% every 15 seconds. Reaches 0 stop time at 5 minutes.
+- Chaos: Margin time is based on the amount of garbage in the player's queue, and it affects both stop and shake time. Reaches 0 stop time at 5 minutes.
 
 Both players must have Margin Time enabled in order to play ranked games.
 # Chaos Mode
